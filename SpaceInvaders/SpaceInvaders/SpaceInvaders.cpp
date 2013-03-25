@@ -18,7 +18,7 @@
 #endif
 
 #define window_width 800
-#define window_height 600
+
 
 float global_width;
 float global_height;
@@ -36,6 +36,7 @@ void myKeyboard(unsigned char key, int x, int y){
             if (key > 96) key -= 32;   //Torna todas as teclas primidas maiusculas
 			theGame->moveShip(key);
             break;
+		case '0':   //Movimenta para a esquerda
 	}
 }
 
@@ -55,7 +56,7 @@ void myTimer(int value){
 
 
 
-
+	myTimer(value);
 }
 
 void myReshape(GLsizei w, GLsizei h) {
@@ -75,9 +76,9 @@ glLoadIdentity();
 
 /*  ----- para o jogo - sem desformatacao--- */
 if(aspect_ratio >= 1)
-glOrtho(-135.0f*aspect_ratio, 135.0f*aspect_ratio, -135.0f, 100.0f, -100.0f, 100.0f);
+glOrtho(-100.0f*aspect_ratio, 100.0f*aspect_ratio, -100.0f, 100.0f, -100.0f, 100.0f);
 else
-glOrtho(-135.0f, 135.0f, -135.0f/aspect_ratio, 135.0f/aspect_ratio, -100.0f, 100.0f);
+glOrtho(-100.0f, 100.0f, -100.0f/aspect_ratio, 100.0f/aspect_ratio, -100.0f, 100.0f);
 
 
 /* ------------- original
