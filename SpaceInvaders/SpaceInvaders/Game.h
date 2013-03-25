@@ -22,13 +22,13 @@ private:
 	Char* InvPurple[17];
 	Char* Ship;
 	Char* Shields[5];
-	class Camera* View;
+	Camera* View;
 
 
 public:
 
 	void moveShip(unsigned char key);
-	void switchView(float w, float h, unsigned char key);
+	void switchView(float w, float h, int cam);
 	void drawObjects();
 	void objectInit();
 	Game(void);

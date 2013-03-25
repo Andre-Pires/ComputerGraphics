@@ -9,6 +9,8 @@ Game::Game(void)
 
 void Game::objectInit(){
 
+	View = new Camera();
+
 	for(int i = 0; i <= 16; i++){
 	
 		InvBlue[i] = new BlueInvader();
@@ -22,8 +24,6 @@ void Game::objectInit(){
 	}
 
 	Ship = new SpaceShip();
-
-	View = new Camera();
 }
 
 
@@ -35,7 +35,6 @@ void Game::moveShip(unsigned char key){
 		{
 			if(xShip > -120){
 				xShip -= 4;
-				 glutPostRedisplay();
 			}
 			break;
 		}
@@ -44,16 +43,17 @@ void Game::moveShip(unsigned char key){
 		{
 			if(xShip < 120){
 				xShip += 4;
-			    glutPostRedisplay();
 			}
 			break;
 		}
 	}
+	glutPostRedisplay();
 }
 
-void Game::switchView(float w, float h, unsigned char key){
+void Game::switchView(float w, float h, int cam){
 
-	View->setCamera(w, h, key);
+	View->setCamera(w, h, cam);
+	glutPostRedisplay();
 
 }
 

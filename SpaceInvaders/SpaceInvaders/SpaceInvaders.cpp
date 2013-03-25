@@ -24,7 +24,7 @@
 
 float global_width;
 float global_height;
-
+int camera_mode = 1;
 Game * theGame;
 
 
@@ -38,8 +38,15 @@ void myKeyboard(unsigned char key, int x, int y){
             if (key > 96) key -= 32;   //Torna todas as teclas primidas maiusculas
 			theGame->moveShip(key);
             break;
-		case '0': 
-			theGame->switchView(global_height, global_width, key);	//Mete a camera top view
+		case '1': 
+			camera_mode = 1;
+			theGame->switchView(global_width, global_height, 1);	//Troca para a camera top view
+			break;
+		case '2': 
+			camera_mode = 2;
+			theGame->switchView(global_width, global_height, 2);	//Troca para a camera third person
+			break;
+		
 	}
 }
 
@@ -73,13 +80,7 @@ void myReshape(GLsizei w, GLsizei h) {
 
 void proj(float w, float h){
 
-float aspect_ratio = w/h;
-
-glMatrixMode(GL_PROJECTION);
-
-glLoadIdentity();
-
-theGame->switchView(global_width, global_height, 0);
+	theGame->switchView(w, h, camera_mode);
 
 }
 
