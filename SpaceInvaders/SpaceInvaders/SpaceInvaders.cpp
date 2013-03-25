@@ -17,7 +17,7 @@
 #include <GL/glut.h> 
 #endif
 
-#define window_width 800
+
 
 
 float global_width;
