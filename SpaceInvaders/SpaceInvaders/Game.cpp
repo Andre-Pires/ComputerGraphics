@@ -22,6 +22,8 @@ void Game::objectInit(){
 	}
 
 	Ship = new SpaceShip();
+
+	View = new Camera();
 }
 
 
@@ -48,6 +50,13 @@ void Game::moveShip(unsigned char key){
 		}
 	}
 }
+
+void Game::switchView(float w, float h, unsigned char key){
+
+	View->setCamera(w, h, key);
+
+}
+
 
 void Game::drawObjects(){
 

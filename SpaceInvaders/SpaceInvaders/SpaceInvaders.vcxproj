@@ -80,6 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BlueInvader.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Char.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GreenInvader.h" />
@@ -93,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BlueInvader.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Char.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GreenInvader.cpp" />

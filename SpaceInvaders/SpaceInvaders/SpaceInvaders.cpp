@@ -2,6 +2,7 @@
 //
 #include "stdafx.h"
 #include "Char.h"
+#include "Camera.h"
 #include "Invader.h"
 #include "BlueInvader.h"
 #include "GreenInvader.h"
@@ -37,7 +38,8 @@ void myKeyboard(unsigned char key, int x, int y){
             if (key > 96) key -= 32;   //Torna todas as teclas primidas maiusculas
 			theGame->moveShip(key);
             break;
-		case '0':   //Movimenta para a esquerda
+		case '0': 
+			theGame->switchView(global_height, global_width, key);	//Mete a camera top view
 	}
 }
 
@@ -53,12 +55,14 @@ void mySpecialKeyboard(int key, int x, int y){
 	}
 }
 
+/*
 void myTimer(int value){
 
 
 
 	myTimer(value);
 }
+*/
 
 void myReshape(GLsizei w, GLsizei h) {
 
@@ -75,23 +79,7 @@ glMatrixMode(GL_PROJECTION);
 
 glLoadIdentity();
 
-/*  ----- para o jogo - sem desformatacao--- */
-if(aspect_ratio >= 1)
-glOrtho(-100.0f*aspect_ratio, 100.0f*aspect_ratio, -100.0f, 100.0f, -100.0f, 100.0f);
-else
-glOrtho(-100.0f, 100.0f, -100.0f/aspect_ratio, 100.0f/aspect_ratio, -100.0f, 100.0f);
-
-
-/* ------------- original
-if(aspect_ratio >= 1)
-glOrtho(-100.0f*aspect_ratio, 100.0f*aspect_ratio, -100.0f, 100.0f, -100.0f, 100.0f);
-else
-glOrtho(-100.0f, 100.0f, -100.0f/aspect_ratio, 100.0f/aspect_ratio, -100.0f, 100.0f);
-
-glMatrixMode(GL_MODELVIEW);
-
-glLoadIdentity();
-*/
+theGame->switchView(global_width, global_height, 0);
 
 }
 
@@ -136,7 +124,7 @@ glutKeyboardFunc(myKeyboard);
 
 glutSpecialFunc(mySpecialKeyboard);
 
-glutTimerFunc(40, myTimer, 0);
+//glutTimerFunc(40, myTimer, 0);
 
 glutMainLoop();
 

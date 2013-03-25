@@ -1,5 +1,6 @@
 #pragma once
 #include "Char.h"
+#include "Camera.h"
 #include "Invader.h"
 #include "BlueInvader.h"
 #include "GreenInvader.h"
@@ -9,23 +10,25 @@
 #include "Shield.h"
 
 
+
 class Game
 {
 private:
 
 	float xShip;
-
 	Char* InvBlue[17];
 	Char* InvGreen[17];
 	Char* InvRed[17];
 	Char* InvPurple[17];
 	Char* Ship;
 	Char* Shields[5];
-	
+	class Camera* View;
+
 
 public:
 
 	void moveShip(unsigned char key);
+	void switchView(float w, float h, unsigned char key);
 	void drawObjects();
 	void objectInit();
 	Game(void);
