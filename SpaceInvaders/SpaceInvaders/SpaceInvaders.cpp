@@ -46,6 +46,10 @@ void myKeyboard(unsigned char key, int x, int y){
 			camera_mode = 2;
 			theGame->switchView(global_width, global_height, 2);	//Troca para a camera third person
 			break;
+		case '3': 
+			camera_mode = 3;
+			theGame->switchView(global_width, global_height, 3);	//Troca para a camera third person
+			break;
 		
 	}
 }

@@ -7,7 +7,7 @@ Camera::Camera(void)
 }
 
 
-void Camera::setCamera(float w,	float h, int cam){
+void Camera::setCamera(float w,	float h, int cam, float xShip){
 
 	float aspect_ratio = w/h;
 
@@ -31,7 +31,14 @@ void Camera::setCamera(float w,	float h, int cam){
 		gluPerspective(60, aspect_ratio, 0, 200);
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
-		gluLookAt(0, -100, 160, 0, -20, 0, 0, 0, 1); //De onde, para onde e vector normal
+		gluLookAt(xShip, -100, 160, xShip, -20, 0, 0, 0, 1); //Eye, LookAt e UP vector
+		break;
+	case 3:
+		printf("first person view\n");
+		gluPerspective(60, aspect_ratio, 0, 200);
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+		gluLookAt(xShip,-100, 45, xShip, -30, 5, 0, 0, 1); //Eye, LookAt e UP vector
 		break;
 	}
 

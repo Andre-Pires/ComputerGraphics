@@ -50,13 +50,6 @@ void Game::moveShip(unsigned char key){
 	glutPostRedisplay();
 }
 
-void Game::switchView(float w, float h, int cam){
-
-	View->setCamera(w, h, cam);
-	glutPostRedisplay();
-
-}
-
 
 void Game::drawObjects(){
 
@@ -82,6 +75,13 @@ void Game::drawObjects(){
 	
 
 	Ship->draw(xShip, -85); // base do ecrã
+}
+
+void Game::switchView(float w, float h, int cam){
+
+	View->setCamera(w, h, cam, xShip);
+	glutPostRedisplay();
+
 }
 
 
