@@ -38,6 +38,7 @@ void myKeyboard(unsigned char key, int x, int y){
             if (key > 96) key -= 32;   //Torna todas as teclas primidas maiusculas
 			theGame->moveShip(key);
             break;
+<<<<<<< HEAD
 		case '1': 
 			camera_mode = 1;
 			theGame->switchView(global_width, global_height, 1);	//Troca para a camera top view
@@ -50,6 +51,8 @@ void myKeyboard(unsigned char key, int x, int y){
 			camera_mode = 3;
 			theGame->switchView(global_width, global_height, 3);	//Troca para a camera third person
 			break;
+=======
+>>>>>>> ola?
 		
 	}
 }
@@ -66,14 +69,22 @@ void mySpecialKeyboard(int key, int x, int y){
 	}
 }
 
+<<<<<<< HEAD
 /*
 void myTimer(int value){
+=======
+/*void myTimer(int value){
+>>>>>>> ola?
 
 
 
 	myTimer(value);
+<<<<<<< HEAD
 }
 */
+=======
+}*/
+>>>>>>> ola?
 
 void myReshape(GLsizei w, GLsizei h) {
 
@@ -84,7 +95,33 @@ void myReshape(GLsizei w, GLsizei h) {
 
 void proj(float w, float h){
 
+<<<<<<< HEAD
 	theGame->switchView(w, h, camera_mode);
+=======
+float aspect_ratio = w/h;
+
+glMatrixMode(GL_PROJECTION);
+
+glLoadIdentity();
+
+/*  ----- para o jogo - sem desformatacao--- */
+if(aspect_ratio >= 1)
+glOrtho(-100.0f*aspect_ratio, 100.0f*aspect_ratio, -100.0f, 100.0f, -100.0f, 100.0f);
+else
+glOrtho(-100.0f, 100.0f, -100.0f/aspect_ratio, 100.0f/aspect_ratio, -100.0f, 100.0f);
+
+
+/* ------------- original
+if(aspect_ratio >= 1)
+glOrtho(-100.0f*aspect_ratio, 100.0f*aspect_ratio, -100.0f, 100.0f, -100.0f, 100.0f);
+else
+glOrtho(-100.0f, 100.0f, -100.0f/aspect_ratio, 100.0f/aspect_ratio, -100.0f, 100.0f);
+*/
+glMatrixMode(GL_MODELVIEW);
+
+glLoadIdentity();
+
+>>>>>>> ola?
 
 }
 

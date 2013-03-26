@@ -21,31 +21,44 @@ glPushMatrix();
 glColor3f(1.0f, 1.0f, 1.0f);
 
 glPushMatrix();
-glScaled(26, 2, 2);
+glTranslated(0, 4, 0.0f);
+glScaled(10, 2, 2);
 glutWireCube(1);
 glPopMatrix();
 
 glPushMatrix();
 glTranslated(0, 2, 0.0f);
-glScaled(20, 2, 2);
-glutWireCube(1);
-glPopMatrix();
-
-glPushMatrix();
-glTranslated(0, 4, 0.0f);
 glScaled(14, 2, 2);
 glutWireCube(1);
 glPopMatrix();
 
 glPushMatrix();
-glTranslated(10, -2, 0.0f);
-glScaled(12, 2, 2);
+//glTranslated(0, -1, 0.0f);
+glScaled(18, 2, 2);
 glutWireCube(1);
 glPopMatrix();
 
 glPushMatrix();
-glTranslated(-10, -2, 0.0f);
-glScaled(12, 2, 2);
+glTranslated(-6.5, -2, 0.0f);
+glScaled(9, 2, 2);
+glutWireCube(1);
+glPopMatrix();
+
+glPushMatrix();
+glTranslated(6.5, -2, 0.0f);
+glScaled(9, 2, 2);
+glutWireCube(1);
+glPopMatrix();
+
+glPushMatrix();
+glTranslated(-7.5, -4, 0.0f);
+glScaled(7, 2, 2);
+glutWireCube(1);
+glPopMatrix();
+
+glPushMatrix();
+glTranslated(7.5, -4, 0.0f);
+glScaled(7, 2, 2);
 glutWireCube(1);
 glPopMatrix();
 
