@@ -142,6 +142,22 @@ glFlush();
 
 }
 
+void printMenu(){
+
+	printf("\n\n");
+	printf("        SPACE INVADERS            \n\n\n");
+	printf("CONTROLS: \n\n");
+	printf("Movement: A and D / Left and Right keys\n\n");
+	printf("Top View Camera: 1\n");
+	printf("3rd Person Camera: 2\n");
+	printf("1rst Person Camera: 3\n");
+	printf("\n\n\n");
+	printf(" Andre Pires N:68593            \n");
+	printf(" Joana Condeco N:68624            \n");
+	
+
+}
+
 int main(int argc, char** argv){
 
 int  janela;
@@ -157,6 +173,8 @@ glutInitWindowPosition(-1, -1);
 glutInitWindowSize(window_width, window_height);
 
 janela = glutCreateWindow("SpaceInvaders");
+
+printMenu();
 
 glutDisplayFunc(myDisplay);
 
