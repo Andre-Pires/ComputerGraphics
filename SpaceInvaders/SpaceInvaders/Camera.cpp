@@ -41,7 +41,7 @@ void Camera::setCamera(float w,	float h, int cam, float xShip){
 		gluPerspective(60, aspect_ratio, 0, 200);
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
-		gluLookAt(xShip,-100, 45, xShip, -30, 5, 0, 0, 1); //Eye, LookAt e UP vector
+		gluLookAt(xShip,-75, 0, xShip, -30, 0, 0, 0, 1); //Eye, LookAt e UP vector
 		break;
 	}
 
