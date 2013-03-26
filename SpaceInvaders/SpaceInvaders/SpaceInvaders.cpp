@@ -40,15 +40,15 @@ void myKeyboard(unsigned char key, int x, int y){
             break;
 		case '1': 
 			camera_mode = 1;
-			theGame->switchView(global_width, global_height, 1);	//Troca para a camera top view
+			theGame->switchView(global_width, global_height, 1);		//Troca para a camera top view
 			break;
 		case '2': 
 			camera_mode = 2;
-			theGame->switchView(global_width, global_height, 2);	//Troca para a camera third person
+			theGame->switchView(global_width, global_height, 2);		//Troca para a camera third person
 			break;
 		case '3': 
 			camera_mode = 3;
-			theGame->switchView(global_width, global_height, 3);	//Troca para a camera third person
+			theGame->switchView(global_width, global_height, 3);		//Troca para a camera third person
 			break;
 
 		
