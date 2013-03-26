@@ -9,13 +9,9 @@ Game::Game(void)
 
 void Game::objectInit(){
 
-<<<<<<< HEAD
 	View = new Camera();
 
-	for(int i = 0; i <= 16; i++){
-=======
 	for(int i = 0; i <= 10; i++){
->>>>>>> ola?
 	
 		InvBlue[i] = new BlueInvader();
 		InvGreen[i] = new GreenInvader();
@@ -29,6 +25,7 @@ void Game::objectInit(){
 
 	Ship = new SpaceShip();
 }
+
 
 
 void Game::moveShip(unsigned char key){
