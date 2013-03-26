@@ -3,8 +3,10 @@
 
 Game::Game(void)
 {
-	xShip = 0;
+	alienx = -80.0;
+	alieny = 90.0;
 	objectInit();
+	Ship->setX(0);
 }
 
 void Game::objectInit(){
@@ -12,11 +14,21 @@ void Game::objectInit(){
 	View = new Camera();
 
 	for(int i = 0; i <= 10; i++){
-	
-		InvBlue[i] = new BlueInvader();
-		InvGreen[i] = new GreenInvader();
+		
 		InvRed[i] = new RedInvader();
+		InvRed[i]->setX(alienx);
+		InvRed[i]->setY(alieny);
+		InvGreen[i] = new GreenInvader();
+		InvGreen[i]->setX(alienx);
+		InvGreen[i]->setY(alieny-15);
+		InvBlue[i] = new BlueInvader();
+		InvBlue[i]->setX(alienx);
+		InvBlue[i]->setY(alieny-30);
 		InvPurple[i] = new PurpleInvader();
+		InvPurple[i]->setX(alienx);
+		InvPurple[i]->setY(alieny-45);
+		
+		alienx += 16;
 
 		if(i <= 4){
 			Shields[i] = new Shield();
@@ -30,7 +42,39 @@ void Game::objectInit(){
 
 void Game::moveShip(unsigned char key){
 
+	float xShip = Ship->getX();
+
 	switch (key){
+		//Movimenta para a esquerda
+	case 'A': 
+		{
+			if(xShip > -85){
+				xShip -= 4;
+				Ship->setX(xShip);
+			}
+			break;
+		}
+        //Movimenta para a direita
+	case 'D':
+		{
+			if(xShip < 85){
+				xShip += 4;
+				Ship->setX(xShip);
+			}
+			break;
+		}
+	}
+	glutPostRedisplay();
+}
+
+/*
+void Game::moveInvaders(){
+
+
+
+
+
+	switch (){
 		//Movimenta para a esquerda
 	case 'A': 
 		{
@@ -39,7 +83,7 @@ void Game::moveShip(unsigned char key){
 			}
 			break;
 		}
-        //Movimenta para a direita
+		//Movimenta para a direita
 	case 'D':
 		{
 			if(xShip < 85){
@@ -50,37 +94,33 @@ void Game::moveShip(unsigned char key){
 	}
 	glutPostRedisplay();
 }
-
+*/
 
 void Game::drawObjects(){
 
-	float sitiox = -80.0;
-	float sitioy = 90.0;
+	float sitiox = -64;
+	float sitioy = -60;
 	
 	for(int i = 0; i <= 10; i++){
 		
-		InvRed[i]->draw(sitiox, sitioy); // fila 1
-		InvGreen[i]->draw(sitiox, sitioy - 15); // fila 2
-		InvBlue[i]->draw(sitiox, sitioy - 30); // fila 3
-		InvPurple[i]->draw(sitiox, sitioy - 45); // fila 4
-
-		sitiox += 16;
+		InvRed[i]->draw(InvRed[i]->getX(), InvRed[i]->getY()); // fila 1
+		InvGreen[i]->draw(InvGreen[i]->getX(), InvGreen[i]->getY()); // fila 2
+		InvBlue[i]->draw(InvBlue[i]->getX(), InvBlue[i]->getY()); // fila 3
+		InvPurple[i]->draw(InvPurple[i]->getX(), InvPurple[i]->getY()); // fila 4
 	}
 
-	sitiox = -64.0;
-
-	Shields[0]->draw(sitiox, -60);
-	Shields[1]->draw(sitiox + 40, -60);
-	Shields[2]->draw(sitiox + 88, -60);
-	Shields[3]->draw(sitiox + 128, -60);
+	Shields[0]->draw(sitiox, sitioy);
+	Shields[1]->draw(sitiox + 40, sitioy);
+	Shields[2]->draw(sitiox + 88, sitioy);
+	Shields[3]->draw(sitiox + 128, sitioy);
 	
 
-	Ship->draw(xShip, -85); // base do ecrã
+	Ship->draw(Ship->getX(), -85); // base do ecrã
 }
 
 void Game::switchView(float w, float h, int cam){
 
-	View->setCamera(w, h, cam, xShip);
+	View->setCamera(w, h, cam, Ship->getX());
 	glutPostRedisplay();
 
 }

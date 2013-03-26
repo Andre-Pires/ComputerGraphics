@@ -107,7 +107,8 @@ void PurpleInvader::drawEyes()
 
 void PurpleInvader::draw(float x, float y)
 {
-	PurpleInvader inv;
+	_x = x;
+	_y = y;
 
 	glPushMatrix();
 

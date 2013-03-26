@@ -15,7 +15,8 @@ class Game
 {
 private:
 
-	float xShip;
+	float alienx;
+	float alieny;
 	Char* InvBlue[17];
 	Char* InvGreen[17];
 	Char* InvRed[17];
@@ -27,6 +28,7 @@ private:
 
 public:
 
+	void moveInvaders();
 	void moveShip(unsigned char key);
 	void switchView(float w, float h, int cam);
 	void drawObjects();

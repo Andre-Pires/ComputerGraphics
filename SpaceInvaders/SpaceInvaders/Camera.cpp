@@ -11,6 +11,9 @@ void Camera::setCamera(float w,	float h, int cam, float xShip){
 
 	float aspect_ratio = w/h;
 
+	/*-------------------Clear-----------------------*/
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+	/*-----------------------------------------------*/
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	

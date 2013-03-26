@@ -78,7 +78,9 @@ void BlueInvader::draw_eyes(){
 
 void BlueInvader::draw(float x, float y){
 
-	BlueInvader inv;
+	
+	_x = x;
+	_y = y;
 
 glPushMatrix();
 
@@ -90,12 +92,12 @@ glColor3f(0.0f, 0.75f, 1.0f);
 
 glPushMatrix();
 glTranslated(-4.5, -5, 0);
-inv.draw_legs(); // perna esquerda
+draw_legs(); // perna esquerda
 glPopMatrix();
 
 glPushMatrix();
 glTranslated(2.5, -5, 0);
-inv.draw_legs();	//perna direita
+draw_legs();	//perna direita
 glPopMatrix();
 
 
@@ -107,17 +109,17 @@ glPopMatrix();
 
 
 glPushMatrix();
-inv.draw_body();	//corpo
+draw_body();	//corpo
 glPopMatrix();
 
 glPushMatrix();
-inv.draw_head(); //cabeca
+draw_head(); //cabeca
 glPopMatrix();
 
 glColor3f(0.0f, 0.0f, 0.0f); //preto
 
 glPushMatrix();
-inv.draw_eyes(); //olhos
+draw_eyes(); //olhos
 glPopMatrix();
 
 glPopMatrix();

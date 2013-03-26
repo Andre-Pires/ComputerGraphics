@@ -86,6 +86,9 @@ void GreenInvader::draw_eyes(){
 
 void GreenInvader::draw(float x, float y){
 
+	_x = x;
+	_y = y;
+
 	GreenInvader inv;
 	
 	glPushMatrix();
@@ -97,7 +100,7 @@ void GreenInvader::draw(float x, float y){
 	glColor3f(0.5f, 1.0f, 0.0f);
 
 	glPushMatrix();
-	inv.draw_legs(); // pernas
+	draw_legs(); // pernas
 	glPopMatrix();
 
 	glPushMatrix();
@@ -112,17 +115,17 @@ void GreenInvader::draw(float x, float y){
 	glPopMatrix();
 
 	glPushMatrix();
-	inv.draw_body();	//corpo
+	draw_body();	//corpo
 	glPopMatrix();
 
 	glPushMatrix();
-	inv.draw_head(); //cabeca
+	draw_head(); //cabeca
 	glPopMatrix();
 
 	glColor3f(0.0f, 0.0f, 0.0f); //preto
 
 	glPushMatrix();
-	inv.draw_eyes(); //olhos
+	draw_eyes(); //olhos
 	glPopMatrix();
 
 	glPopMatrix();

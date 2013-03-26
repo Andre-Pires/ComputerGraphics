@@ -103,7 +103,7 @@ proj(global_width, global_height);
 
 theGame->drawObjects();
 
-glFlush();
+glutSwapBuffers();
 
 }
 
@@ -131,7 +131,7 @@ theGame = new Game();
 
 glutInit(&argc, argv);
 
-glutInitDisplayMode(GLUT_RGBA|GLUT_SINGLE);
+glutInitDisplayMode(GLUT_RGBA|GLUT_DOUBLE);
 
 glutInitWindowPosition(-1, -1);
 

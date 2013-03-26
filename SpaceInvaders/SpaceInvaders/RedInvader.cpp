@@ -120,6 +120,10 @@ void drawEyes(){
 }
 
 void RedInvader::draw(float x, float y){
+	
+	_x = x;
+	_y = y;
+
 
 	glPushMatrix();
 
