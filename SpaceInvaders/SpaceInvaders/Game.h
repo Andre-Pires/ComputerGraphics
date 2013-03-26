@@ -15,14 +15,19 @@ class Game
 {
 private:
 
+	int	  columns[11]; // vector para registar a posicao as colunas das pontas
+	int Max;
+	int Min;
+	bool Down;
+	bool Right;
 	float alienx;
 	float alieny;
-	Char* InvBlue[17];
-	Char* InvGreen[17];
-	Char* InvRed[17];
-	Char* InvPurple[17];
+	Char* InvBlue[11];
+	Char* InvGreen[11];
+	Char* InvRed[11];
+	Char* InvPurple[11];
 	Char* Ship;
-	Char* Shields[5];
+	Char* Shields[4];
 	Camera* View;
 
 

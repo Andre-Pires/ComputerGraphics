@@ -3,10 +3,18 @@
 
 Game::Game(void)
 {
-	alienx = -80.0;
-	alieny = 90.0;
+	for (int i = 0; i <= 10; i++)
+	{
+		columns[i] = 1;
+	}
+	Down = false;// se desce
+	Right = true; // se anda para direita
+	Max = 10; //mov invaders
+	Min = 0; //mov invaders
+	alienx = -80.0; //coord init
+	alieny = 90.0; //coord init
 	objectInit();
-	Ship->setX(0);
+	Ship->setX(0); //coord init
 }
 
 void Game::objectInit(){
@@ -67,34 +75,70 @@ void Game::moveShip(unsigned char key){
 	glutPostRedisplay();
 }
 
-/*
+
 void Game::moveInvaders(){
 
+	float step = 2;
+	float MinBondary = -86;
+	float MaxBondary = 86;
+	float x, y;
+						
+			if (columns[Max] == 0) --Max;
 
+			if (columns[Min] == 0) ++Min;
 
-
-
-	switch (){
-		//Movimenta para a esquerda
-	case 'A': 
-		{
-			if(xShip > -85){
-				xShip -= 4;
+			if (Right && (InvRed[Max]->getX() == MaxBondary)){
+				Down = true;
+				Right = false;
+			}else if (!Right && (InvRed[Min]->getX() == MinBondary))
+			{
+				Right = true;
 			}
-			break;
-		}
-		//Movimenta para a direita
-	case 'D':
-		{
-			if(xShip < 85){
-				xShip += 4;
-			}
-			break;
-		}
-	}
+
+			if (Down == true) //só anda para baixo
+			{
+				Down = false;
+
+					for(int i = Min; i <= Max; i++){
+
+						y = InvRed[i]->getY(); // fila 1
+						InvRed[i]->setY(y-5);
+						y = InvGreen[i]->getY(); // fila 2
+						InvGreen[i]->setY(y-5);
+						y = InvBlue[i]->getY(); // fila 3
+						InvBlue[i]->setY(y-5);
+						y = InvPurple[i]->getY(); // fila 4
+						InvPurple[i]->setY(y-5);
+					}
+				}else if (Right)
+				{
+					for(int i = Min; i <= Max; i++){
+
+						x = InvRed[i]->getX(); // fila 1
+						InvRed[i]->setX(x+step);
+						x = InvGreen[i]->getX(); // fila 2
+						InvGreen[i]->setX(x+step);
+						x = InvBlue[i]->getX(); // fila 3
+						InvBlue[i]->setX(x+step);
+						x = InvPurple[i]->getX(); // fila 4
+						InvPurple[i]->setX(x+step);
+					} 
+				}else{
+					for(int i = Min; i <= Max; i++){
+
+						x = InvRed[i]->getX(); // fila 1
+						InvRed[i]->setX(x-step);
+						x = InvGreen[i]->getX(); // fila 2
+						InvGreen[i]->setX(x-step);
+						x = InvBlue[i]->getX(); // fila 3
+						InvBlue[i]->setX(x-step);
+						x = InvPurple[i]->getX(); // fila 4
+						InvPurple[i]->setX(x-step);
+					}
+				}
+
 	glutPostRedisplay();
 }
-*/
 
 void Game::drawObjects(){
 

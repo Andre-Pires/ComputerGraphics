@@ -67,14 +67,15 @@ void mySpecialKeyboard(int key, int x, int y){
 	}
 }
 
-/*
+
 void myTimer(int value){
+	
+	theGame->moveInvaders();
 
-
-	myTimer(value);
+	glutTimerFunc(300, myTimer, 0);
 
 }
-*/
+
 
 
 void myReshape(GLsizei w, GLsizei h) {
@@ -149,7 +150,7 @@ glutKeyboardFunc(myKeyboard);
 
 glutSpecialFunc(mySpecialKeyboard);
 
-//glutTimerFunc(40, myTimer, 0);
+glutTimerFunc(0, myTimer, 0);
 
 glutMainLoop();
 
