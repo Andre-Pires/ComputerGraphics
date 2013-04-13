@@ -77,7 +77,9 @@ void Game::moveShip(unsigned char key){
 
 
 void Game::moveInvaders(){
-
+/* alterar o vector columns para ter o numero de aliens que cada coluna tem, quando uma posiçao chega a zero a coluna está vazia.
+	cada alien quando morre deve decrementar a posição correspondente à sua coluna */
+	
 	float step = 2;
 	float MinBondary = -86;
 	float MaxBondary = 86;
