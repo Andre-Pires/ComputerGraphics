@@ -92,6 +92,7 @@ void Game::moveInvaders(){
 				Right = false;
 			}else if (!Right && (InvRed[Min]->getX() == MinBondary))
 			{
+				Down = true;
 				Right = true;
 			}
 
