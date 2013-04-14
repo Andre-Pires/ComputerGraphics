@@ -10,6 +10,7 @@
 #include "SpaceShip.h"
 #include "Shield.h"
 #include "Game.h"
+#include "Missile.h"
 
 
 #if defined(__APPLE__) || defined(MACOSX) 
@@ -50,7 +51,8 @@ void myKeyboard(unsigned char key, int x, int y){
 			camera_mode = 3;
 			theGame->switchView(global_width, global_height, 3);		//Troca para a camera third person
 			break;
-
+		case ' ':
+			theGame->newMissile();
 		
 	}
 }
@@ -71,6 +73,8 @@ void mySpecialKeyboard(int key, int x, int y){
 void myTimer(int value){
 	
 	theGame->moveInvaders();
+
+	theGame->moveMissiles();
 
 	glutTimerFunc(300, myTimer, 0);
 

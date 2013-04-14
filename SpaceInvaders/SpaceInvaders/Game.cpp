@@ -7,6 +7,10 @@ Game::Game(void)
 	{
 		columns[i] = 1;
 	}
+	for (int i = 0; i < 10; i++)
+	{
+		Missiles[i] =	NULL;
+	}
 	Down = false;// se desce
 	Right = true; // se anda para direita
 	Max = 10; //mov invaders
@@ -143,6 +147,31 @@ void Game::moveInvaders(){
 	glutPostRedisplay();
 }
 
+void Game::moveMissiles(){
+	float step = 2;
+
+	for(int i = 0; i < 10; i++){
+		if(Missiles[i] != NULL){
+			int y = Missiles[i]->getY(); // fila 1
+			Missiles[i]->setY(y+step);
+		}
+	}
+}
+
+
+void Game::newMissile(){
+
+	for(int i = 0; i < 10; i++){
+		if (Missiles[i] == NULL){
+			Missiles[i] = new Missile;
+			Missiles[i]->setX(Ship->getX());
+			Missiles[i]->setY(-75);
+			break;
+		}
+	}
+
+}
+
 void Game::drawObjects(){
 
 	float sitiox = -64;
@@ -163,6 +192,11 @@ void Game::drawObjects(){
 	
 
 	Ship->draw(Ship->getX(), -85); // base do ecrã
+
+	for(int i = 0; i < 10; i++){
+		if(Missiles[i] != NULL) 
+			Missiles[i]->draw(Missiles[i]->getX(), Missiles[i]->getY());
+	}
 }
 
 void Game::switchView(float w, float h, int cam){

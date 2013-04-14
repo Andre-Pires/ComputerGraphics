@@ -47,7 +47,8 @@ void SpaceShip::draw(float x, float y){
 
 	glPushMatrix();
 	glTranslated(0, 9, 0);
-	glutSolidCube(2);
+	glScaled(2, 2, 2);
+	glutSolidCube(1);
 	glPopMatrix();
 
 	

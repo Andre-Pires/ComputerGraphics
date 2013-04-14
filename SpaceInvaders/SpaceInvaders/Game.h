@@ -8,6 +8,7 @@
 #include "PurpleInvader.h"
 #include "SpaceShip.h"
 #include "Shield.h"
+#include "Missile.h"
 
 
 
@@ -28,6 +29,7 @@ private:
 	Char* InvPurple[11];
 	Char* Ship;
 	Char* Shields[4];
+	Char* Missiles[10];
 	Camera* View;
 
 
@@ -35,9 +37,11 @@ public:
 
 	void moveInvaders();
 	void moveShip(unsigned char key);
+	void moveMissiles();
 	void switchView(float w, float h, int cam);
 	void drawObjects();
 	void objectInit();
+	void newMissile();
 	Game(void);
 	~Game(void);
 };
