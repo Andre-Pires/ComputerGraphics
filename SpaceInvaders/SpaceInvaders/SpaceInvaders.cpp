@@ -97,7 +97,8 @@ void myDisplay() {
 
 
 glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-glClear(GL_COLOR_BUFFER_BIT);
+glClearDepth(1);
+glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 
 glViewport(0, 0, global_width, global_height);
 proj(global_width, global_height);
@@ -132,11 +133,15 @@ theGame = new Game();
 
 glutInit(&argc, argv);
 
-glutInitDisplayMode(GLUT_RGBA|GLUT_DOUBLE);
+glutInitDisplayMode(GLUT_RGBA|GLUT_DOUBLE|GLUT_DEPTH);
 
 glutInitWindowPosition(-1, -1);
 
 glutInitWindowSize(window_width, window_height);
+
+glEnable (GL_DEPTH_TEST);
+glEnable (GL_LIGHTING);
+glEnable (GL_LIGHT0);
 
 janela = glutCreateWindow("SpaceInvaders");
 
