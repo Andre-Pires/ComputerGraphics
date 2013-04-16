@@ -7,10 +7,7 @@ Game::Game(void)
 	{
 		columns[i] = 1;
 	}
-	for (int i = 0; i < 10; i++)
-	{
-		Missiles[i] =	NULL;
-	}
+	
 	Down = false;// se desce
 	Right = true; // se anda para direita
 	Max = 10; //mov invaders
@@ -46,6 +43,9 @@ void Game::objectInit(){
 			Shields[i] = new Shield();
 		} 
 	}
+	
+	MissileShip = new Missile();
+	MissileShip->setAlive(false);
 
 	Ship = new SpaceShip();
 }
@@ -149,27 +149,23 @@ void Game::moveInvaders(){
 
 void Game::moveMissiles(){
 	float step = 2;
-
-	for(int i = 0; i < 10; i++){
-		if(Missiles[i] != NULL){
-			int y = Missiles[i]->getY(); // fila 1
-			Missiles[i]->setY(y+step);
-		}
+	if(MissileShip->getAlive() != false){
+		if(MissileShip->getY() > 97) 
+			MissileShip->setAlive(false);
+		int y = MissileShip->getY(); // fila 1
+		MissileShip->setY(y+step);
 	}
 }
 
 
 void Game::newMissile(){
-
-	for(int i = 0; i < 10; i++){
-		if (Missiles[i] == NULL){
-			Missiles[i] = new Missile;
-			Missiles[i]->setX(Ship->getX());
-			Missiles[i]->setY(-75);
-			break;
-		}
+	printf("OLA");
+	if (MissileShip->getAlive() == false){
+		printf("OLA2");
+		MissileShip->setAlive(true);
+		MissileShip->setX(Ship->getX());
+		MissileShip->setY(-75);
 	}
-
 }
 
 void Game::drawObjects(){
@@ -193,10 +189,8 @@ void Game::drawObjects(){
 
 	Ship->draw(Ship->getX(), -85); // base do ecrã
 
-	for(int i = 0; i < 10; i++){
-		if(Missiles[i] != NULL) 
-			Missiles[i]->draw(Missiles[i]->getX(), Missiles[i]->getY());
-	}
+	if(MissileShip->getAlive() != false) 
+		MissileShip->draw(MissileShip->getX(), MissileShip->getY());
 }
 
 void Game::switchView(float w, float h, int cam){

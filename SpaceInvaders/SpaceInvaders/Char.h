@@ -20,5 +20,8 @@ public:
 	void setX(float x);
 	float getY();
 	void setY(float y);
+	bool getAlive();
+	void setAlive(bool a);
+	
 	virtual void draw(float x, float y) = 0;
 };

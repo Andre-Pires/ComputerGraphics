@@ -29,7 +29,7 @@ private:
 	Char* InvPurple[11];
 	Char* Ship;
 	Char* Shields[4];
-	Char* Missiles[10];
+	Char* MissileShip;
 	Camera* View;
 
 

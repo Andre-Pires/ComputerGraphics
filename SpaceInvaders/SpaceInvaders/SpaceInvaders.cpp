@@ -76,7 +76,7 @@ void myTimer(int value){
 
 	theGame->moveMissiles();
 
-	glutTimerFunc(300, myTimer, 0);
+	glutTimerFunc(5, myTimer, 0);
 
 }
 

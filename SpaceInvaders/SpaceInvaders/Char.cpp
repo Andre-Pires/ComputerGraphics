@@ -25,3 +25,13 @@ void Char::setY(float y){
 
 	_y = y;
 }
+
+bool Char::getAlive(){
+	
+	return _alive;
+}
+
+void Char::setAlive(bool a){
+
+	_alive = a;
+}
