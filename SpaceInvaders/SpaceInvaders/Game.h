@@ -42,6 +42,7 @@ public:
 	void drawObjects();
 	void objectInit();
 	void newMissile();
+	void lightGame();
 	Game(void);
 	~Game(void);
 };

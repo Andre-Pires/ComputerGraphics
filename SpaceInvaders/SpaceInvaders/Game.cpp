@@ -48,6 +48,8 @@ void Game::objectInit(){
 	MissileShip->setAlive(false);
 
 	Ship = new SpaceShip();
+
+
 }
 
 
@@ -198,6 +200,18 @@ void Game::switchView(float w, float h, int cam){
 	View->setCamera(w, h, cam, Ship->getX());
 	glutPostRedisplay();
 
+}
+
+void Game::lightGame(){
+	GLfloat ambient[] = {0.4,0.4,0.4,1};
+	GLfloat diffuse[] = {0.7,0.7,0.7,1};
+	GLfloat specular[] = {0.7,0.7,0.7,1};
+	GLfloat direction[] = {0,0,100,0};
+	glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
+	glLightfv(GL_LIGHT0, GL_POSITION, direction);
+	glEnable(GL_LIGHT0); 
 }
 
 

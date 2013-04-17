@@ -28,7 +28,6 @@ float global_height;
 int camera_mode = 1;
 Game * theGame;
 
-
 void myKeyboard(unsigned char key, int x, int y){
 
 	switch (key){
@@ -76,7 +75,7 @@ void myTimer(int value){
 
 	theGame->moveMissiles();
 
-	glutTimerFunc(5, myTimer, 0);
+	glutTimerFunc(300, myTimer, 0);
 
 }
 
@@ -107,7 +106,11 @@ glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 glViewport(0, 0, global_width, global_height);
 proj(global_width, global_height);
 
+theGame->lightGame();
+
 theGame->drawObjects();
+
+glEnable (GL_LIGHTING);
 
 glutSwapBuffers();
 
@@ -143,11 +146,10 @@ glutInitWindowPosition(-1, -1);
 
 glutInitWindowSize(window_width, window_height);
 
+janela = glutCreateWindow("SpaceInvaders");
+
 glEnable (GL_DEPTH_TEST);
 glEnable (GL_LIGHTING);
-glEnable (GL_LIGHT0);
-
-janela = glutCreateWindow("SpaceInvaders");
 
 printMenu();
 

@@ -88,7 +88,17 @@ glTranslated(x, y, 0.0f);
 
 glPushMatrix();
 
-glColor3f(0.0f, 0.75f, 1.0f);
+GLfloat material[] = {0,0.75,1};
+GLfloat emission[] = {0,0,0,1};
+GLfloat specular[] = {0,0,0,1};
+GLfloat shininess[] = {0};
+glMaterialfv(GL_FRONT, GL_AMBIENT, material);
+glMaterialfv(GL_FRONT, GL_DIFFUSE, material);
+glMaterialfv(GL_FRONT, GL_EMISSION, emission);
+glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
+glMaterialfv(GL_FRONT, GL_SHININESS, shininess);
+//glColor4fv(material);
+
 
 glPushMatrix();
 glTranslated(-4.5, -5, 0);
@@ -116,9 +126,20 @@ glPushMatrix();
 draw_head(); //cabeca
 glPopMatrix();
 
-glColor3f(0.0f, 0.0f, 0.0f); //preto
-
 glPushMatrix();
+
+GLfloat eye2_ambient[] = {0,0,0,1};
+GLfloat eye2_diffuse[] = {0.03,0.03,0.03,1};
+GLfloat eye2_specular[] = {1,1,1,1};
+GLfloat eye2_emission[] = {0,0,0,1};
+GLfloat eye2_shininess[] = {128};
+glMaterialfv(GL_FRONT, GL_EMISSION, eye2_emission);
+glMaterialfv(GL_FRONT, GL_AMBIENT, eye2_ambient);
+glMaterialfv(GL_FRONT, GL_DIFFUSE, eye2_diffuse);
+glMaterialfv(GL_FRONT, GL_SPECULAR, eye2_specular);
+glMaterialfv(GL_FRONT, GL_SHININESS, eye2_shininess);
+glColor4fv(eye2_ambient); //preto 
+
 draw_eyes(); //olhos
 glPopMatrix();
 
