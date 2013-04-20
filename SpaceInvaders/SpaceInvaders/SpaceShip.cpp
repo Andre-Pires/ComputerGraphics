@@ -47,8 +47,8 @@ void SpaceShip::draw(float x, float y){
 	{
 		GLfloat material[] = {0.85,0.85,0.85};
 		GLfloat emission[] = {0,0,0,1};
-		GLfloat specular[] = {0,0,0,1};
-		GLfloat shininess[] = {0};
+		GLfloat specular[] = {1,1,1,1};
+		GLfloat shininess[] = {50};
 		glMaterialfv(GL_FRONT, GL_AMBIENT, material);
 		glMaterialfv(GL_FRONT, GL_DIFFUSE, material);
 		glMaterialfv(GL_FRONT, GL_EMISSION, emission);

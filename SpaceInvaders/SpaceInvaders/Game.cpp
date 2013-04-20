@@ -204,16 +204,31 @@ void Game::switchView(float w, float h, int cam){
 
 void Game::toggleLight(){
 
+	GLfloat pos[] = {0.0, 0.0, 10.0, 0.0};
+	GLfloat white[] = {1.0, 1.0, 1.0, 1.0}; //Fully white
+	GLfloat red[] = {0.0, 0.0, 0.9, 1.0}; //Bright red - para testar brilho da nave
+
+	GLfloat darker[] = {.4, .4, .4, 1.0}; //Darker white
+	GLfloat blue[] = {0.0, 0.0, 0.9, 1.0}; //Bright blue - para testar brilho da nave
+
 	if(!glIsEnabled(GL_LIGHT0) && !glIsEnabled(GL_LIGHT1)) {
 		glEnable(GL_LIGHTING); 
 		glEnable(GL_LIGHT0);
-		GLfloat lmodel_ambient[] = { 0.8, 0.8, 0.8, 1.0 };
-		glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lmodel_ambient);
+		glLightfv(GL_LIGHT0,GL_POSITION,pos);
+
+		glLightfv(GL_LIGHT0, GL_AMBIENT, white);
+		glLightfv(GL_LIGHT0, GL_DIFFUSE, white);
+		glLightfv(GL_LIGHT0, GL_SPECULAR, red);
+
 	}else if(glIsEnabled(GL_LIGHT0) && !glIsEnabled(GL_LIGHT1)){
 		glDisable(GL_LIGHT0);
 		glEnable(GL_LIGHT1);
-		GLfloat lmodel_ambient[] = { 0.4, 0.4, 0.4, 1.0 };
-		glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lmodel_ambient);
+		glLightfv(GL_LIGHT1,GL_POSITION,pos);
+		
+		glLightfv(GL_LIGHT1, GL_AMBIENT, darker);
+		glLightfv(GL_LIGHT1, GL_DIFFUSE, darker);
+		glLightfv(GL_LIGHT1, GL_SPECULAR, blue);
+
 	}else{
 		glDisable(GL_LIGHTING);
 		glDisable(GL_LIGHT1);
