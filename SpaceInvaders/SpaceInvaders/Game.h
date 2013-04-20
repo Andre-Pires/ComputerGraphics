@@ -43,6 +43,7 @@ public:
 	void objectInit();
 	void newMissile();
 	void lightGame();
+	void toggleLight();
 	Game(void);
 	~Game(void);
 };

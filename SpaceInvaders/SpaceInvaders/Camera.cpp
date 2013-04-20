@@ -13,6 +13,7 @@ void Camera::setCamera(float w,	float h, int cam, float xShip){
 
 	/*-------------------Clear-----------------------*/
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+	glClear(GL_DEPTH_BUFFER_BIT);
 	/*-----------------------------------------------*/
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();

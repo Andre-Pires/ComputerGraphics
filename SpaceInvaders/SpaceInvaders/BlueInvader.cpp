@@ -59,7 +59,7 @@ void BlueInvader::draw_eyes(){
 
 	for(i = 0; i <2; i++){
 			glPushMatrix();
-			glTranslated(-2, -1 + i, 0);
+			glTranslated(-2, -1 + i, 0.1);
 			glScaled(2,1,2);
 			glutSolidCube(1);
 			glLoadIdentity();
@@ -68,7 +68,7 @@ void BlueInvader::draw_eyes(){
 
 	for(i = 0; i <2; i++){
 			glPushMatrix();
-			glTranslated(2, -1 + i, 0);
+			glTranslated(2, -1 + i, 0.1);
 			glScaled(2,1,2);
 			glutSolidCube(1);
 			glLoadIdentity();
@@ -88,7 +88,9 @@ glTranslated(x, y, 0.0f);
 
 glPushMatrix();
 
-GLfloat material[] = {0,0.75,1};
+if (glIsEnabled(GL_LIGHT0)|| glIsEnabled(GL_LIGHT1))
+{
+GLfloat material[] = {0,0.75,1,1};
 GLfloat emission[] = {0,0,0,1};
 GLfloat specular[] = {0,0,0,1};
 GLfloat shininess[] = {0};
@@ -97,7 +99,8 @@ glMaterialfv(GL_FRONT, GL_DIFFUSE, material);
 glMaterialfv(GL_FRONT, GL_EMISSION, emission);
 glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
 glMaterialfv(GL_FRONT, GL_SHININESS, shininess);
-//glColor4fv(material);
+
+}else glColor3f(0.0f, 0.75f, 1.0f);
 
 
 glPushMatrix();
@@ -128,17 +131,20 @@ glPopMatrix();
 
 glPushMatrix();
 
+if (glIsEnabled(GL_LIGHT0)|| glIsEnabled(GL_LIGHT1))
+{
 GLfloat eye2_ambient[] = {0,0,0,1};
 GLfloat eye2_diffuse[] = {0.03,0.03,0.03,1};
-GLfloat eye2_specular[] = {1,1,1,1};
+GLfloat eye2_specular[] = {0,0,0,1};
 GLfloat eye2_emission[] = {0,0,0,1};
-GLfloat eye2_shininess[] = {128};
+GLfloat eye2_shininess[] = {0};
 glMaterialfv(GL_FRONT, GL_EMISSION, eye2_emission);
 glMaterialfv(GL_FRONT, GL_AMBIENT, eye2_ambient);
 glMaterialfv(GL_FRONT, GL_DIFFUSE, eye2_diffuse);
 glMaterialfv(GL_FRONT, GL_SPECULAR, eye2_specular);
 glMaterialfv(GL_FRONT, GL_SHININESS, eye2_shininess);
-glColor4fv(eye2_ambient); //preto 
+
+}else glColor3f(0.0f, 0.0f, 0.0f);
 
 draw_eyes(); //olhos
 glPopMatrix();

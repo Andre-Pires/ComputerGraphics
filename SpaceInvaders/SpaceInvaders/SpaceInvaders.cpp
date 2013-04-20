@@ -25,6 +25,9 @@
 
 float global_width;
 float global_height;
+float currentTime;
+float previousTime;
+float elapsedTime;
 int camera_mode = 1;
 Game * theGame;
 
@@ -50,8 +53,12 @@ void myKeyboard(unsigned char key, int x, int y){
 			camera_mode = 3;
 			theGame->switchView(global_width, global_height, 3);		//Troca para a camera third person
 			break;
+		case 'l': 
+			theGame->toggleLight();										//Ligar/Desligar Luz
+			break;
 		case ' ':
 			theGame->newMissile();
+			break;
 		
 	}
 }
@@ -70,12 +77,20 @@ void mySpecialKeyboard(int key, int x, int y){
 
 
 void myTimer(int value){
-	
-	theGame->moveInvaders();
 
+
+	currentTime = glutGet(GLUT_ELAPSED_TIME);
+	elapsedTime = currentTime - previousTime;
+	
 	theGame->moveMissiles();
 
-	glutTimerFunc(300, myTimer, 0);
+	if (elapsedTime >= 200)
+	{
+		previousTime = currentTime;	
+		theGame->moveInvaders();
+	}
+
+	glutTimerFunc(15, myTimer, 0);
 
 }
 
@@ -100,17 +115,13 @@ void myDisplay() {
 
 
 glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-glClearDepth(1);
 glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 
 glViewport(0, 0, global_width, global_height);
 proj(global_width, global_height);
 
-theGame->lightGame();
 
 theGame->drawObjects();
-
-glEnable (GL_LIGHTING);
 
 glutSwapBuffers();
 
@@ -140,16 +151,15 @@ theGame = new Game();
 
 glutInit(&argc, argv);
 
-glutInitDisplayMode(GLUT_RGBA|GLUT_DOUBLE|GLUT_DEPTH);
+glutInitDisplayMode(GLUT_RGB|GLUT_DOUBLE|GLUT_DEPTH);
+glEnable(GL_DEPTH_TEST);
+glShadeModel (GL_SMOOTH);
 
 glutInitWindowPosition(-1, -1);
 
 glutInitWindowSize(window_width, window_height);
 
 janela = glutCreateWindow("SpaceInvaders");
-
-glEnable (GL_DEPTH_TEST);
-glEnable (GL_LIGHTING);
 
 printMenu();
 

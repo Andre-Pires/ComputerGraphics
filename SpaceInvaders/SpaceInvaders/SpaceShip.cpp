@@ -43,7 +43,19 @@ void SpaceShip::draw(float x, float y){
 
 	glPushMatrix();
 
-	glColor3f(0.85f, 0.85f, 0.85f);
+	if (glIsEnabled(GL_LIGHT0)|| glIsEnabled(GL_LIGHT1))
+	{
+		GLfloat material[] = {0.85,0.85,0.85};
+		GLfloat emission[] = {0,0,0,1};
+		GLfloat specular[] = {0,0,0,1};
+		GLfloat shininess[] = {0};
+		glMaterialfv(GL_FRONT, GL_AMBIENT, material);
+		glMaterialfv(GL_FRONT, GL_DIFFUSE, material);
+		glMaterialfv(GL_FRONT, GL_EMISSION, emission);
+		glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
+		glMaterialfv(GL_FRONT, GL_SHININESS, shininess);
+
+	}else glColor3f(0.85f, 0.85f, 0.85f);
 
 	glPushMatrix();
 	glTranslated(0, 9, 0);

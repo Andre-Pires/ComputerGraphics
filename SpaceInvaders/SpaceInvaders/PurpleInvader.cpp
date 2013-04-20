@@ -93,13 +93,13 @@ void PurpleInvader::drawLegs()
 void PurpleInvader::drawEyes()
 {
 	glPushMatrix();
-	glTranslated(-2,0,0);
+	glTranslated(-2,0,0.1);
 	glScaled(2,3,2);
 	glutSolidCube(1);
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslated(2,0,0);
+	glTranslated(2,0,0.1);
 	glScaled(2,3,2);
 	glutSolidCube(1);
 	glPopMatrix();
@@ -116,12 +116,37 @@ void PurpleInvader::draw(float x, float y)
 
 	glPushMatrix();
 
-	glColor3f(0.59f, 0.0f, 0.82f);
+	if (glIsEnabled(GL_LIGHT0)|| glIsEnabled(GL_LIGHT1))
+	{
+		GLfloat material[] = {0.59,0.0,0.82};
+		GLfloat emission[] = {0,0,0,1};
+		GLfloat specular[] = {0,0,0,1};
+		GLfloat shininess[] = {0};
+		glMaterialfv(GL_FRONT, GL_AMBIENT, material);
+		glMaterialfv(GL_FRONT, GL_DIFFUSE, material);
+		glMaterialfv(GL_FRONT, GL_EMISSION, emission);
+		glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
+		glMaterialfv(GL_FRONT, GL_SHININESS, shininess);
+
+	}else glColor3f(0.59f, 0.0f, 0.82f);
 
 	drawHead();
 	drawBody();
 	drawLegs();
-	glColor3f(0.0f, 0.0f, 0.0f);
+
+	if (glIsEnabled(GL_LIGHT0)|| glIsEnabled(GL_LIGHT1))
+	{
+		GLfloat eye2_ambient[] = {0.03,0.03,0.03,1};
+		GLfloat eye2_specular[] = {0,0,0,1};
+		GLfloat eye2_emission[] = {0,0,0,1};
+		GLfloat eye2_shininess[] = {0};
+		glMaterialfv(GL_FRONT, GL_EMISSION, eye2_emission);
+		glMaterialfv(GL_FRONT, GL_AMBIENT, eye2_ambient);
+		glMaterialfv(GL_FRONT, GL_DIFFUSE, eye2_ambient);
+		glMaterialfv(GL_FRONT, GL_SPECULAR, eye2_specular);
+		glMaterialfv(GL_FRONT, GL_SHININESS, eye2_shininess);
+	}else glColor3f(0.0f, 0.0f, 0.0f); //preto 
+
 	drawEyes();
 
 	glPopMatrix();

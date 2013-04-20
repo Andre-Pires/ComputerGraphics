@@ -161,9 +161,9 @@ void Game::moveMissiles(){
 
 
 void Game::newMissile(){
-	printf("OLA");
+
 	if (MissileShip->getAlive() == false){
-		printf("OLA2");
+
 		MissileShip->setAlive(true);
 		MissileShip->setX(Ship->getX());
 		MissileShip->setY(-75);
@@ -171,7 +171,7 @@ void Game::newMissile(){
 }
 
 void Game::drawObjects(){
-
+	
 	float sitiox = -64;
 	float sitioy = -60;
 	
@@ -202,17 +202,25 @@ void Game::switchView(float w, float h, int cam){
 
 }
 
-void Game::lightGame(){
-	GLfloat ambient[] = {0.4,0.4,0.4,1};
-	GLfloat diffuse[] = {0.7,0.7,0.7,1};
-	GLfloat specular[] = {0.7,0.7,0.7,1};
-	GLfloat direction[] = {0,0,100,0};
-	glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
-	glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse);
-	glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
-	glLightfv(GL_LIGHT0, GL_POSITION, direction);
-	glEnable(GL_LIGHT0); 
+void Game::toggleLight(){
+
+	if(!glIsEnabled(GL_LIGHT0) && !glIsEnabled(GL_LIGHT1)) {
+		glEnable(GL_LIGHTING); 
+		glEnable(GL_LIGHT0);
+		GLfloat lmodel_ambient[] = { 0.8, 0.8, 0.8, 1.0 };
+		glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lmodel_ambient);
+	}else if(glIsEnabled(GL_LIGHT0) && !glIsEnabled(GL_LIGHT1)){
+		glDisable(GL_LIGHT0);
+		glEnable(GL_LIGHT1);
+		GLfloat lmodel_ambient[] = { 0.4, 0.4, 0.4, 1.0 };
+		glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lmodel_ambient);
+	}else{
+		glDisable(GL_LIGHTING);
+		glDisable(GL_LIGHT1);
+	}
+	glutPostRedisplay();
 }
+
 
 
 Game::~Game(void)
