@@ -151,9 +151,9 @@ theGame = new Game();
 
 glutInit(&argc, argv);
 
-glutInitDisplayMode(GLUT_RGB|GLUT_DOUBLE|GLUT_DEPTH);
-glEnable(GL_DEPTH_TEST);
-glShadeModel (GL_SMOOTH);
+glutInitDisplayMode(GLUT_RGBA|GLUT_DOUBLE|GLUT_DEPTH);
+
+glShadeModel(GL_SMOOTH);                 // Enables Smooth Color Shading
 
 glutInitWindowPosition(-1, -1);
 

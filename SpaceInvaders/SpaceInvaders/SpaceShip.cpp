@@ -45,14 +45,14 @@ void SpaceShip::draw(float x, float y){
 
 	if (glIsEnabled(GL_LIGHT0)|| glIsEnabled(GL_LIGHT1))
 	{
-		GLfloat material[] = {0.85,0.85,0.85};
+		GLfloat material[] = {.85,.85,.85,1};
 		GLfloat emission[] = {0,0,0,1};
-		GLfloat specular[] = {1,1,1,1};
-		GLfloat shininess[] = {50};
+		GLfloat specular[] = {1,0,0,1};
+		GLfloat shininess[] = {120};
 		glMaterialfv(GL_FRONT, GL_AMBIENT, material);
 		glMaterialfv(GL_FRONT, GL_DIFFUSE, material);
 		glMaterialfv(GL_FRONT, GL_EMISSION, emission);
-		glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
+		glMaterialfv(GL_FRONT, GL_SPECULAR, material);
 		glMaterialfv(GL_FRONT, GL_SHININESS, shininess);
 
 	}else glColor3f(0.85f, 0.85f, 0.85f);
@@ -113,17 +113,71 @@ void SpaceShip::draw(float x, float y){
 	glPopMatrix();
 
 	glPushMatrix();
+/*
 	glBegin(GL_POLYGON);
-
+	glNormal3f(0.0f, 0.0f, 1.0f);
 	glVertex3f (-1,8,1); // esq - cima - frente
+	glNormal3f(0.0f, 0.0f, 1.0f);
 	glVertex3f (1,8,1); // dir - cima - frente
+	glNormal3f(0.0f, 0.0f, -1.0f);
 	glVertex3f (-1,8,-1); // esq - cima - tras
+	glNormal3f(0.0f, 0.0f, -1.0f);
 	glVertex3f (1,8,-1); // dir - cima - tras
+	glNormal3f(0.0f, 0.0f, -1.0f);
 	glVertex3f (3,-3,-1); // dir - baixo - tras
+	glNormal3f(0.0f, 0.0f, -1.0f);
 	glVertex3f (-3,-3,-1); // esq - baixo - tras
+	glNormal3f(0.0f, 0.0f, 1.0f);
 	glVertex3f (3,-3,1); // dir - baixo - frente
-	glVertex3f (-3,-3,1); // esq - baixo - tras
+	glNormal3f(0.0f, 0.0f, 1.0f);
+	glVertex3f (-3,-3,1); // esq - baixo - frente
+	glEnd();*/
+
+	glBegin(GL_POLYGON);
+	glNormal3f(0.0f, 0.0f, 1.0f);
+	glVertex3f (-1,8,1); // esq - cima - frente
+	glNormal3f(0.0f, 0.0f, 1.0f);
+	glVertex3f (1,8,1); // dir - cima - frente
+	glNormal3f(0.0f, 0.0f, 1.0f);
+	glVertex3f (3,-3,1); // dir - baixo - frente
+	glNormal3f(0.0f, 0.0f, 1.0f);
+	glVertex3f (-3,-3,1); // esq - baixo - frente
 	glEnd();
+
+	glBegin(GL_POLYGON);
+	glNormal3f(0.0f, 0.0f, -1.0f);
+	glVertex3f (-1,8,-1); // esq - cima - tras
+	glNormal3f(0.0f, 0.0f, -1.0f);
+	glVertex3f (1,8,-1); // dir - cima - tras
+	glNormal3f(0.0f, 0.0f, -1.0f);
+	glVertex3f (3,-3,-1); // dir - baixo - tras
+	glNormal3f(0.0f, 0.0f, -1.0f);
+	glVertex3f (-3,-3,-1); // esq - baixo - tras
+	glEnd();
+
+	glBegin(GL_POLYGON);
+	glNormal3f(-1.0f, 0.0f, 0.0f);
+	glVertex3f (-1,8,-1); // esq - cima - tras
+	glNormal3f(-1.0f, 0.0f, 0.0f);
+	glVertex3f (-1,8,1); // esq - cima - frente
+	glNormal3f(-1.0f, 0.0f, 0.0f);
+	glVertex3f (-3,-3,1); // esq - baixo - frente
+	glNormal3f(-1.0f, 0.0f, 0.0f);
+	glVertex3f (-3,-3,-1); // esq - baixo - tras
+	glEnd();
+
+	glBegin(GL_POLYGON);
+	glNormal3f(1.0f, 0.0f, 0.0f);
+	glVertex3f (1,8,-1); // dir - cima - tras
+	glNormal3f(1.0f, 0.0f, 0.0f);
+	glVertex3f (3,-3,-1); // dir - baixo - tras
+	glNormal3f(1.0f, 0.0f, 0.0f);
+	glVertex3f (1,8,1); // dir - cima - frente
+	glNormal3f(1.0f, 0.0f, 0.0f);
+	glVertex3f (3,-3,1); // dir - baixo - frente
+	glEnd();
+
+
 	glPopMatrix();
 
 	glPopMatrix();

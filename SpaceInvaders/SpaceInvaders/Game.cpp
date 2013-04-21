@@ -172,6 +172,7 @@ void Game::newMissile(){
 
 void Game::drawObjects(){
 	
+
 	float sitiox = -64;
 	float sitioy = -60;
 	
@@ -204,20 +205,22 @@ void Game::switchView(float w, float h, int cam){
 
 void Game::toggleLight(){
 
-	GLfloat pos[] = {0.0, 0.0, 10.0, 0.0};
-	GLfloat white[] = {1.0, 1.0, 1.0, 1.0}; //Fully white
-	GLfloat red[] = {0.0, 0.0, 0.9, 1.0}; //Bright red - para testar brilho da nave
+	GLfloat pos[] = {0.0, 0.0, 10.0, 0.5};
+	GLfloat amb_white[] = {.5, .5, .5, 1.0}; //Fully white
+	GLfloat dif_white[] = {1.0, 1.0, 1.0, 1.0}; //Fully white
+	GLfloat red[] = {1, 0, 0, 1.0}; //Bright red - para testar brilho da nave
 
-	GLfloat darker[] = {.4, .4, .4, 1.0}; //Darker white
-	GLfloat blue[] = {0.0, 0.0, 0.9, 1.0}; //Bright blue - para testar brilho da nave
+	GLfloat amb_darker[] = {.3, .3, .3, 1.0}; //Darker white
+	GLfloat dif_darker[] = {.6, .6, .6, 1.0}; //Darker white
+	GLfloat blue[] = {0, 0, 1, 1.0}; //Bright blue - para testar brilho da nave
 
 	if(!glIsEnabled(GL_LIGHT0) && !glIsEnabled(GL_LIGHT1)) {
 		glEnable(GL_LIGHTING); 
 		glEnable(GL_LIGHT0);
 		glLightfv(GL_LIGHT0,GL_POSITION,pos);
 
-		glLightfv(GL_LIGHT0, GL_AMBIENT, white);
-		glLightfv(GL_LIGHT0, GL_DIFFUSE, white);
+		glLightfv(GL_LIGHT0, GL_AMBIENT, amb_white);
+		glLightfv(GL_LIGHT0, GL_DIFFUSE, dif_white);
 		glLightfv(GL_LIGHT0, GL_SPECULAR, red);
 
 	}else if(glIsEnabled(GL_LIGHT0) && !glIsEnabled(GL_LIGHT1)){
@@ -225,14 +228,16 @@ void Game::toggleLight(){
 		glEnable(GL_LIGHT1);
 		glLightfv(GL_LIGHT1,GL_POSITION,pos);
 		
-		glLightfv(GL_LIGHT1, GL_AMBIENT, darker);
-		glLightfv(GL_LIGHT1, GL_DIFFUSE, darker);
+		glLightfv(GL_LIGHT1, GL_AMBIENT, amb_darker);
+		glLightfv(GL_LIGHT1, GL_DIFFUSE, dif_darker);
 		glLightfv(GL_LIGHT1, GL_SPECULAR, blue);
 
 	}else{
 		glDisable(GL_LIGHTING);
 		glDisable(GL_LIGHT1);
 	}
+
+	glShadeModel(GL_SMOOTH);
 	glutPostRedisplay();
 }
 
