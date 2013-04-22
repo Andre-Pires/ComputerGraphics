@@ -59,23 +59,133 @@ void SpaceShip::draw(float x, float y){
 	}else glColor3f(0.85f, 0.85f, 0.85f);
 
 	glPushMatrix();
-	glTranslated(0, 9, 0);
-	glScaled(2, 2, 2);
+	glTranslated(-.5, 9.5, 0);
+	glScaled(1, 1, 2);
 	glutSolidCube(1);
 	glPopMatrix();
+	glPushMatrix();
+	glTranslated(.5, 9.5, 0);
+	glScaled(1, 1, 2);
+	glutSolidCube(1);
+	glPopMatrix();
+	glPushMatrix();
+	glTranslated(-.5, 8.5, 0);
+	glScaled(1, 1, 2);
+	glutSolidCube(1);
+	glPopMatrix();
+	glPushMatrix();
+	glTranslated(.5, 8.5, 0);
 
+	glScaled(1, 1, 2);
+	glutSolidCube(1);
+	glPopMatrix();
+	// nariz 
 	
-	glPushMatrix();
-	glTranslated(0, -3.5, 0);
-	glScaled(8, 1, 2);
-	glutSolidCube(1);
-	glPopMatrix();
 
-	glPushMatrix();
-	glTranslated(0, -5, 0);
-	glScaled(22, 2, 2);
-	glutSolidCube(1);
-	glPopMatrix();
+	for (float cx = -3.5; cx <= 3.5; cx++)
+	{
+		for (int cy = -3.5; cy >= -6.5 ; cy--)
+		{
+			glPushMatrix();
+			glTranslated(cx, cy, 0);
+			glScaled(1, 1, 2);
+			glutSolidCube(1);
+			glPopMatrix();
+		}
+	}
+		
+		//Asa esquerda - cima 
+		glPushMatrix();
+		glBegin(GL_POLYGON);
+		glVertex3f(-4,-3,4);
+		glVertex3f(-7.5,-3.5,3.5);
+		glVertex3f(-11,-4,3);
+		glVertex3f(-11,-5,3);
+		glVertex3f(-11,-6,3);
+		glVertex3f(-7.5,-6.5,3.5);
+		glVertex3f(-4,-7,4);
+		glVertex3f(-4,-6,4);
+		glVertex3f(-4,-5,4);
+		glVertex3f(-4,-4,4);
+		glVertex3f(-7.5,-5,3.5);
+		glEnd();
+		glPopMatrix();
+
+		// Asa direita - cima
+		glPushMatrix();
+		glBegin(GL_POLYGON);
+		glVertex3f(4,-3,4);
+		glVertex3f(7.5,-3.5,3.5);
+		glVertex3f(11,-4,3);
+		glVertex3f(11,-5,3);
+		glVertex3f(11,-6,3);
+		glVertex3f(7.5,-6.5,3.5);
+		glVertex3f(4,-7,4);
+		glVertex3f(4,-6,4);
+		glVertex3f(4,-5,4);
+		glVertex3f(4,-4,4);
+		glVertex3f(7.5,-5,3.5);
+		glEnd();
+		glPopMatrix();
+
+		//Asa esquerda - baixo
+
+		glPushMatrix();
+		glBegin(GL_POLYGON);
+		glVertex3f(-4,-3,0);
+		glVertex3f(-7.5,-3.5,0.5);
+		glVertex3f(-11,-4,1);
+		glVertex3f(-11,-5,1);
+		glVertex3f(-11,-6,1);
+		glVertex3f(-7.5,-6.5,0.5);
+		glVertex3f(-4,-7,0);
+		glVertex3f(-4,-6,0);
+		glVertex3f(-4,-5,0);
+		glVertex3f(-4,-4,0);
+		glVertex3f(-7.5,-5,0.5);
+		glEnd();
+		glPopMatrix();
+
+		// Asa direita - baixo
+		glPushMatrix();
+		glBegin(GL_POLYGON);
+		glVertex3f(4,-3,0);
+		glVertex3f(7.5,-3.5,0.5);
+		glVertex3f(11,-4,1);
+		glVertex3f(11,-5,1);
+		glVertex3f(11,-6,1);
+		glVertex3f(7.5,-6.5,0.5);
+		glVertex3f(4,-7,0);
+		glVertex3f(4,-6,0);
+		glVertex3f(4,-5,0);
+		glVertex3f(4,-4,0);
+		glVertex3f(7.5,-5,0.5);
+		glEnd();
+		glPopMatrix();
+
+		//Asa esquerda - lado - frente
+
+		glPushMatrix();
+		glBegin(GL_POLYGON);
+		glVertex3f(-4,-3,4);
+		glVertex3f(-4,-3,0);
+		glVertex3f(-11,-4,1);
+		glVertex3f(-11,-4,3);
+		glEnd();
+		glPopMatrix();
+
+		// Asa direita - lado - frente
+		glPushMatrix();
+		glBegin(GL_POLYGON);
+		glVertex3f(4,-3,4);
+		glVertex3f(4,-3,0);
+		glVertex3f(11,-4,1);
+		glVertex3f(11,-4,3);
+		glEnd();
+		glPopMatrix();
+
+
+
 
 	glPushMatrix();
 	glTranslated(0, -6.5, 0);
