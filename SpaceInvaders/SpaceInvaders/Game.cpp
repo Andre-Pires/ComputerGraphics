@@ -194,7 +194,7 @@ void Game::drawObjects(){
 	if(MissileShip->getAlive() != false) 
 		MissileShip->draw(MissileShip->getX(), MissileShip->getY());
 
-	/*------------------------- retirar a esfera -------------------------------------*/
+	/*------------------------- retirar a esfera -------------------------------------
 	GLfloat material[] = {1,0,0,1};
 	GLfloat material1[] = {1.0,0.0,0.0,1};
 	GLfloat emission[] = {0,0,0,1};
