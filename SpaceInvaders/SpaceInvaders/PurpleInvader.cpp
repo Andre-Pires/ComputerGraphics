@@ -118,9 +118,9 @@ void PurpleInvader::draw(float x, float y)
 
 	if (glIsEnabled(GL_LIGHT0)|| glIsEnabled(GL_LIGHT1))
 	{
-		GLfloat material[] = {0.59,0.0,0.82};
+		GLfloat material[] = {0.59,0.0,0.82, 1};
 		GLfloat emission[] = {0,0,0,1};
-		GLfloat specular[] = {0,0,0,0};
+		GLfloat specular[] = {0,0,0,1};
 		GLfloat shininess[] = {0};
 		glMaterialfv(GL_FRONT, GL_AMBIENT, material);
 		glMaterialfv(GL_FRONT, GL_DIFFUSE, material);

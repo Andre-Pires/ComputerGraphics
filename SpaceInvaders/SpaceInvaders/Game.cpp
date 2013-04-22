@@ -68,7 +68,7 @@ void Game::moveShip(unsigned char key){
 			}
 			break;
 		}
-        //Movimenta para a direita
+		//Movimenta para a direita
 	case 'D':
 		{
 			if(xShip < 85){
@@ -171,11 +171,10 @@ void Game::newMissile(){
 }
 
 void Game::drawObjects(){
-	
-
 	float sitiox = -64;
 	float sitioy = -60;
 	
+
 	for(int i = 0; i <= 10; i++){
 		
 		InvRed[i]->draw(InvRed[i]->getX(), InvRed[i]->getY()); // fila 1
@@ -194,50 +193,64 @@ void Game::drawObjects(){
 
 	if(MissileShip->getAlive() != false) 
 		MissileShip->draw(MissileShip->getX(), MissileShip->getY());
+
+	/*------------------------- retirar a esfera -------------------------------------*/
+	GLfloat material[] = {1,0,0,1};
+	GLfloat material1[] = {1.0,0.0,0.0,1};
+	GLfloat emission[] = {0,0,0,1};
+	GLfloat specular[] = {0,1,0,1};
+	GLfloat shininess[] = {120};
+	glMaterialfv(GL_FRONT, GL_AMBIENT, material);
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, material1);
+	glMaterialfv(GL_FRONT, GL_EMISSION, emission);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
+	glMaterialfv(GL_FRONT, GL_SHININESS, shininess);
+	glutSolidSphere(40,20,20);
+	/*------------------------- retirar a esfera -------------------------------------*/
+
 }
 
 void Game::switchView(float w, float h, int cam){
 
 	View->setCamera(w, h, cam, Ship->getX());
-	glutPostRedisplay();
 
 }
 
-void Game::toggleLight(){
-
-	GLfloat pos[] = {0.0, 0.0, 10.0, 0.5};
+void Game::toggleLight(int light){
+	
+	GLfloat pos[] = {0.0, 0.0, 1.0, 0};
 	GLfloat amb_white[] = {.5, .5, .5, 1.0}; //Fully white
-	GLfloat dif_white[] = {1.0, 1.0, 1.0, 1.0}; //Fully white
-	GLfloat red[] = {1, 0, 0, 1.0}; //Bright red - para testar brilho da nave
+	GLfloat dif_white[] = {0.8, 0.8, 0.8, 1.0}; //Fully white
+	GLfloat shine[] = {1, 1, 1, 1.0}; //Bright - para testar brilho da nave
 
 	GLfloat amb_darker[] = {.3, .3, .3, 1.0}; //Darker white
 	GLfloat dif_darker[] = {.6, .6, .6, 1.0}; //Darker white
-	GLfloat blue[] = {0, 0, 1, 1.0}; //Bright blue - para testar brilho da nave
+	GLfloat shine2[] = {1, 1, 1, 1.0}; //Bright - para testar brilho da nave
 
-	if(!glIsEnabled(GL_LIGHT0) && !glIsEnabled(GL_LIGHT1)) {
+	if(light == 1) {
 		glEnable(GL_LIGHTING); 
 		glEnable(GL_LIGHT0);
 		glLightfv(GL_LIGHT0,GL_POSITION,pos);
 
 		glLightfv(GL_LIGHT0, GL_AMBIENT, amb_white);
 		glLightfv(GL_LIGHT0, GL_DIFFUSE, dif_white);
-		glLightfv(GL_LIGHT0, GL_SPECULAR, red);
+		glLightfv(GL_LIGHT0, GL_SPECULAR, shine);
 
-	}else if(glIsEnabled(GL_LIGHT0) && !glIsEnabled(GL_LIGHT1)){
+	}else if(light == 2){
 		glDisable(GL_LIGHT0);
 		glEnable(GL_LIGHT1);
 		glLightfv(GL_LIGHT1,GL_POSITION,pos);
 		
 		glLightfv(GL_LIGHT1, GL_AMBIENT, amb_darker);
 		glLightfv(GL_LIGHT1, GL_DIFFUSE, dif_darker);
-		glLightfv(GL_LIGHT1, GL_SPECULAR, blue);
+		glLightfv(GL_LIGHT1, GL_SPECULAR, shine2);
 
 	}else{
 		glDisable(GL_LIGHTING);
 		glDisable(GL_LIGHT1);
 	}
 
-	glShadeModel(GL_SMOOTH);
+
 	glutPostRedisplay();
 }
 

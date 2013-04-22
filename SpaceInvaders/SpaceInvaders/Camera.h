@@ -8,10 +8,12 @@
 
 
 class Camera {
+
 public:
 
 	Camera(void);
 	~Camera(void);
+
 	void setCamera(float w,	float h, int cam, float xShip);
 
 };

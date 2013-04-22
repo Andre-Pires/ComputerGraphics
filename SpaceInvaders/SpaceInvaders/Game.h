@@ -10,6 +10,11 @@
 #include "Shield.h"
 #include "Missile.h"
 
+#if defined(__APPLE__) || defined(MACOSX) 
+#include <GLUT/glut.h> 
+#else
+#include <GL/glut.h> 
+#endif
 
 
 class Game
@@ -35,15 +40,14 @@ private:
 
 public:
 
-	void moveInvaders();
 	void moveShip(unsigned char key);
+	void moveInvaders();
 	void moveMissiles();
 	void switchView(float w, float h, int cam);
 	void drawObjects();
 	void objectInit();
 	void newMissile();
-	void lightGame();
-	void toggleLight();
+	void toggleLight(int light);
 	Game(void);
 	~Game(void);
 };

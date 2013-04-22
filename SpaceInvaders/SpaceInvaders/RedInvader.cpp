@@ -106,10 +106,9 @@ void drawEyes(){
 	
 	glPushMatrix();
 	glBegin(GL_POLYGON);
-	glVertex3f (-3.5,1,1.0);
-	
-	glVertex3f (-0.5,-1,1.0);
-	glVertex3f (-3.5,-1,1.0);
+	glVertex3f (-3.5,1,1.1);	
+	glVertex3f (-0.5,-1,1.1);
+	glVertex3f (-3.5,-1,1.1);
 	/*glVertex3f (-3.5,1,-1);
 	glVertex3f (-3.5,-1,-1);
 	glVertex3f (-0.5,-1,-1);*/
@@ -118,9 +117,9 @@ void drawEyes(){
 
 	glPushMatrix();
 	glBegin(GL_POLYGON);
-	glVertex3f (3.5,1,1.0);
-	glVertex3f (3.5,-1,1.0);
-	glVertex3f (0.5,-1,1.0);
+	glVertex3f (3.5,1,1.1);
+	glVertex3f (3.5,-1,1.1);
+	glVertex3f (0.5,-1,1.1);
 	/*glVertex3f (3.5,-1,-1);
 	glVertex3f (3.5,1,-1);
 	glVertex3f (0.5,-1,-1);*/

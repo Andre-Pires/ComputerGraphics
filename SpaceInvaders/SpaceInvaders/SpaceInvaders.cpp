@@ -29,6 +29,7 @@ float currentTime;
 float previousTime;
 float elapsedTime;
 int camera_mode = 1;
+int light = 0; 
 Game * theGame;
 
 void myKeyboard(unsigned char key, int x, int y){
@@ -43,18 +44,21 @@ void myKeyboard(unsigned char key, int x, int y){
             break;
 		case '1': 
 			camera_mode = 1;
-			theGame->switchView(global_width, global_height, 1);		//Troca para a camera top view
+			glutPostRedisplay();		//Troca para a camera top view
 			break;
 		case '2': 
 			camera_mode = 2;
-			theGame->switchView(global_width, global_height, 2);		//Troca para a camera third person
+			glutPostRedisplay();		//Troca para a camera third person
 			break;
 		case '3': 
 			camera_mode = 3;
-			theGame->switchView(global_width, global_height, 3);		//Troca para a camera third person
+			glutPostRedisplay();		//Troca para a camera third person
 			break;
 		case 'l': 
-			theGame->toggleLight();										//Ligar/Desligar Luz
+			if (light != 2)
+			{
+			light++;
+			}else	light = 0;		//Ligar/Desligar Luz
 			break;
 		case ' ':
 			theGame->newMissile();
@@ -114,12 +118,15 @@ void proj(float w, float h){
 void myDisplay() {
 
 
+
+
 glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 glViewport(0, 0, global_width, global_height);
 proj(global_width, global_height);
 
+theGame->toggleLight(light);
 
 theGame->drawObjects();
 
@@ -147,21 +154,26 @@ int main(int argc, char** argv){
 
 int  janela;
 
-theGame = new Game();
 
 glutInit(&argc, argv);
 
-glutInitDisplayMode(GLUT_RGBA|GLUT_DOUBLE|GLUT_DEPTH);
-
-glShadeModel(GL_SMOOTH);                 // Enables Smooth Color Shading
+glutInitDisplayMode(GLUT_RGB|GLUT_DOUBLE|GLUT_DEPTH);
 
 glutInitWindowPosition(-1, -1);
 
 glutInitWindowSize(window_width, window_height);
 
+/* Enables Depth Testing */
+
+
 janela = glutCreateWindow("SpaceInvaders");
 
-printMenu();
+
+glEnable( GL_DEPTH_TEST );
+
+theGame = new Game();
+
+//printMenu();
 
 glutDisplayFunc(myDisplay);
 

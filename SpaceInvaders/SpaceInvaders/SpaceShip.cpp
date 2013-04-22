@@ -8,6 +8,7 @@ SpaceShip::SpaceShip(void)
 	_rot = 0;
 }
 
+
 void SpaceShip::draw(float x, float y){
 
 	glPushMatrix();
@@ -52,7 +53,7 @@ void SpaceShip::draw(float x, float y){
 		glMaterialfv(GL_FRONT, GL_AMBIENT, material);
 		glMaterialfv(GL_FRONT, GL_DIFFUSE, material);
 		glMaterialfv(GL_FRONT, GL_EMISSION, emission);
-		glMaterialfv(GL_FRONT, GL_SPECULAR, material);
+		glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
 		glMaterialfv(GL_FRONT, GL_SHININESS, shininess);
 
 	}else glColor3f(0.85f, 0.85f, 0.85f);
@@ -135,11 +136,11 @@ void SpaceShip::draw(float x, float y){
 
 	glBegin(GL_POLYGON);
 	glNormal3f(0.0f, 0.0f, 1.0f);
-	glVertex3f (-1,8,1); // esq - cima - frente
+	glVertex3f (3,-3,1); // dir - baixo - frente
 	glNormal3f(0.0f, 0.0f, 1.0f);
 	glVertex3f (1,8,1); // dir - cima - frente
 	glNormal3f(0.0f, 0.0f, 1.0f);
-	glVertex3f (3,-3,1); // dir - baixo - frente
+	glVertex3f (-1,8,1); // esq - cima - frente
 	glNormal3f(0.0f, 0.0f, 1.0f);
 	glVertex3f (-3,-3,1); // esq - baixo - frente
 	glEnd();
