@@ -97,7 +97,7 @@ void myTimer(int value){
 		theGame->moveInvaders();
 	}
 
-	glutTimerFunc(15, myTimer, 0);
+	glutTimerFunc(10, myTimer, 0);
 
 }
 

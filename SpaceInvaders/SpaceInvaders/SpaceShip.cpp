@@ -4,9 +4,10 @@
 
 SpaceShip::SpaceShip(void)
 {
-	_coord = 0;
+	_coord = _x;
 	_rot = 0;
 }
+
 
 
 void SpaceShip::draw(float x, float y){
@@ -16,7 +17,7 @@ void SpaceShip::draw(float x, float y){
 	glTranslated(x, y, 0.0f);
 
 	/* Codigo para a rotacao --------- nave mal desenhada ha intercecao errada das rectas
-	 * 
+	 *
 	if (_coord != x)
 	{
 		if(_coord > x && _rot == 0){
@@ -46,18 +47,18 @@ void SpaceShip::draw(float x, float y){
 
 	if (glIsEnabled(GL_LIGHT0)|| glIsEnabled(GL_LIGHT1))
 	{
-		GLfloat material[] = {.25,.25,.25,.5};
-		GLfloat material2[] = {.4,.4,.4,.5};
-		GLfloat emission[] = {0,0,0,0};
+		GLfloat ambient[] = {.25,.25,.25,1};
+		GLfloat diffuse[] = {.4,.4,.4,1};
 		GLfloat specular[] = {0.774597,0.774597,0.774597,1.0};
+		GLfloat emission[] = {0,0,0,0};
 		GLfloat shininess[] = {128};
-		glMaterialfv(GL_FRONT, GL_AMBIENT, material);
-		glMaterialfv(GL_FRONT, GL_DIFFUSE, material2);
-		glMaterialfv(GL_FRONT, GL_EMISSION, emission);
+		glMaterialfv(GL_FRONT, GL_AMBIENT, ambient);
+		glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuse);
 		glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
+		glMaterialfv(GL_FRONT, GL_EMISSION, emission);
 		glMaterialfv(GL_FRONT, GL_SHININESS, shininess);
 
-	}else glColor3f(0.85f, 0.85f, 0.85f);
+	}else glColor3f(0.30f, 0.30f, 0.30f);
 
 	glPushMatrix();
 	glTranslated(-.5, 9.5, 0);
