@@ -172,20 +172,6 @@ void Game::drawObjects(){
 	if(MissileShip->getAlive() != false) 
 		MissileShip->draw(MissileShip->getX(), MissileShip->getY());
 
-	/*------------------------- retirar a esfera -------------------------------------
-	GLfloat material[] = {1,0,0,1};
-	GLfloat material1[] = {1.0,0.0,0.0,1};
-	GLfloat emission[] = {0,0,0,1};
-	GLfloat specular[] = {0,1,0,1};
-	GLfloat shininess[] = {120};
-	glMaterialfv(GL_FRONT, GL_AMBIENT, material);
-	glMaterialfv(GL_FRONT, GL_DIFFUSE, material1);
-	glMaterialfv(GL_FRONT, GL_EMISSION, emission);
-	glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
-	glMaterialfv(GL_FRONT, GL_SHININESS, shininess);
-	glutSolidSphere(40,20,20);
-	/*------------------------- retirar a esfera -------------------------------------*/
-
 }
 
 void Game::switchView(float w, float h, int cam){
@@ -201,13 +187,14 @@ void Game::toggleLight(int light){
 	GLfloat dif_white[] = {0.8, 0.8, 0.8, 1.0}; //Fully white
 	GLfloat shine[] = {1, 1, 1, 1.0}; //Bright - para testar brilho da nave
 
-	GLfloat amb_darker[] = {.3, .3, .3, 1.0}; //Darker white
-	GLfloat dif_darker[] = {.6, .6, .6, 1.0}; //Darker white
-	GLfloat shine2[] = {1, 1, 1, 1.0}; //Bright - para testar brilho da nave
+	GLfloat amb_spot[] = {.5, .5, .5, 1.0};
+	GLfloat dif_spot[] = {.8, .8, .8, 1.0};
+	GLfloat shine2[] = {1, 1, 1, 1.0}; 
 
 	if(light == 1) {
 		glEnable(GL_LIGHTING); 
 		glEnable(GL_LIGHT0);
+
 		glLightfv(GL_LIGHT0,GL_POSITION,pos);
 
 		glLightfv(GL_LIGHT0, GL_AMBIENT, amb_white);
@@ -217,15 +204,44 @@ void Game::toggleLight(int light){
 	}else if(light == 2){
 		glDisable(GL_LIGHT0);
 		glEnable(GL_LIGHT1);
-		glLightfv(GL_LIGHT1,GL_POSITION,pos);
+		glEnable(GL_LIGHT2);
+
+
+		// luz esq
+		GLfloat spotPosition1[] = {Ship->getX()-16.5, -85.0f, 0.0f, 1.0f};
+		glLightfv(GL_LIGHT1,GL_POSITION,spotPosition1);
+
+		glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 10); 
+
+		GLfloat spotDirection1[] = {0.0f, 1.0f, 0.0f};
+		glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, spotDirection1);
+
+		glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 5.0f);
 		
-		glLightfv(GL_LIGHT1, GL_AMBIENT, amb_darker);
-		glLightfv(GL_LIGHT1, GL_DIFFUSE, dif_darker);
+
+		glLightfv(GL_LIGHT1, GL_AMBIENT, amb_spot);
+		glLightfv(GL_LIGHT1, GL_DIFFUSE, dif_spot);
 		glLightfv(GL_LIGHT1, GL_SPECULAR, shine2);
+
+		// luz - dir
+		GLfloat spotPosition2[] = {Ship->getX()+16.5, -85.0f, 0.0f, 1.0f};
+		glLightfv(GL_LIGHT2,GL_POSITION,spotPosition2);
+
+		glLightf(GL_LIGHT2, GL_SPOT_CUTOFF, 10); 
+
+		GLfloat spotDirection2[] = {0.0f, 1.0f, 0.0f};
+		glLightfv(GL_LIGHT2, GL_SPOT_DIRECTION, spotDirection2);
+
+		glLightf(GL_LIGHT2, GL_SPOT_EXPONENT, 5.0f);
+
+		glLightfv(GL_LIGHT2, GL_AMBIENT, amb_spot);
+		glLightfv(GL_LIGHT2, GL_DIFFUSE, dif_spot);
+		glLightfv(GL_LIGHT2, GL_SPECULAR, shine2);
 
 	}else{
 		glDisable(GL_LIGHTING);
 		glDisable(GL_LIGHT1);
+		glDisable(GL_LIGHT2);
 	}
 
 

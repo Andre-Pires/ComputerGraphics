@@ -16,7 +16,7 @@ void Camera::setCamera(float w,	float h, int cam, float xShip){
 	{
 	case 1:
 		// ---- top down view --------
-		if (current != 1)
+		if (current != 1 || old_aspect != aspect_ratio)
 		{
 			glMatrixMode(GL_PROJECTION);
 			glLoadIdentity();
@@ -27,18 +27,20 @@ void Camera::setCamera(float w,	float h, int cam, float xShip){
 				glOrtho(-100.0f, 100.0f, -100.0f/aspect_ratio, 100.0f/aspect_ratio, -100.0f, 100.0f);
 
 			current = cam;
+			old_aspect = aspect_ratio;
 			glMatrixMode(GL_MODELVIEW);
 			glLoadIdentity();
 		}
 			break;
 	case 2:
 		// ---- third person view ---------
-		if (current == 1)
+		if (current == 1 || old_aspect != aspect_ratio)
 		{
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 		gluPerspective(60, aspect_ratio, 0.1, 400);
 		glMatrixMode(GL_MODELVIEW);
+		old_aspect = aspect_ratio;
 		current = cam;
 		}
 		glLoadIdentity();
@@ -46,13 +48,14 @@ void Camera::setCamera(float w,	float h, int cam, float xShip){
 		break;
 	case 3:
 		// ---- first person view --------
-		if (current == 1)
+		if (current == 1 || old_aspect != aspect_ratio)
 		{
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 		gluPerspective(60, aspect_ratio, 0.1, 400);
 		glMatrixMode(GL_MODELVIEW);
 		current = cam;
+		old_aspect = aspect_ratio;
 		}
 		glLoadIdentity();
 		gluLookAt(xShip,-75, 0, xShip, -30, 0, 0, 0, 1); //Eye, LookAt e UP vector

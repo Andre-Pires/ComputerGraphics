@@ -11,6 +11,7 @@ class Camera {
 
 private:
 	int current;
+	float old_aspect;
 
 public:
 
