@@ -46,12 +46,13 @@ void SpaceShip::draw(float x, float y){
 
 	if (glIsEnabled(GL_LIGHT0)|| glIsEnabled(GL_LIGHT1))
 	{
-		GLfloat material[] = {.85,.85,.85,1};
-		GLfloat emission[] = {0,0,0,1};
-		GLfloat specular[] = {1,0,0,1};
-		GLfloat shininess[] = {120};
+		GLfloat material[] = {.25,.25,.25,.5};
+		GLfloat material2[] = {.4,.4,.4,.5};
+		GLfloat emission[] = {0,0,0,0};
+		GLfloat specular[] = {0.774597,0.774597,0.774597,1.0};
+		GLfloat shininess[] = {128};
 		glMaterialfv(GL_FRONT, GL_AMBIENT, material);
-		glMaterialfv(GL_FRONT, GL_DIFFUSE, material);
+		glMaterialfv(GL_FRONT, GL_DIFFUSE, material2);
 		glMaterialfv(GL_FRONT, GL_EMISSION, emission);
 		glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
 		glMaterialfv(GL_FRONT, GL_SHININESS, shininess);
@@ -81,8 +82,106 @@ void SpaceShip::draw(float x, float y){
 	glPopMatrix();
 	// nariz 
 	
+	glPushMatrix();
+	glBegin(GL_POLYGON);
+	glNormal3f(1.0f, 1.0f, 1.0f);
+	glVertex3f(-4,-3,4);
 
-	for (float cx = -3.5; cx <= 3.5; cx++)
+	//glNormal3f(1.0f, 0.0f, 0.0f);
+	//glVertex3f(-4,-5,4);
+	glNormal3f(1.0f, 1.0f, 0.0f);
+	glVertex3f(-4,-7,4);
+	//glNormal3f(0.0f, 0.0f, 0.0f);
+	//glVertex3f(0,-7,4);
+	glNormal3f(-1.0f, 1.0f, 0.0f);
+	glVertex3f(4,-7,4);
+	//glNormal3f(-1.0f, 0.0f, 0.0f);
+	//glVertex3f(4,-5,4);
+	glNormal3f(-1.0f, 1.0f, 1.0f);
+	glVertex3f(4,-3,4);
+	glNormal3f(0.0f, 1.0f, 1.0f);
+	glVertex3f(0,-3,4);
+	//glNormal3f(1.0f,0.0f, 1.0f);
+	//glVertex3f(0,-5,4);
+	glEnd();
+	glPopMatrix();
+	//cubo central cima
+
+	glPushMatrix();
+	glBegin(GL_POLYGON);
+	glNormal3f(0.0f, 0.0f, -1.0f);
+	glVertex3f(-4,-3,-2);
+	glNormal3f(0.0f, 0.0f, -1.0f);
+	glVertex3f(-4,-7,-2);
+	glNormal3f(0.0f, 0.0f, -1.0f);
+	glVertex3f(4,-7,-2);
+	glNormal3f(0.0f, 0.0f, -1.0f);
+	glVertex3f(4,-3,-2);
+	glNormal3f(0.0f, 0.0f, -1.0f);
+	glVertex3f(0,-3,-2);
+	glEnd();
+	glPopMatrix();
+	//cubo central baixo
+
+	glPushMatrix();
+	glBegin(GL_POLYGON);
+	glNormal3f(-1.0f, 0.0f, 0.0f);
+	glVertex3f(-4,-3,-2);
+	glNormal3f(-1.0f, 0.0f, 0.0f);
+	glVertex3f(-4,-7,-2);
+	glNormal3f(-1.0f, 0.0f, 0.0f);
+	glVertex3f(-4,-7,4);
+	glNormal3f(-1.0f, 0.0f, 0.0f);
+	glVertex3f(-4,-3,4);
+	glEnd();
+	glPopMatrix();
+	//cubo central esq
+
+	glPushMatrix();
+	glBegin(GL_POLYGON);
+	glNormal3f(1.0f, 0.0f, 0.0f);
+	glVertex3f(4,-3,-2);
+	glNormal3f(1.0f, 0.0f, 0.0f);
+	glVertex3f(4,-7,-2);
+	glNormal3f(1.0f, 0.0f, 0.0f);
+	glVertex3f(4,-7,4);
+	glNormal3f(1.0f, 0.0f, 0.0f);
+	glVertex3f(4,-3,4);
+	glEnd();
+	glPopMatrix();
+	//cubo central dir
+
+	glPushMatrix();
+	glBegin(GL_POLYGON);
+	glNormal3f(0.0f, 1.0f, 0.0f);
+	glVertex3f(-4,-3,-2);
+	glNormal3f(0.0f, 1.0f, 0.0f);
+	glVertex3f(4,-3,-2);
+	glNormal3f(0.0f, 1.0f, 0.0f);
+	glVertex3f(4,-3,4);
+	glNormal3f(0.0f, 1.0f, 0.0f);
+	glVertex3f(-4,-3,4);
+	glEnd();
+	glPopMatrix();
+	//cubo central frente
+
+	glPushMatrix();
+	glBegin(GL_POLYGON);
+	glNormal3f(0.0f, -1.0f, 0.0f);
+	glVertex3f(-4,-7,-2);
+	glNormal3f(0.0f, -1.0f, 0.0f);
+	glVertex3f(4,-7,-2);
+	glNormal3f(0.0f, -1.0f, 0.0f);
+	glVertex3f(4,-7,4);
+	glNormal3f(0.0f, -1.0f, 0.0f);
+	glVertex3f(-4,-7,4);
+	glEnd();
+	glPopMatrix();
+	//cubo central trás
+
+
+
+/*	for (float cx = -3.5; cx <= 3.5; cx++)
 	{
 		for (float cy = -3.5; cy >= -6.5 ; cy--)
 		{
@@ -92,7 +191,7 @@ void SpaceShip::draw(float x, float y){
 			glutSolidCube(1);
 			glPopMatrix();
 		}
-	}
+	}*/
 
 	//corpo
 		
@@ -103,16 +202,27 @@ void SpaceShip::draw(float x, float y){
 		//Asa esquerda - cima 
 		glPushMatrix();
 		glBegin(GL_TRIANGLE_FAN);
+		glNormal3f(1.0f, 1.0f, 1.0f);
 		glVertex3f(-4,-3,4);
+		glNormal3f(0.0f, 1.0f, 1.0f);
 		glVertex3f(-7.5,-3.5,3.5);
+		glNormal3f(-1.0f, 0.0f, 0.0f);
 		glVertex3f(-11,-4,3);
+		glNormal3f(-1.0f, 1.0f, 0.0f);
 		glVertex3f(-11,-5,3);
+		glNormal3f(-1.0f, 1.0f, 0.0f);
 		glVertex3f(-11,-6,3);
+		glNormal3f(0.0f, -1.0f, 0.0f);
 		glVertex3f(-7.5,-6.5,3.5);
+		glNormal3f(0.0f, -1.0f, 0.0f);
 		glVertex3f(-4,-7,4);
+		glNormal3f(-1.0f, 0.0f, 1.0f);
 		glVertex3f(-4,-6,4);
+		glNormal3f(-1.0f, 0.0f, 1.0f);
 		glVertex3f(-4,-5,4);
+		glNormal3f(-1.0f, 0.0f, 1.0f);
 		glVertex3f(-4,-4,4);
+		glNormal3f(0.0f, 0.0f, 1.0f);
 		glVertex3f(-7.5,-5,3.5);
 		glEnd();
 		glPopMatrix();
@@ -121,16 +231,27 @@ void SpaceShip::draw(float x, float y){
 		// Asa direita - cima
 		glPushMatrix();
 		glBegin(GL_TRIANGLE_FAN);
+		glNormal3f(-1.0f, 1.0f, 1.0f);
 		glVertex3f(4,-3,4);
+		glNormal3f(0.0f, 1.0f, 1.0f);
 		glVertex3f(7.5,-3.5,3.5);
+		glNormal3f(1.0f, 0.0f, 0.0f);
 		glVertex3f(11,-4,3);
+		glNormal3f(1.0f, 1.0f, 0.0f);
 		glVertex3f(11,-5,3);
+		glNormal3f(1.0f, 1.0f, 0.0f);
 		glVertex3f(11,-6,3);
+		glNormal3f(0.0f, -1.0f, 0.0f);
 		glVertex3f(7.5,-6.5,3.5);
+		glNormal3f(0.0f, -1.0f, 0.0f);
 		glVertex3f(4,-7,4);
+		glNormal3f(1.0f, 0.0f, 1.0f);
 		glVertex3f(4,-6,4);
+		glNormal3f(1.0f, 0.0f, 1.0f);
 		glVertex3f(4,-5,4);
+		glNormal3f(1.0f, 0.0f, 1.0f);
 		glVertex3f(4,-4,4);
+		glNormal3f(0.0f, 0.0f, 1.0f);
 		glVertex3f(7.5,-5,3.5);
 		glEnd();
 		glPopMatrix();
@@ -139,6 +260,7 @@ void SpaceShip::draw(float x, float y){
 
 		glPushMatrix();
 		glBegin(GL_TRIANGLE_FAN);
+		glNormal3f(-1.0f, 0.0f, -1.0f);
 		glVertex3f(-4,-3,0);
 		glVertex3f(-7.5,-3.5,0.5);
 		glVertex3f(-11,-4,1);
@@ -156,6 +278,7 @@ void SpaceShip::draw(float x, float y){
 		// Asa direita - baixo
 		glPushMatrix();
 		glBegin(GL_TRIANGLE_FAN);
+		glNormal3f(1.0f, 0.0f, -1.0f);
 		glVertex3f(4,-3,0);
 		glVertex3f(7.5,-3.5,0.5);
 		glVertex3f(11,-4,1);
@@ -174,6 +297,7 @@ void SpaceShip::draw(float x, float y){
 
 		glPushMatrix();
 		glBegin(GL_TRIANGLE_FAN);
+		glNormal3f(-1.0f, 1.0f, 0.0f);
 		glVertex3f(-4,-3,4);
 		glVertex3f(-4,-3,0);
 		glVertex3f(-11,-4,1);
@@ -184,6 +308,7 @@ void SpaceShip::draw(float x, float y){
 		// Asa direita - lado - frente
 		glPushMatrix();
 		glBegin(GL_TRIANGLE_FAN);
+		glNormal3f(1.0f, 1.0f, 0.0f);
 		glVertex3f(4,-3,4);
 		glVertex3f(4,-3,0);
 		glVertex3f(11,-4,1);
@@ -195,6 +320,7 @@ void SpaceShip::draw(float x, float y){
 		// Asa direita - lado - trás
 		glPushMatrix();
 		glBegin(GL_TRIANGLE_FAN);
+		glNormal3f(1.0f, -1.0f, 0.0f);
 		glVertex3f(4,-7,4);
 		glVertex3f(4,-7,0);
 		glVertex3f(11,-6,1);
@@ -206,6 +332,7 @@ void SpaceShip::draw(float x, float y){
 
 		glPushMatrix();
 		glBegin(GL_TRIANGLE_FAN);
+		glNormal3f(-1.0f, -1.0f, 0.0f);
 		glVertex3f(-4,-7,4);
 		glVertex3f(-4,-7,0);
 		glVertex3f(-11,-6,1);
@@ -273,13 +400,21 @@ void SpaceShip::draw(float x, float y){
 	glPushMatrix();
 
 	glBegin(GL_POLYGON);
-	glVertex3f (3,-3,4); // dir - baixo - frente
-	glVertex3f (1,8,1); // dir - cima - frente
-	glVertex3f (-1,8,1); // esq - cima - frente
+	glNormal3f(1.0f, 1.0f, 1.0f);
 	glVertex3f (-3,-3,4); // esq - baixo - frente
+	glNormal3f(0.0f, 1.0f, 1.0f);
+	glVertex3f (0,-3,4); // esq - baixo - frente
+	glNormal3f(-1.0f, 1.0f, 1.0f);
+	glVertex3f (3,-3,4); // dir - baixo - frente
+	glNormal3f(1.0f, 1.0f, 0.0f);
+	glVertex3f (1,8,1); // dir - cima - frente
+	glNormal3f(-1.0f, 1.0f, 0.0f);
+	glVertex3f (-1,8,1); // esq - cima - frente
+
 	glEnd();
 
 	glBegin(GL_POLYGON);
+	glNormal3f(.0f, 0.0f, -1.0f);
 	glVertex3f (-1,8,-1); // esq - cima - tras
 	glVertex3f (1,8,-1); // dir - cima - tras
 	glVertex3f (3,-3,-2); // dir - baixo - tras
@@ -287,6 +422,7 @@ void SpaceShip::draw(float x, float y){
 	glEnd();
 
 	glBegin(GL_POLYGON);
+	glNormal3f(-1.0f, 0.0f, 0.0f);
 	glVertex3f (-1,8,-1); // esq - cima - tras
 	glVertex3f (-1,8,1); // esq - cima - frente
 	glVertex3f (-3,-3,4); // esq - baixo - frente
@@ -294,6 +430,7 @@ void SpaceShip::draw(float x, float y){
 	glEnd();
 
 	glBegin(GL_POLYGON);
+	glNormal3f(1.0f, 0.0f, 0.0f);
 	glVertex3f (1,8,-1); // dir - cima - tras
 	glVertex3f (3,-3,-2); // dir - baixo - tras
 	glVertex3f (1,8,1); // dir - cima - frente
