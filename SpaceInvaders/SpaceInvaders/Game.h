@@ -32,7 +32,7 @@ private:
 	Char* InvGreen[11];
 	Char* InvRed[11];
 	Char* InvPurple[11];
-	Char* Ship;
+	SpaceShip* Ship;
 	Char* Shields[4];
 	Char* MissileShip;
 	Camera* View;
@@ -40,7 +40,7 @@ private:
 
 public:
 
-	void moveShip(unsigned char key);
+	void movementShip(unsigned char key);
 	void moveInvaders();
 	void moveMissiles();
 	void switchView(float w, float h, int cam);

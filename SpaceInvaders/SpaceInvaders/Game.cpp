@@ -54,31 +54,9 @@ void Game::objectInit(){
 
 
 
-void Game::moveShip(unsigned char key){
+void Game::movementShip(unsigned char key){
 
-	float xShip = Ship->getX();
-
-	switch (key){
-		//Movimenta para a esquerda
-	case 'A': 
-		{
-			if(xShip > -85){
-				xShip -= 4;
-				Ship->setX(xShip);
-			}
-			break;
-		}
-		//Movimenta para a direita
-	case 'D':
-		{
-			if(xShip < 85){
-				xShip += 4;
-				Ship->setX(xShip);
-			}
-			break;
-		}
-	}
-	glutPostRedisplay();
+	Ship->moveShip(key);
 }
 
 

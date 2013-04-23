@@ -30,6 +30,7 @@ float previousTime;
 float elapsedTime;
 int camera_mode = 1;
 int light = 0; 
+int prev_light = 0;
 Game * theGame;
 
 void myKeyboard(unsigned char key, int x, int y){
@@ -40,7 +41,7 @@ void myKeyboard(unsigned char key, int x, int y){
         case 'd':   //Movimenta para a direita
         case 'D':
             if (key > 96) key -= 32;   //Torna todas as teclas primidas maiusculas
-			theGame->moveShip(key);
+			theGame->movementShip(key);
             break;
 		case '1': 
 			camera_mode = 1;
@@ -55,6 +56,8 @@ void myKeyboard(unsigned char key, int x, int y){
 			glutPostRedisplay();		//Troca para a camera third person
 			break;
 		case 'l': 
+		case 'L': 
+			if (key > 96) key -= 32;   //Torna todas as teclas primidas maiusculas
 			if (light != 2)
 			{
 			light++;
@@ -117,9 +120,6 @@ void proj(float w, float h){
 
 void myDisplay() {
 
-
-
-
 glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -127,6 +127,7 @@ glViewport(0, 0, global_width, global_height);
 proj(global_width, global_height);
 
 theGame->toggleLight(light);
+
 
 theGame->drawObjects();
 
@@ -163,17 +164,15 @@ glutInitWindowPosition(-1, -1);
 
 glutInitWindowSize(window_width, window_height);
 
-/* Enables Depth Testing */
-
-
 janela = glutCreateWindow("SpaceInvaders");
 
+glEnable(GL_SMOOTH);
 
 glEnable( GL_DEPTH_TEST );
 
 theGame = new Game();
 
-//printMenu();
+printMenu();
 
 glutDisplayFunc(myDisplay);
 

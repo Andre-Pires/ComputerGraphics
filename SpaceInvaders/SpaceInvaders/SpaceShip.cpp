@@ -341,7 +341,6 @@ void SpaceShip::draw(float x, float y){
 		glPopMatrix();
 
 
-		glColor3f(0.1,0.1,0.9);
 		glPushMatrix();
 		glTranslated(-11.5, -5, 2);
 		glScaled(1, 7, 2);
@@ -445,6 +444,32 @@ void SpaceShip::draw(float x, float y){
 
 	_coord = x;
 }
+
+
+void SpaceShip::moveShip(unsigned char key){
+
+
+	switch (key){
+		//Movimenta para a esquerda
+	case 'A': 
+		{
+			if(_x > -85){
+				_x -= 4;
+			}
+			break;
+		}
+		//Movimenta para a direita
+	case 'D':
+		{
+			if(_x < 85){
+				_x += 4;
+			}
+			break;
+		}
+	}
+	glutPostRedisplay();
+}
+
 
 SpaceShip::~SpaceShip(void)
 {

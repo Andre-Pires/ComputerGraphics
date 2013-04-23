@@ -9,6 +9,9 @@
 
 class Camera {
 
+private:
+	int current;
+
 public:
 
 	Camera(void);

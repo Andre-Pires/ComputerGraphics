@@ -9,6 +9,7 @@ class SpaceShip : public Char
 public:
 	SpaceShip(void);
 	~SpaceShip(void);
+	void moveShip(unsigned char key);
 	void draw(float x, float y);
 };
 
