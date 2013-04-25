@@ -9,6 +9,8 @@
 #include "SpaceShip.h"
 #include "Shield.h"
 #include "Missile.h"
+#include <time.h>
+#include <cstdlib>
 
 #if defined(__APPLE__) || defined(MACOSX) 
 #include <GLUT/glut.h> 
@@ -21,20 +23,21 @@ class Game
 {
 private:
 
-	int	  columns[11]; // vector para registar a posicao as colunas das pontas
+	int	columns[11]; // vector para registar a posicao as colunas das pontas
 	int Max;
 	int Min;
 	bool Down;
 	bool Right;
 	float alienx;
 	float alieny;
-	Char* InvBlue[11];
-	Char* InvGreen[11];
-	Char* InvRed[11];
-	Char* InvPurple[11];
+	Invader* InvBlue[11];
+	Invader* InvGreen[11];
+	Invader* InvRed[11];
+	Invader* InvPurple[11];
 	SpaceShip* Ship;
 	Char* Shields[4];
 	Char* MissileShip;
+	Char* MissileInv[11];
 	Camera* View;
 
 
@@ -42,10 +45,12 @@ public:
 
 	void movementShip(unsigned char key);
 	void moveInvaders();
-	void moveMissiles();
+	void moveMissile();
 	void switchView(float w, float h, int cam);
 	void drawObjects();
 	void objectInit();
+	void moveInvMissiles();
+	void shootInvMissiles();
 	void newMissile();
 	void toggleLight(int light);
 	Game(void);

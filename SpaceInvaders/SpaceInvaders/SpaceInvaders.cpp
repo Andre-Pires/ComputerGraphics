@@ -28,6 +28,8 @@ float global_height;
 float currentTime;
 float previousTime;
 float elapsedTime;
+float previousTime2;
+float previousTime3;
 int camera_mode = 1;
 int light = 0; 
 int prev_light = 0;
@@ -89,12 +91,30 @@ void myTimer(int value){
 	currentTime = glutGet(GLUT_ELAPSED_TIME);
 	elapsedTime = currentTime - previousTime;
 	
-	theGame->moveMissiles();
+	theGame->moveMissile();
+
+	
+
+	if (elapsedTime >= 50)
+	{
+		previousTime = currentTime;	
+		theGame->moveInvMissiles();
+	}
+
+	elapsedTime = currentTime - previousTime2;
 
 	if (elapsedTime >= 200)
 	{
-		previousTime = currentTime;	
+		previousTime2 = currentTime;	
 		theGame->moveInvaders();
+	}
+
+	elapsedTime = currentTime - previousTime3;
+
+	if (elapsedTime >= 500)
+	{
+		previousTime3 = currentTime;	
+		theGame->shootInvMissiles();
 	}
 
 	glutTimerFunc(10, myTimer, 0);
@@ -140,7 +160,9 @@ void printMenu(){
 	printf("\n\n");
 	printf("        SPACE INVADERS            \n\n\n");
 	printf("CONTROLS: \n\n");
-	printf("Movement: A and D / Left and Right keys\n\n");
+	printf("Movement: A and D / Left and Right keys\n");
+	printf("Combat: Spacebar\n\n");
+	printf("Lighting Toggle: L\n");
 	printf("Top View Camera: 1\n");
 	printf("3rd Person Camera: 2\n");
 	printf("1rst Person Camera: 3\n");
@@ -166,9 +188,8 @@ glutInitWindowSize(window_width, window_height);
 
 janela = glutCreateWindow("SpaceInvaders");
 
-glEnable(GL_SMOOTH);
-
 glEnable( GL_DEPTH_TEST );
+
 
 theGame = new Game();
 

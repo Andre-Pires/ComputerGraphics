@@ -5,7 +5,7 @@ Game::Game(void)
 {
 	for (int i = 0; i <= 10; i++)
 	{
-		columns[i] = 1;
+			columns[i] = 1;
 	}
 	
 	Down = false;// se desce
@@ -36,8 +36,11 @@ void Game::objectInit(){
 		InvPurple[i] = new PurpleInvader();
 		InvPurple[i]->setX(alienx);
 		InvPurple[i]->setY(alieny-45);
-		
-		alienx += 16;
+
+		MissileInv[i] = new Missile();
+		MissileInv[i]->setAlive(false);
+
+		alienx += 16; 
 
 		if(i <= 4){
 			Shields[i] = new Shield();
@@ -49,6 +52,7 @@ void Game::objectInit(){
 
 	Ship = new SpaceShip();
 
+	
 
 }
 
@@ -123,17 +127,78 @@ void Game::moveInvaders(){
 						InvPurple[i]->setX(x-step);
 					}
 				}
-
+				
 	glutPostRedisplay();
 }
 
-void Game::moveMissiles(){
+void Game::moveMissile(){
 	float step = 2;
 	if(MissileShip->getAlive() != false){
 		if(MissileShip->getY() > 97) 
 			MissileShip->setAlive(false);
-		int y = MissileShip->getY(); // fila 1
+		int y = MissileShip->getY();
 		MissileShip->setY(y+step);
+	}
+}
+
+
+void Game::moveInvMissiles(){ // move os dos aliens ----
+	float step = 2;
+
+	for(int i = 0; i <= 10; i++){
+
+		if (MissileInv[i]->getAlive()){
+
+			if(MissileInv[i]->getY() < -85) 
+				MissileInv[i]->setAlive(false);
+			else {
+				int y = MissileInv[i]->getY();
+				MissileInv[i]->setY(y - step);
+				printf("%d\n", y);
+			}		
+		}
+	}
+}
+
+void Game::shootInvMissiles(){
+	
+	srand(time(NULL));
+
+	int inv_num = rand() % 10; // num da coluna do invader q pode disparar
+
+	for (int i = 0; i < 11; i++)
+	{
+		if (MissileInv[inv_num]->getAlive())
+		{
+				inv_num = rand() % 10;
+
+		}else break;
+	}
+	
+	if (InvPurple[inv_num]->getAlive())	{
+
+		MissileInv[inv_num]->setAlive(true); 
+		MissileInv[inv_num]->setX(InvPurple[inv_num]->getX()); 
+		MissileInv[inv_num]->setY(InvPurple[inv_num]->getY()-10);
+		
+	}else if(InvBlue[inv_num]->getAlive())
+	{
+		MissileInv[inv_num]->setAlive(true); 
+		MissileInv[inv_num]->setX(InvBlue[inv_num]->getX()); 
+		MissileInv[inv_num]->setY(InvBlue[inv_num]->getY()-10);
+		
+	}else if (InvGreen[inv_num]->getAlive())
+	{
+		MissileInv[inv_num]->setAlive(true); 
+		MissileInv[inv_num]->setX(InvGreen[inv_num]->getX()); 
+		MissileInv[inv_num]->setY(InvGreen[inv_num]->getY()-10);
+
+	}else if (InvRed[inv_num]->getAlive())
+	{
+		MissileInv[inv_num]->setAlive(true); 
+		MissileInv[inv_num]->setX(InvRed[inv_num]->getX()); 
+		MissileInv[inv_num]->setY(InvRed[inv_num]->getY()-10);
+		
 	}
 }
 
@@ -159,6 +224,9 @@ void Game::drawObjects(){
 		InvGreen[i]->draw(InvGreen[i]->getX(), InvGreen[i]->getY()); // fila 2
 		InvBlue[i]->draw(InvBlue[i]->getX(), InvBlue[i]->getY()); // fila 3
 		InvPurple[i]->draw(InvPurple[i]->getX(), InvPurple[i]->getY()); // fila 4
+		
+		if(MissileInv[i]->getAlive()) 
+			MissileInv[i]->draw(MissileInv[i]->getX(), MissileInv[i]->getY());
 	}
 
 	Shields[0]->draw(sitiox, sitioy);
@@ -208,7 +276,7 @@ void Game::toggleLight(int light){
 
 
 		// luz esq
-		GLfloat spotPosition1[] = {Ship->getX()-16.5, -85.0f, 0.0f, 1.0f};
+		GLfloat spotPosition1[] = {Ship->getX()-16.5, -95.0f, 5.0f, 1.0f};
 		glLightfv(GL_LIGHT1,GL_POSITION,spotPosition1);
 
 		glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 10); 
@@ -224,7 +292,7 @@ void Game::toggleLight(int light){
 		glLightfv(GL_LIGHT1, GL_SPECULAR, shine2);
 
 		// luz - dir
-		GLfloat spotPosition2[] = {Ship->getX()+16.5, -85.0f, 0.0f, 1.0f};
+		GLfloat spotPosition2[] = {Ship->getX()+16.5, -95.0f, 5.0f, 1.0f};
 		glLightfv(GL_LIGHT2,GL_POSITION,spotPosition2);
 
 		glLightf(GL_LIGHT2, GL_SPOT_CUTOFF, 10); 

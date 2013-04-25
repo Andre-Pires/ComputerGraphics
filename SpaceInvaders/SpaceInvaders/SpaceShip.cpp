@@ -52,7 +52,7 @@ void SpaceShip::draw(float x, float y){
 
 		GLfloat ambient1[] = {0.35,0.35,0.35,0};
 		GLfloat emission_on[] = {1,1,1,0};
-		GLfloat emission_off[] = {0,0,0,0};
+		GLfloat emission_off[] = {0.3,0.3,0.3,0};
 
 		if (glIsEnabled(GL_LIGHT2))
 		{
