@@ -52,7 +52,7 @@ void Game::objectInit(){
 
 	Ship = new SpaceShip();
 
-	
+	Box = new Background();
 
 }
 
@@ -239,6 +239,9 @@ void Game::drawObjects(){
 
 	if(MissileShip->getAlive() != false) 
 		MissileShip->draw(MissileShip->getX(), MissileShip->getY());
+
+	printf("ola\n");
+	Box->draw();
 
 }
 

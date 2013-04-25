@@ -80,6 +80,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Background.h" />
     <ClInclude Include="BlueInvader.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Char.h" />
@@ -95,6 +96,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Background.cpp" />
     <ClCompile Include="BlueInvader.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Char.cpp" />

@@ -9,8 +9,9 @@
 #include "SpaceShip.h"
 #include "Shield.h"
 #include "Missile.h"
+#include "Background.h"
 #include <time.h>
-#include <cstdlib>
+#include <cstdlib> // linha 360 - comentada !!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 #if defined(__APPLE__) || defined(MACOSX) 
 #include <GLUT/glut.h> 
@@ -39,6 +40,7 @@ private:
 	Char* MissileShip;
 	Char* MissileInv[11];
 	Camera* View;
+	Background* Box;
 
 
 public:

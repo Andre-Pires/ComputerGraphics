@@ -111,7 +111,7 @@ void myTimer(int value){
 
 	elapsedTime = currentTime - previousTime3;
 
-	if (elapsedTime >= 500)
+	if (elapsedTime >= 1500)
 	{
 		previousTime3 = currentTime;	
 		theGame->shootInvMissiles();
