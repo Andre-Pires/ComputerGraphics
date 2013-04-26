@@ -142,7 +142,7 @@ void Game::moveMissile(){
 }
 
 
-void Game::moveInvMissiles(){ // move os dos aliens ----
+void Game::moveInvMissiles(){ // move os dos aliens
 	float step = 2;
 
 	for(int i = 0; i <= 10; i++){
@@ -154,7 +154,6 @@ void Game::moveInvMissiles(){ // move os dos aliens ----
 			else {
 				int y = MissileInv[i]->getY();
 				MissileInv[i]->setY(y - step);
-				printf("%d\n", y);
 			}		
 		}
 	}
@@ -240,7 +239,6 @@ void Game::drawObjects(){
 	if(MissileShip->getAlive() != false) 
 		MissileShip->draw(MissileShip->getX(), MissileShip->getY());
 
-	printf("ola\n");
 	Box->draw();
 
 }
