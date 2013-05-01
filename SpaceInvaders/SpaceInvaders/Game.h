@@ -10,15 +10,6 @@
 #include "Shield.h"
 #include "Missile.h"
 #include "Background.h"
-#include <time.h>
-#include <cstdlib> // linha 360 - comentada !!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-#if defined(__APPLE__) || defined(MACOSX) 
-#include <GLUT/glut.h> 
-#else
-#include <GL/glut.h> 
-#endif
-
 
 class Game
 {

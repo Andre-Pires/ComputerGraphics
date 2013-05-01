@@ -67,14 +67,14 @@ void SpaceShip::draw(float x, float y){
 		} else glColor3f(0.35f, 0.35f, 0.35f);
 
 		glPushMatrix();
-		glTranslated(-11.5, -1.5, 2);
+		glTranslated(-11.5, -1.0, 2);
 		glScaled(1, 1, 2);
 		glutSolidCube(1);
 		glPopMatrix();
 		// strobe esq
 
 		glPushMatrix();
-		glTranslated(11.5, -1.5, 2);
+		glTranslated(11.5, -1.0, 2);
 		glScaled(1, 1, 2);
 		glutSolidCube(1);
 		glPopMatrix();

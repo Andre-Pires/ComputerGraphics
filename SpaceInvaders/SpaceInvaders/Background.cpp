@@ -58,14 +58,17 @@ void Background::draw(){
 
 	glBegin(GL_QUADS);
 	glNormal3f(0, 0, 1);
+
+
 	glTexCoord2f(0,0);
-	glVertex3f(-150, -150, 0);
+	glVertex3f(-150, -150, -5);
 	glTexCoord2f(1,0);
-	glVertex3f(150, -150, 0);
+	glVertex3f(150, -150, -5);
 	glTexCoord2f(1,1);
-	glVertex3f(150, 150, 0);
+	glVertex3f(150, 150, -5);
 	glTexCoord2f(0,1);
-	glVertex3f(-150, 150, 0);
+	glVertex3f(-150, 150, -5);
+
 	glEnd();
 
 	glDisable(GL_TEXTURE_2D);

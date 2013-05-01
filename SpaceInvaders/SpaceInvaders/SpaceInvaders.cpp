@@ -13,12 +13,6 @@
 #include "Missile.h"
 
 
-#if defined(__APPLE__) || defined(MACOSX) 
-#include <GLUT/glut.h> 
-#else
-#include <GL/glut.h> 
-#endif
-
 #define window_height 600
 #define window_width 800
 
@@ -87,6 +81,9 @@ void mySpecialKeyboard(int key, int x, int y){
 
 void myTimer(int value){
 
+	srand(time(NULL));
+	int inv_dispara = rand() % 10 + 5;
+	inv_dispara *= 100;
 
 	currentTime = glutGet(GLUT_ELAPSED_TIME);
 	elapsedTime = currentTime - previousTime;
@@ -111,7 +108,7 @@ void myTimer(int value){
 
 	elapsedTime = currentTime - previousTime3;
 
-	if (elapsedTime >= 1500)
+	if (elapsedTime >= inv_dispara)
 	{
 		previousTime3 = currentTime;	
 		theGame->shootInvMissiles();

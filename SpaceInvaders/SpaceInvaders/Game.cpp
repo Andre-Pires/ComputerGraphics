@@ -149,7 +149,7 @@ void Game::moveInvMissiles(){ // move os dos aliens
 
 		if (MissileInv[i]->getAlive()){
 
-			if(MissileInv[i]->getY() < -85) 
+			if(MissileInv[i]->getY() < -95) 
 				MissileInv[i]->setAlive(false);
 			else {
 				int y = MissileInv[i]->getY();
