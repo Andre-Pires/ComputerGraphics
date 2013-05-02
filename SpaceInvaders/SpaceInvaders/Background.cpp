@@ -12,7 +12,7 @@ Background::~Background(void)
 Background::Background(){
 	
 	FILE *file;
-	unsigned char * data;
+	GLubyte * data;
 
 	data = (unsigned char *) malloc(SIZE);
 
@@ -29,7 +29,7 @@ Background::Background(){
 		glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP);
 		glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP);
 		glTexImage2D(GL_TEXTURE_2D,0,4,1024,768,0,GL_RGB,GL_UNSIGNED_BYTE,data);
-		gluBuild2DMipmaps( GL_TEXTURE_2D, 3, 1024, 768, GL_RGB, GL_UNSIGNED_BYTE, data );
+		gluBuild2DMipmaps(GL_TEXTURE_2D, 3, 1024, 768, GL_RGB, GL_UNSIGNED_BYTE, data);
 	}
 	free(data);
 	_texture = BackgTexture;
@@ -37,11 +37,17 @@ Background::Background(){
 
 void Background::draw(){
 
+	int height = 1, width = 1;
+	int y = 0, x = 0;
+	float xt = 0, yt = 0;
+
+
+
 	//Material
 	GLfloat ambient[] = {1,1,1,1};
 	GLfloat diffuse[] = {0.5,0.5,0.5,0.5};
-	GLfloat specular[] = {0,0,0,0.5};
-	GLfloat emission[] = {1,1,1,1};
+	GLfloat specular[] = {0.8,0.8,0.8,1};
+	GLfloat emission[] = {0.2,0.2,0.2,1};
 	GLfloat shininess[] = {60};
 	glMaterialfv(GL_FRONT, GL_EMISSION, emission);
 	glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
@@ -53,21 +59,24 @@ void Background::draw(){
 	//Textura
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D,_texture);
-	
+ 	glNormal3f(0, 0, 1);
 
-
-	glBegin(GL_QUADS);
-	glNormal3f(0, 0, 1);
-
-
-	glTexCoord2f(0,0);
-	glVertex3f(-150, -150, -5);
-	glTexCoord2f(1,0);
-	glVertex3f(150, -150, -5);
-	glTexCoord2f(1,1);
-	glVertex3f(150, 150, -5);
-	glTexCoord2f(0,1);
-	glVertex3f(-150, 150, -5);
+	for (y = -150, yt = 0; y < 150; y += 1, yt += .003)
+	{
+		for (x = -150, xt = 0; x < 150; x += 1, xt += .003)
+		{
+			glBegin(GL_TRIANGLE_FAN);
+			glTexCoord2f(xt,yt);
+			glVertex3f(x, y, -2);
+			glTexCoord2f(xt,yt+.003);
+			glVertex3f(x, y+height, -2);
+			glTexCoord2f(xt+.003,yt+.003);
+			glVertex3f(x+width, y+height, -2);
+			glTexCoord2f(xt+.003,yt);
+			glVertex3f(x+width, y, -2);
+			glEnd();
+		}
+	}
 
 	glEnd();
 

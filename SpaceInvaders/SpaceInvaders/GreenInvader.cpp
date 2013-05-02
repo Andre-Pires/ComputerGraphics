@@ -97,8 +97,6 @@ void GreenInvader::draw(float x, float y){
 
 	glPushMatrix();
 
-	if (glIsEnabled(GL_LIGHT0)|| glIsEnabled(GL_LIGHT1))
-	{
 		GLfloat material[] = {0.5,1.0,0,1};
 		GLfloat specular[] = {0,0,0,0};
 		GLfloat emission[] = {0,0,0,0};
@@ -108,8 +106,7 @@ void GreenInvader::draw(float x, float y){
 		glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
 		glMaterialfv(GL_FRONT, GL_EMISSION, emission);
 		glMaterialfv(GL_FRONT, GL_SHININESS, shininess);
-
-	}else glColor3f(0.5f, 1.0f, 0.0f);
+		glColor3f(0.5f, 1.0f, 0.0f);
 
 	glPushMatrix();
 	draw_legs(); // pernas
@@ -134,8 +131,6 @@ void GreenInvader::draw(float x, float y){
 	draw_head(); //cabeca
 	glPopMatrix();
 
-	if (glIsEnabled(GL_LIGHT0)|| glIsEnabled(GL_LIGHT1))
-	{
 		GLfloat eye_ambient[] = {0,0,0,1};
 		GLfloat eye_diffuse[] = {0,0,0,1};
 		GLfloat eye_specular[] = {0,0,0,0};
@@ -146,8 +141,7 @@ void GreenInvader::draw(float x, float y){
 		glMaterialfv(GL_FRONT, GL_SPECULAR, eye_specular);
 		glMaterialfv(GL_FRONT, GL_EMISSION, eye_emission);
 		glMaterialfv(GL_FRONT, GL_SHININESS, eye_shininess);
-
-	}else glColor3f(0.0f, 0.0f, 0.0f); //preto
+		glColor3f(0.0f, 0.0f, 0.0f); //preto
 
 	glPushMatrix();
 	draw_eyes(); //olhos

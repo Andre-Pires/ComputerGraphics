@@ -24,6 +24,7 @@ float previousTime;
 float elapsedTime;
 float previousTime2;
 float previousTime3;
+int old_camera_mode = 1;
 int camera_mode = 1;
 int light = 0; 
 int prev_light = 0;
@@ -36,7 +37,7 @@ void myKeyboard(unsigned char key, int x, int y){
         case 'A':
         case 'd':   //Movimenta para a direita
         case 'D':
-            if (key > 96) key -= 32;   //Torna todas as teclas primidas maiusculas
+            if (key > 96) key -= 32;   //Torna todas as teclas premidas maiusculas
 			theGame->movementShip(key);
             break;
 		case '1': 
@@ -53,11 +54,10 @@ void myKeyboard(unsigned char key, int x, int y){
 			break;
 		case 'l': 
 		case 'L': 
-			if (key > 96) key -= 32;   //Torna todas as teclas primidas maiusculas
+			if (key > 96) key -= 32;   //Torna todas as teclas premidas maiusculas
 			if (light != 2)
-			{
-			light++;
-			}else	light = 0;		//Ligar/Desligar Luz
+				light++;
+			else light = 0;		//Ligar/Desligar Luz
 			break;
 		case ' ':
 			theGame->newMissile();
@@ -131,6 +131,10 @@ void proj(float w, float h){
 
 	theGame->switchView(w, h, camera_mode);
 
+	if (old_camera_mode != camera_mode) {
+		light = 1;
+		old_camera_mode = camera_mode;
+	}
 }
 
 
@@ -142,6 +146,7 @@ glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 glViewport(0, 0, global_width, global_height);
 proj(global_width, global_height);
+
 
 theGame->toggleLight(light);
 
@@ -158,11 +163,12 @@ void printMenu(){
 	printf("        SPACE INVADERS            \n\n\n");
 	printf("CONTROLS: \n\n");
 	printf("Movement: A and D / Left and Right keys\n");
-	printf("Combat: Spacebar\n\n");
+	printf("Shoot: Spacebar\n\n");
+	printf("Settings:\n");
 	printf("Lighting Toggle: L\n");
 	printf("Top View Camera: 1\n");
 	printf("3rd Person Camera: 2\n");
-	printf("1rst Person Camera: 3\n");
+	printf("1st Person Camera: 3\n");
 	printf("\n\n\n");
 	printf(" Andre Pires N:68593            \n");
 	printf(" Joana Condeco N:68624            \n");

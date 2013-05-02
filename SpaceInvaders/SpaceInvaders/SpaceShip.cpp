@@ -54,17 +54,12 @@ void SpaceShip::draw(float x, float y){
 		GLfloat emission_on[] = {1,1,1,0};
 		GLfloat emission_off[] = {0.3,0.3,0.3,0};
 
-		if (glIsEnabled(GL_LIGHT2))
-		{
-		glMaterialfv(GL_FRONT, GL_EMISSION, emission_on);
+		if (glIsEnabled(GL_LIGHT2))			glMaterialfv(GL_FRONT, GL_EMISSION, emission_on);
+
+		else if (glIsEnabled(GL_LIGHT0)) 	glMaterialfv(GL_FRONT, GL_EMISSION, emission_off);
+			
 		glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, ambient1);
-
-		}else if (glIsEnabled(GL_LIGHT0))
-		{
-			glMaterialfv(GL_FRONT, GL_EMISSION, emission_off);
-			glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, ambient1);
-
-		} else glColor3f(0.35f, 0.35f, 0.35f);
+		glColor3f(0.35f, 0.35f, 0.35f);
 
 		glPushMatrix();
 		glTranslated(-11.5, -1.0, 2);
@@ -82,8 +77,6 @@ void SpaceShip::draw(float x, float y){
 		glPopMatrix();
 
 
-		if (glIsEnabled(GL_LIGHT0)|| glIsEnabled(GL_LIGHT1))
-		{
 			GLfloat ambient[] = {.25,.25,.25,1};
 			GLfloat diffuse[] = {.4,.4,.4,1};
 			GLfloat specular[] = {0.774597,0.774597,0.774597,1.0};
@@ -94,8 +87,7 @@ void SpaceShip::draw(float x, float y){
 			glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
 			glMaterialfv(GL_FRONT, GL_EMISSION, emission);
 			glMaterialfv(GL_FRONT, GL_SHININESS, shininess);
-
-		}else glColor3f(0.30f, 0.30f, 0.30f);
+			glColor3f(0.30f, 0.30f, 0.30f);
 
 		glTranslated(0, 0 , -1.5);
 

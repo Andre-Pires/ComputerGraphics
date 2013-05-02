@@ -18,8 +18,6 @@ glTranslated(x, y, 0.0f);
 
 glPushMatrix();
 
-if (glIsEnabled(GL_LIGHT0)|| glIsEnabled(GL_LIGHT1))
-{
 	GLfloat material[] = {1,1,1,1};
 	GLfloat emission[] = {0,0,0,1};
 	GLfloat specular[] = {0,0,0,1};
@@ -29,8 +27,7 @@ if (glIsEnabled(GL_LIGHT0)|| glIsEnabled(GL_LIGHT1))
 	glMaterialfv(GL_FRONT, GL_EMISSION, emission);
 	glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
 	glMaterialfv(GL_FRONT, GL_SHININESS, shininess);
-
-}else glColor3f(1.0f, 1.0f, 1.0f);
+	glColor3f(1.0f, 1.0f, 1.0f);
 
 glPushMatrix();
 glTranslated(0, 4, 0.0f);

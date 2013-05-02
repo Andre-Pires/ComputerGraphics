@@ -139,8 +139,6 @@ void RedInvader::draw(float x, float y){
 
 	glPushMatrix();
 
-	if (glIsEnabled(GL_LIGHT0)|| glIsEnabled(GL_LIGHT1))
-	{
 		GLfloat material[] = {1,0.14,0,1};
 		GLfloat specular[] = {0,0,0,0};
 		GLfloat emission[] = {0,0,0,0};
@@ -150,15 +148,12 @@ void RedInvader::draw(float x, float y){
 		glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
 		glMaterialfv(GL_FRONT, GL_EMISSION, emission);
 		glMaterialfv(GL_FRONT, GL_SHININESS, shininess);
-	
-	}else glColor3f(1.0f, 0.14f, 0.0f);
+		glColor3f(1.0f, 0.14f, 0.0f);
 
 	drawHead();
 	drawBody();
 	drawLegs();
 
-	if (glIsEnabled(GL_LIGHT0)|| glIsEnabled(GL_LIGHT1))
-	{
 		GLfloat eye_ambient[] = {0,0,0,1};
 		GLfloat eye_diffuse[] = {0,0,0,1};
 		GLfloat eye_specular[] = {0,0,0,0};
@@ -169,8 +164,7 @@ void RedInvader::draw(float x, float y){
 		glMaterialfv(GL_FRONT, GL_SPECULAR, eye_specular);
 		glMaterialfv(GL_FRONT, GL_EMISSION, eye_emission);
 		glMaterialfv(GL_FRONT, GL_SHININESS, eye_shininess);
-
-	}else glColor3f(0.0f, 0.0f, 0.0f); //preto 
+		glColor3f(0.0f, 0.0f, 0.0f); //preto 
 
 	drawEyes();
 	glPopMatrix();

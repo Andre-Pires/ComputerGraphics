@@ -260,9 +260,20 @@ void Game::toggleLight(int light){
 	GLfloat dif_spot[] = {.8, .8, .8, 1.0};
 	GLfloat shine2[] = {1, 1, 1, 1.0}; 
 
-	if(light == 1) {
+
+	if (View->getView())
+	{
+		glDisable(GL_LIGHTING);
+		glDisable(GL_LIGHT0);
+		glDisable(GL_LIGHT1);
+		glDisable(GL_LIGHT2);
+
+	}else if(light == 1) {
+
 		glEnable(GL_LIGHTING); 
 		glEnable(GL_LIGHT0);
+		glDisable(GL_LIGHT1);
+		glDisable(GL_LIGHT2);
 
 		glLightfv(GL_LIGHT0,GL_POSITION,pos);
 
@@ -308,7 +319,8 @@ void Game::toggleLight(int light){
 		glLightfv(GL_LIGHT2, GL_SPECULAR, shine2);
 
 	}else{
-		glDisable(GL_LIGHTING);
+		glEnable(GL_LIGHTING);
+		glDisable(GL_LIGHT0);
 		glDisable(GL_LIGHT1);
 		glDisable(GL_LIGHT2);
 	}

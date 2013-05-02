@@ -5,8 +5,14 @@
 Camera::Camera(void)
 {
 	current = 0;
+	ortho = 1;
 }
 
+
+int Camera::getView(){
+
+	return ortho;
+}
 
 void Camera::setCamera(float w,	float h, int cam, float xShip){
 
@@ -25,7 +31,8 @@ void Camera::setCamera(float w,	float h, int cam, float xShip){
 				glOrtho(-100.0f*aspect_ratio, 100.0f*aspect_ratio, -100.0f, 100.0f, -100.0f, 100.0f);
 			else
 				glOrtho(-100.0f, 100.0f, -100.0f/aspect_ratio, 100.0f/aspect_ratio, -100.0f, 100.0f);
-
+			
+			ortho = 1;
 			current = cam;
 			old_aspect = aspect_ratio;
 			glMatrixMode(GL_MODELVIEW);
@@ -43,6 +50,7 @@ void Camera::setCamera(float w,	float h, int cam, float xShip){
 		old_aspect = aspect_ratio;
 		current = cam;
 		}
+		ortho = 0;
 		glLoadIdentity();
 		gluLookAt(xShip, -120, 160, xShip, -20, 0, 0, 0, 1); //Eye, LookAt e UP vector
 		break;
@@ -57,6 +65,7 @@ void Camera::setCamera(float w,	float h, int cam, float xShip){
 		current = cam;
 		old_aspect = aspect_ratio;
 		}
+		ortho = 0;
 		glLoadIdentity();
 		gluLookAt(xShip,-75, 0, xShip, -30, 0, 0, 0, 1); //Eye, LookAt e UP vector
 		break;
