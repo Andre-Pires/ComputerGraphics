@@ -193,7 +193,6 @@ janela = glutCreateWindow("SpaceInvaders");
 
 glEnable( GL_DEPTH_TEST );
 
-
 theGame = new Game();
 
 printMenu();

@@ -14,7 +14,7 @@ Background::Background(){
 	FILE *file;
 	GLubyte * data;
 
-	data = (unsigned char *) malloc(SIZE);
+	data = (GLubyte *) malloc(SIZE);
 
 	GLuint BackgTexture = 0;
 	file=fopen("2.raw","rb");
