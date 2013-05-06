@@ -35,3 +35,7 @@ void Char::setAlive(bool a){
 
 	_alive = a;
 }
+
+void Char::setInv(bool b){
+	_inv = b;
+}

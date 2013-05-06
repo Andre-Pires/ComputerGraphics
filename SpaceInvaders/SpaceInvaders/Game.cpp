@@ -38,6 +38,7 @@ void Game::objectInit(){
 		InvPurple[i]->setY(alieny-45);
 
 		MissileInv[i] = new Missile();
+		MissileInv[i]->setInv(true);
 		MissileInv[i]->setAlive(false);
 
 		alienx += 16; 

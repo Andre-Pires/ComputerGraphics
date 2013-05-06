@@ -82,7 +82,7 @@ void mySpecialKeyboard(int key, int x, int y){
 void myTimer(int value){
 
 	srand(time(NULL));
-	int inv_dispara = rand() % 10 + 5;
+	int inv_dispara = rand() % 10 + 7;
 	inv_dispara *= 100;
 
 	currentTime = glutGet(GLUT_ELAPSED_TIME);
@@ -100,7 +100,7 @@ void myTimer(int value){
 
 	elapsedTime = currentTime - previousTime2;
 
-	if (elapsedTime >= 200)
+	if (elapsedTime >= 400)
 	{
 		previousTime2 = currentTime;	
 		theGame->moveInvaders();

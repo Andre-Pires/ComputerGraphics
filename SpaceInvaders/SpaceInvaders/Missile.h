@@ -4,6 +4,7 @@
 class Missile : public Char
 {
 	float x, y;
+
 public:
 	Missile(void);
 	~Missile(void);
