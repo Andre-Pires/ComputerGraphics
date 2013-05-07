@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Background.h"
 
-#define SIZE 1024*768*3
+#define SIZE 768*768*3
 
 Background::~Background(void)
 {
@@ -17,7 +17,7 @@ Background::Background(){
 	data = (GLubyte *) malloc(SIZE);
 
 	GLuint BackgTexture = 0;
-	file=fopen("2.raw","rb");
+	file=fopen("star_texture.raw","rb");
 	if(file != NULL){
 		fread(data,SIZE,1,file);
 		fclose(file);
@@ -27,9 +27,9 @@ Background::Background(){
 		glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP);
-		glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP);
-		glTexImage2D(GL_TEXTURE_2D,0,3,1024,768,0,GL_RGB,GL_UNSIGNED_BYTE,data);
-		gluBuild2DMipmaps(GL_TEXTURE_2D, 3, 1024, 768, GL_RGB, GL_UNSIGNED_BYTE, data);
+		glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
+		glTexImage2D(GL_TEXTURE_2D,0,3,768,768,0,GL_RGB,GL_UNSIGNED_BYTE,data);
+		gluBuild2DMipmaps(GL_TEXTURE_2D, 3, 768, 768, GL_RGB, GL_UNSIGNED_BYTE, data);
 	}
 	free(data);
 	_texture = BackgTexture;
@@ -45,7 +45,7 @@ void Background::draw(){
 
 	//Material
 	GLfloat ambient[] = {1,1,1,1};
-	GLfloat diffuse[] = {0.5,0.5,0.5,0.5};
+	GLfloat diffuse[] = {0.5,0.5,0.5,1};
 	GLfloat specular[] = {0.8,0.8,0.8,1};
 	GLfloat emission[] = {0.2,0.2,0.2,1};
 	GLfloat shininess[] = {60};

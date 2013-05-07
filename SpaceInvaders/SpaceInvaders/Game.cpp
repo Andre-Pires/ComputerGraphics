@@ -298,6 +298,8 @@ void Game::toggleLight(int light){
 		glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, spotDirection1);
 
 		glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 5.0f);
+
+		glLightf(GL_LIGHT1, GL_CONSTANT_ATTENUATION, 1.25);
 		
 
 		glLightfv(GL_LIGHT1, GL_AMBIENT, amb_spot);
@@ -314,6 +316,8 @@ void Game::toggleLight(int light){
 		glLightfv(GL_LIGHT2, GL_SPOT_DIRECTION, spotDirection2);
 
 		glLightf(GL_LIGHT2, GL_SPOT_EXPONENT, 5.0f);
+
+		glLightf(GL_LIGHT2, GL_CONSTANT_ATTENUATION, 1.25);
 
 		glLightfv(GL_LIGHT2, GL_AMBIENT, amb_spot);
 		glLightfv(GL_LIGHT2, GL_DIFFUSE, dif_spot);
