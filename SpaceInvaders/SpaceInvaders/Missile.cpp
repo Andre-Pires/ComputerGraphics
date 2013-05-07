@@ -4,6 +4,7 @@
 
 Missile::Missile(void)
 {
+	_radius = 4.5;
 }
 
 void Missile::draw(float x, float y)

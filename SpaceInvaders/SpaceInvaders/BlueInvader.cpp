@@ -4,6 +4,7 @@
 
 BlueInvader::BlueInvader()
 {
+	_radius = 5.5;
 }
 
 void BlueInvader::draw_legs(){

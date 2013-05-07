@@ -12,6 +12,7 @@
 #include <stdlib.h>
 #include <tchar.h>
 #include <time.h>
+#include <math.h>
 
 #if defined(__APPLE__) || defined(MACOSX) 
 #include <GLUT/glut.h> 

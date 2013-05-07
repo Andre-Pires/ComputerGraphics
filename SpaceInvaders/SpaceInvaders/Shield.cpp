@@ -4,6 +4,7 @@
 
 Shield::Shield(void)
 {
+	_radius = 7;
 }
 
 Shield::~Shield(void)
@@ -11,6 +12,9 @@ Shield::~Shield(void)
 }
 
 void Shield::draw(float x, float y){
+
+	_x = x;
+	_y = y;
 
 glPushMatrix();
 

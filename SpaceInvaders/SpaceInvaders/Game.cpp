@@ -3,9 +3,12 @@
 
 Game::Game(void)
 {
+
+	srand(time(NULL));
+
 	for (int i = 0; i <= 10; i++)
 	{
-			columns[i] = 1;
+			columns[i] = 4;
 	}
 	
 	Down = false;// se desce
@@ -161,8 +164,6 @@ void Game::moveInvMissiles(){ // move os dos aliens
 }
 
 void Game::shootInvMissiles(){
-	
-	srand(time(NULL));
 
 	int inv_num = rand() % 10; // num da coluna do invader q pode disparar
 
@@ -202,10 +203,114 @@ void Game::shootInvMissiles(){
 	}
 }
 
+void Game::wasHit(){
+
+	int cont = 0;
+
+	// Para os misseis dos Invaders e Shields
+
+	for (int a = 0; a < 10; a++)
+	{
+		if (MissileInv[a]->getAlive())
+		{
+			float radius2, invx, invy;
+
+			radius2 = MissileInv[a]->getRadius();
+			invx = MissileInv[a]->getX();
+			invy = MissileInv[a]->getY();
+
+			for (int b = 0; b < 4; b++) // ciclo para percorrer cada escudo e ver se os aliens lhe acertam
+			{
+				if (Shields[b]->getAlive())
+				{
+					float radius1, shldx, shldy, distance;
+					radius1 = Shields[b]->getRadius();	
+					shldx = Shields[b]->getX();
+					shldy = Shields[b]->getY();
+
+					distance = sqrt((shldx - invx)*(shldx - invx) + (shldy - invy)*(shldy - invy));
+
+					if (distance <= (radius1+radius2))
+					{
+						Shields[b]->setAlive(false);
+						MissileInv[a]->setAlive(false);
+					}
+				}
+			}
+				
+			if (MissileInv[a]->getAlive() && Ship->getAlive())
+			{
+				float radius3, shipx, shipy, distance;
+				radius3 = Ship->getRadius();	
+				shipx = Ship->getX();
+				shipy = Ship->getY();
+				
+				distance = sqrt((shipx - invx)*(shipx - invx) + (shipy - invy)*(shipy - invy));
+
+				if (distance <= (radius3+radius2))
+				{
+					Ship->setAlive(false);
+					MissileInv[a]->setAlive(false);
+				}
+			}
+		}
+	}
+
+
+	// Para o missil da SpaceShip e Invaders
+	Invader ** inv[4];
+
+	inv[0] = InvPurple;
+	inv[1] = InvBlue;
+	inv[2] = InvGreen;
+	inv[3] = InvRed;
+	
+	if (MissileShip->getAlive())
+		{
+			float radius1, msx, msy, distance;
+			radius1 = MissileShip->getRadius();	
+			msx = MissileShip->getX();
+			msy = MissileShip->getY();
+
+			for (int b = 0; b <= 3; b++)
+			{
+				if (MissileShip->getAlive())
+				{
+
+				for (int a = 0; a < 10; a++)
+				{
+						if (inv[b][a]->getAlive())
+						{
+							float radius2, invx, invy;
+
+							radius2 = inv[b][a]->getRadius();
+							invx = inv[b][a]->getX();
+							invy = inv[b][a]->getY();
+
+							distance = sqrt((msx - invx)*(msx - invx) + (msy - invy)*(msy - invy));
+
+							if (distance <= (radius1+radius2))
+							{
+								printf("ola \n",inv[b][a]->getAlive());
+
+								MissileShip->setAlive(false);
+								columns[a]--;
+								inv[b][a]->setAlive(false);
+								break;
+							}
+
+
+						}
+
+					}
+				}
+			}
+	}
+}
 
 void Game::newMissile(){
 
-	if (MissileShip->getAlive() == false){
+	if (MissileShip->getAlive() == false && Ship->getAlive()){
 
 		MissileShip->setAlive(true);
 		MissileShip->setX(Ship->getX());
@@ -220,22 +325,30 @@ void Game::drawObjects(){
 
 	for(int i = 0; i <= 10; i++){
 		
-		InvRed[i]->draw(InvRed[i]->getX(), InvRed[i]->getY()); // fila 1
-		InvGreen[i]->draw(InvGreen[i]->getX(), InvGreen[i]->getY()); // fila 2
-		InvBlue[i]->draw(InvBlue[i]->getX(), InvBlue[i]->getY()); // fila 3
-		InvPurple[i]->draw(InvPurple[i]->getX(), InvPurple[i]->getY()); // fila 4
+		if(InvRed[i]->getAlive())
+			InvRed[i]->draw(InvRed[i]->getX(), InvRed[i]->getY()); // fila 1
+
+		if(InvGreen[i]->getAlive())
+			InvGreen[i]->draw(InvGreen[i]->getX(), InvGreen[i]->getY()); // fila 2
+
+		if(InvBlue[i]->getAlive())
+			InvBlue[i]->draw(InvBlue[i]->getX(), InvBlue[i]->getY()); // fila 3
+		
+		if(InvPurple[i]->getAlive())
+			InvPurple[i]->draw(InvPurple[i]->getX(), InvPurple[i]->getY()); // fila 4
 		
 		if(MissileInv[i]->getAlive()) 
 			MissileInv[i]->draw(MissileInv[i]->getX(), MissileInv[i]->getY());
 	}
 
-	Shields[0]->draw(sitiox, sitioy);
-	Shields[1]->draw(sitiox + 40, sitioy);
-	Shields[2]->draw(sitiox + 88, sitioy);
-	Shields[3]->draw(sitiox + 128, sitioy);
+	
+		if(Shields[0]->getAlive()) Shields[0]->draw(sitiox, sitioy);
+		if(Shields[1]->getAlive()) Shields[1]->draw(sitiox + 40, sitioy);
+		if(Shields[2]->getAlive()) Shields[2]->draw(sitiox + 88, sitioy);
+		if(Shields[3]->getAlive()) Shields[3]->draw(sitiox + 128, sitioy);
 	
 
-	Ship->draw(Ship->getX(), -85); // base do ecrã
+	if(Ship->getAlive()) Ship->draw(Ship->getX(), -85); // base do ecrã
 
 	if(MissileShip->getAlive() != false) 
 		MissileShip->draw(MissileShip->getX(), MissileShip->getY());

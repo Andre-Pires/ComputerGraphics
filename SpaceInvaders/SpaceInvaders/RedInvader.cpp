@@ -4,6 +4,7 @@
 
 RedInvader::RedInvader(void)
 {
+	_radius = 5.5;
 }
 
 

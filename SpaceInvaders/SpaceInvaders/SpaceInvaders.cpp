@@ -81,7 +81,6 @@ void mySpecialKeyboard(int key, int x, int y){
 
 void myTimer(int value){
 
-	srand(time(NULL));
 	int inv_dispara = rand() % 10 + 7;
 	inv_dispara *= 100;
 
@@ -96,6 +95,7 @@ void myTimer(int value){
 	{
 		previousTime = currentTime;	
 		theGame->moveInvMissiles();
+		theGame->wasHit();
 	}
 
 	elapsedTime = currentTime - previousTime2;

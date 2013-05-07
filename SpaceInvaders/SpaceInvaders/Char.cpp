@@ -6,6 +6,12 @@ Char::Char(void)
 {
 }
 
+float Char::getRadius(){
+
+	return _radius;
+}
+
+
 float Char::getX(){
 
 	return _x;

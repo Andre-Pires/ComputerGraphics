@@ -2,6 +2,8 @@
 #include "Background.h"
 
 #define SIZE 768*768*3
+#define SIDE 1
+#define STEP 0.003
 
 Background::~Background(void)
 {
@@ -37,7 +39,6 @@ Background::Background(){
 
 void Background::draw(){
 
-	int height = 1, width = 1;
 	int y = 0, x = 0;
 	float xt = 0, yt = 0;
 
@@ -61,19 +62,19 @@ void Background::draw(){
 	glBindTexture(GL_TEXTURE_2D,_texture);
  	glNormal3f(0, 0, 1);
 
-	for (y = -150, yt = 0; y < 150; y += 1, yt += .003)
+	for (y = -150, yt = 0; y < 150; y += 1, yt += STEP)
 	{
-		for (x = -150, xt = 0; x < 150; x += 1, xt += .003)
+		for (x = -150, xt = 0; x < 150; x += 1, xt += STEP)
 		{
 			glBegin(GL_TRIANGLE_FAN);
 			glTexCoord2f(xt,yt);
 			glVertex3f(x, y, -2);
-			glTexCoord2f(xt,yt+.003);
-			glVertex3f(x, y+height, -2);
-			glTexCoord2f(xt+.003,yt+.003);
-			glVertex3f(x+width, y+height, -2);
-			glTexCoord2f(xt+.003,yt);
-			glVertex3f(x+width, y, -2);
+			glTexCoord2f(xt,yt+STEP);
+			glVertex3f(x, y+SIDE, -2);
+			glTexCoord2f(xt+STEP,yt+STEP);
+			glVertex3f(x+SIDE, y+SIDE, -2);
+			glTexCoord2f(xt+STEP,yt);
+			glVertex3f(x+SIDE, y, -2);
 			glEnd();
 		}
 	}

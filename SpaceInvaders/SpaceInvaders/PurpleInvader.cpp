@@ -4,12 +4,12 @@
 
 PurpleInvader::PurpleInvader(void)
 {
+	_radius = 5.5;
 }
 
 
 PurpleInvader::~PurpleInvader(void)
 {
-
 }
 
 

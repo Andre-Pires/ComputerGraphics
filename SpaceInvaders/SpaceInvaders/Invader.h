@@ -7,7 +7,6 @@ class Invader: public Char
 
 		Char * missile;
 
-
 public:
 	Invader(void);
 	void drawInvMissile();

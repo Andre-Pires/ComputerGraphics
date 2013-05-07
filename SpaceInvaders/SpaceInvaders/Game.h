@@ -44,6 +44,7 @@ public:
 	void objectInit();
 	void moveInvMissiles();
 	void shootInvMissiles();
+	void wasHit();
 	void newMissile();
 	void toggleLight(int light);
 	Game(void);

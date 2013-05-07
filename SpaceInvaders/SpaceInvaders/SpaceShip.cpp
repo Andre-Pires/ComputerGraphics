@@ -4,6 +4,7 @@
 
 SpaceShip::SpaceShip(void)
 {
+	_radius = 5.5;
 	_coord = _x;
 	_rot = 0;
 }
@@ -12,34 +13,12 @@ SpaceShip::SpaceShip(void)
 
 void SpaceShip::draw(float x, float y){
 
+	_x = x;
+	_y = y;
+
 	glPushMatrix();
 	
 	glTranslated(x, y, 0.0f);
-
-	/* Codigo para a rotacao --------- nave mal desenhada ha intercecao errada das rectas
-	 *
-	if (_coord != x)
-	{
-		if(_coord > x && _rot == 0){
-			_rot = 20; 
-			glRotated(_rot, 0, 1, 0);
-		}else if (_coord < x && _rot == 0)
-		{
-			_rot = -20; 
-			glRotated(_rot, 0, 1, 0);
-		}
-		else if(_coord == x &&_rot == 20)
-		{
-			_rot = -20;
-			glRotated(_rot, 0, 1, 0);
-		}else{
-			_rot = 20;
-			glRotated(_rot, 0, 1, 0);
-		}
-	}
-	*/
-	
-	//glRotated(60, 0, 1, 0);
 
 	glScalef(0.8f, 0.8f, 1.0f);
 
