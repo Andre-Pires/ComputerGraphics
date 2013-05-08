@@ -4,6 +4,7 @@
 
 PurpleInvader::PurpleInvader(void)
 {
+	GLfloat material[] = {0.5,1.0,0,1};
 	_radius = 5.5;
 	_lives = 1;
 }

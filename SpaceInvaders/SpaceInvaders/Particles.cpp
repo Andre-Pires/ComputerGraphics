@@ -42,7 +42,7 @@ void Particles::drawParticle(int particle){
 	glMaterialfv(GL_FRONT, GL_EMISSION, emission);
 	glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
 	glMaterialfv(GL_FRONT, GL_SHININESS, shininess);
-	glColor3i(1, 1, 1);
+	glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 
 	glTranslated(x0, y0, 0);
 	glRotated(parts[particle]->angleVert, 0, 0, 1);

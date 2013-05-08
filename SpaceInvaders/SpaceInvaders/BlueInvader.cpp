@@ -4,6 +4,7 @@
 
 BlueInvader::BlueInvader()
 {
+	GLfloat material[] = {0,0.75,1,1};
 	_radius = 5.5;
 	_lives = 1;
 }
@@ -76,6 +77,12 @@ void BlueInvader::draw_eyes(){
 		glLoadIdentity();
 		glPopMatrix();
 	}
+}
+
+GLfloat * BlueInvader::getMaterial(){
+
+	return material;
+
 }
 
 void BlueInvader::draw(float x, float y){

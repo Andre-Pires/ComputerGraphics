@@ -9,6 +9,7 @@ public:
 	int _lives;
 	bool _alive; // se for morto passa a false para não ser desenhado;
 	bool _inv;
+	GLfloat * material;
 
 	Char(void);
 	float getLives();
