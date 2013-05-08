@@ -4,7 +4,8 @@
 
 SpaceShip::SpaceShip(void)
 {
-	_radius = 5.5;
+	_radius = 5;
+	_lives = 5;
 	_coord = _x;
 	_rot = 0;
 }
@@ -464,7 +465,7 @@ void SpaceShip::moveShip(unsigned char key){
 	case 'A': 
 		{
 			if(_x > -85){
-				_x -= 4;
+				_x -= 5;
 			}
 			break;
 		}
@@ -472,7 +473,7 @@ void SpaceShip::moveShip(unsigned char key){
 	case 'D':
 		{
 			if(_x < 85){
-				_x += 4;
+				_x += 5;
 			}
 			break;
 		}

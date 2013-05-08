@@ -16,6 +16,8 @@
 #define window_height 600
 #define window_width 800
 
+using namespace std;
+
 
 float global_width;
 float global_height;
@@ -152,6 +154,9 @@ theGame->toggleLight(light);
 
 
 theGame->drawObjects();
+
+// glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18,'a');
+// glRasterPos2f(0, 0);
 
 glutSwapBuffers();
 

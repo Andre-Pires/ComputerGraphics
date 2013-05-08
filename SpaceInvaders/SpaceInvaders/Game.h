@@ -18,6 +18,7 @@ private:
 	int	columns[11]; // vector para registar a posicao as colunas das pontas
 	int Max;
 	int Min;
+	int Score;
 	bool Down;
 	bool Right;
 	float alienx;
@@ -27,7 +28,7 @@ private:
 	Invader* InvRed[11];
 	Invader* InvPurple[11];
 	SpaceShip* Ship;
-	Char* Shields[4];
+	Shield* Shields[4];
 	Char* MissileShip;
 	Char* MissileInv[11];
 	Camera* View;
@@ -35,7 +36,9 @@ private:
 
 
 public:
-
+	
+	int getShipLives();
+	void updateScore(int alien);
 	void movementShip(unsigned char key);
 	void moveInvaders();
 	void moveMissile();

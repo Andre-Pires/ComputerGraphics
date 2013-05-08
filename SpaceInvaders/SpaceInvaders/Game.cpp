@@ -10,7 +10,8 @@ Game::Game(void)
 	{
 			columns[i] = 4;
 	}
-	
+
+	Score = 0;
 	Down = false;// se desce
 	Right = true; // se anda para direita
 	Max = 10; //mov invaders
@@ -203,13 +204,39 @@ void Game::shootInvMissiles(){
 	}
 }
 
-void Game::wasHit(){
+void Game::updateScore(int alien){
 
-	int cont = 0;
+	switch (alien)
+	{
+	case 0:
+		Score += 10;
+		break;
+	case 1:
+		Score += 20;
+		break;
+	case 2:
+		Score += 30;
+		break;
+	case 3:
+		Score += 40;
+		break;
+	default:
+		break;
+	}
+
+	printf("Score: %d \n", Score);
+}
+
+int Game::getShipLives(){
+
+	return Ship->getLives();
+}
+
+void Game::wasHit(){
 
 	// Para os misseis dos Invaders e Shields
 
-	for (int a = 0; a < 10; a++)
+	for (int a = 0; a <= 10; a++)
 	{
 		if (MissileInv[a]->getAlive())
 		{
@@ -218,7 +245,7 @@ void Game::wasHit(){
 			radius2 = MissileInv[a]->getRadius();
 			invx = MissileInv[a]->getX();
 			invy = MissileInv[a]->getY();
-
+			 
 			for (int b = 0; b < 4; b++) // ciclo para percorrer cada escudo e ver se os aliens lhe acertam
 			{
 				if (Shields[b]->getAlive())
@@ -232,24 +259,34 @@ void Game::wasHit(){
 
 					if (distance <= (radius1+radius2))
 					{
+						Shields[b]->hitChar();
+						Shields[b]->switchShield();
+
+						if (Shields[b]->getLives() == 0) // só destroi quando não houverem mais vidas
 						Shields[b]->setAlive(false);
+
 						MissileInv[a]->setAlive(false);
 					}
 				}
 			}
-				
-			if (MissileInv[a]->getAlive() && Ship->getAlive())
+
+			if (MissileInv[a]->getAlive() && Ship->getAlive()) // ciclo para ver se os aliens acertam na nave
 			{
 				float radius3, shipx, shipy, distance;
 				radius3 = Ship->getRadius();	
 				shipx = Ship->getX();
 				shipy = Ship->getY();
-				
+
 				distance = sqrt((shipx - invx)*(shipx - invx) + (shipy - invy)*(shipy - invy));
 
 				if (distance <= (radius3+radius2))
 				{
-					Ship->setAlive(false);
+					
+					Ship->hitChar();
+
+					if (Ship->getLives() == 0) // só mata quando não houverem mais vidas
+						Ship->setAlive(false);
+
 					MissileInv[a]->setAlive(false);
 				}
 			}
@@ -257,56 +294,123 @@ void Game::wasHit(){
 	}
 
 
-	// Para o missil da SpaceShip e Invaders
+	
 	Invader ** inv[4];
 
 	inv[0] = InvPurple;
 	inv[1] = InvBlue;
 	inv[2] = InvGreen;
 	inv[3] = InvRed;
-	
+
 	if (MissileShip->getAlive())
+	{
+		float radius1, msx, msy, distance;
+		radius1 = MissileShip->getRadius();	
+		msx = MissileShip->getX();
+		msy = MissileShip->getY();
+
+		for (int b = 0; b <= 3; b++) // Para o missil da SpaceShip e Invaders
 		{
-			float radius1, msx, msy, distance;
-			radius1 = MissileShip->getRadius();	
-			msx = MissileShip->getX();
-			msy = MissileShip->getY();
-
-			for (int b = 0; b <= 3; b++)
-			{
-				if (MissileShip->getAlive())
+			for (int a = 0; a <= 10; a++)
 				{
+					if (inv[b][a]->getAlive())
+					{
+						float radius2, invx, invy;
 
-				for (int a = 0; a < 10; a++)
-				{
-						if (inv[b][a]->getAlive())
+						radius2 = inv[b][a]->getRadius();
+						invx = inv[b][a]->getX();
+						invy = inv[b][a]->getY();
+
+						distance = sqrt((msx - invx)*(msx - invx) + (msy - invy)*(msy - invy));
+
+						if (distance <= (radius1+radius2))
 						{
-							float radius2, invx, invy;
+							updateScore(b);
+							MissileShip->setAlive(false);
+							columns[a]--;
+							inv[b][a]->setAlive(false);
+							break;
+						}
 
-							radius2 = inv[b][a]->getRadius();
-							invx = inv[b][a]->getX();
-							invy = inv[b][a]->getY();
+				}
+			}
+		}
 
-							distance = sqrt((msx - invx)*(msx - invx) + (msy - invy)*(msy - invy));
+		if (MissileShip->getAlive()) // Para o missil da SpaceShip e Shields
+		{
+
+			for (int b = 0; b < 4; b++) // ciclo para percorrer cada escudo e ve se a nave lhe acerta
+			{
+				if (Shields[b]->getAlive())
+				{
+					float radius2, shldx, shldy, distance;
+					radius2 = Shields[b]->getRadius();	
+					shldx = Shields[b]->getX();
+					shldy = Shields[b]->getY();
+
+					distance = sqrt((shldx - msx)*(shldx - msx) + (shldy - msy)*(shldy - msy));
+
+					if (distance <= (radius1+radius2))
+					{
+						Shields[b]->hitChar();
+						Shields[b]->switchShield();
+
+						if (Shields[b]->getLives() == 0) // só mata quando não houverem mais vidas
+							Shields[b]->setAlive(false);
+
+						MissileShip->setAlive(false);
+					}
+				}
+			}
+		}
+	}
+
+
+	for (int b = 0; b <= 3; b++) // Para a colisão dos Invaders com os Shields
+	{
+		for (int a = 0; a <= 10; a++)
+		{
+				if (inv[b][a]->getAlive())
+				{
+					float radius2, invx, invy;
+
+					radius2 = inv[b][a]->getRadius();
+					invx = inv[b][a]->getX();
+					invy = inv[b][a]->getY();
+
+					for (int c = 0; c < 4; c++) // ciclo para percorrer cada escudo e ve se o invader lhe acerta
+					{
+						if (Shields[c]->getAlive())
+						{
+							float radius1, shldx, shldy, distance;
+							radius1 = Shields[c]->getRadius();	
+							shldx = Shields[c]->getX();
+							shldy = Shields[c]->getY();
+
+							distance = sqrt((shldx - invx)*(shldx - invx) + (shldy - invy)*(shldy - invy));
 
 							if (distance <= (radius1+radius2))
-							{
-								printf("ola \n",inv[b][a]->getAlive());
-
-								MissileShip->setAlive(false);
-								columns[a]--;
-								inv[b][a]->setAlive(false);
-								break;
-							}
-
-
+								Shields[c]->setAlive(false);
 						}
+					}
+
+					if (inv[b][a]->getAlive())
+					{
+						float radius4, shipx, shipy, distance;
+						radius4 = Ship->getRadius();	
+						shipx = Ship->getX();
+						shipy = Ship->getY();
+
+						distance = sqrt((shipx - invx)*(shipx - invx) + (shipy - invy)*(shipy - invy));
+
+						if (distance <= (radius4+radius2))
+							Ship->setAlive(false);
 
 					}
 				}
 			}
+		}
 	}
-}
 
 void Game::newMissile(){
 
@@ -321,7 +425,6 @@ void Game::newMissile(){
 void Game::drawObjects(){
 	float sitiox = -64;
 	float sitioy = -60;
-	
 
 	for(int i = 0; i <= 10; i++){
 		

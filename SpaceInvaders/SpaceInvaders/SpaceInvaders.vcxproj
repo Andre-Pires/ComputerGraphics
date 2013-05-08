@@ -88,6 +88,7 @@
     <ClInclude Include="GreenInvader.h" />
     <ClInclude Include="Invader.h" />
     <ClInclude Include="Missile.h" />
+    <ClInclude Include="Particles.h" />
     <ClInclude Include="PurpleInvader.h" />
     <ClInclude Include="RedInvader.h" />
     <ClInclude Include="Shield.h" />
@@ -104,6 +105,7 @@
     <ClCompile Include="GreenInvader.cpp" />
     <ClCompile Include="Invader.cpp" />
     <ClCompile Include="Missile.cpp" />
+    <ClCompile Include="Particles.cpp" />
     <ClCompile Include="PurpleInvader.cpp" />
     <ClCompile Include="RedInvader.cpp" />
     <ClCompile Include="Shield.cpp" />

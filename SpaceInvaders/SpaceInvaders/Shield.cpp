@@ -5,6 +5,10 @@
 Shield::Shield(void)
 {
 	_radius = 7;
+	_lives = 5;
+	R = 1;
+	G = 1;
+	B = 1;
 }
 
 Shield::~Shield(void)
@@ -22,7 +26,7 @@ glTranslated(x, y, 0.0f);
 
 glPushMatrix();
 
-	GLfloat material[] = {1,1,1,1};
+	GLfloat material[] = {R,G,B,1};
 	GLfloat emission[] = {0,0,0,1};
 	GLfloat specular[] = {0,0,0,1};
 	GLfloat shininess[] = {0};
@@ -31,7 +35,7 @@ glPushMatrix();
 	glMaterialfv(GL_FRONT, GL_EMISSION, emission);
 	glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
 	glMaterialfv(GL_FRONT, GL_SHININESS, shininess);
-	glColor3f(1.0f, 1.0f, 1.0f);
+	glColor3f(R, G, B);
 
 glPushMatrix();
 glTranslated(0, 4, 0.0f);
@@ -79,4 +83,11 @@ glPopMatrix();
 
 glPopMatrix();
 
+}
+
+void Shield::switchShield(){
+
+	R -= 0.2;
+	G -= 0.2;
+	B -= 0.2;
 }

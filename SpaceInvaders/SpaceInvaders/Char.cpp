@@ -45,3 +45,12 @@ void Char::setAlive(bool a){
 void Char::setInv(bool b){
 	_inv = b;
 }
+
+float Char::getLives(){
+
+	return _lives;
+}
+void Char::hitChar(){
+
+	_lives--;
+}

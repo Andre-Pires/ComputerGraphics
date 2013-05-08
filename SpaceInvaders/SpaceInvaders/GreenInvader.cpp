@@ -5,6 +5,7 @@
 GreenInvader::GreenInvader(void)
 {
 	_radius = 5.5;
+	_lives = 1;
 }
 
 void GreenInvader::draw_legs(){
