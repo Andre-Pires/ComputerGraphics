@@ -24,6 +24,10 @@ private:
 	bool Right;
 	float alienx;
 	float alieny;
+	GLfloat *blueMat;
+	GLfloat * purpleMat;
+	GLfloat * redMat;
+	GLfloat * greenMat;
 	Particles * parts;
 	Invader* InvBlue[11];
 	Invader* InvGreen[11];

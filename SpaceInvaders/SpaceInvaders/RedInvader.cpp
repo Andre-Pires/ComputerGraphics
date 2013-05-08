@@ -4,7 +4,6 @@
 
 RedInvader::RedInvader(void)
 {
-	GLfloat material[] = {1,0.14,0,1};
 	_radius = 5.5;
 	_lives = 1;
 }

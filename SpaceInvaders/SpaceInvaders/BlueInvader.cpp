@@ -4,7 +4,7 @@
 
 BlueInvader::BlueInvader()
 {
-	GLfloat material[] = {0,0.75,1,1};
+	//GLfloat material[] =
 	_radius = 5.5;
 	_lives = 1;
 }

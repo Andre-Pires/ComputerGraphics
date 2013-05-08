@@ -29,11 +29,11 @@ void Particles::setAlive(bool state){
 	_alive = state;
 }
 
-void Particles::drawParticle(int particle){
+void Particles::drawParticle(int particle, GLfloat * mat){
 
 	glPushMatrix();
 
-	GLfloat material[] = {1,1,1,1};
+	GLfloat *material = mat;
 	GLfloat emission[] = {0,0,0,1};
 	GLfloat specular[] = {0,0,0,1};
 	GLfloat shininess[] = {0};
@@ -42,7 +42,7 @@ void Particles::drawParticle(int particle){
 	glMaterialfv(GL_FRONT, GL_EMISSION, emission);
 	glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
 	glMaterialfv(GL_FRONT, GL_SHININESS, shininess);
-	glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+	glColor4fv(material);
 
 	glTranslated(x0, y0, 0);
 	glRotated(parts[particle]->angleVert, 0, 0, 1);
@@ -54,8 +54,8 @@ void Particles::drawParticle(int particle){
 }
 
 
-void Particles::moveParticles(){
-
+void Particles::moveParticles(GLfloat * mat){
+	
 	currentTime += 0.050;
 
 	for (int i = 0; i < PARTICLES; i++)
@@ -64,7 +64,7 @@ void Particles::moveParticles(){
 		if(parts[i]->z > -5){
 		parts[i]->x = (parts[i]->vel*cos(parts[i]->angleVert)*currentTime);
 		parts[i]->z = (0 + parts[i]->vel*sin(parts[i]->angleVert)*currentTime-9.8*currentTime*currentTime); // z0 igual a 0
-		drawParticle(i);
+		drawParticle(i, mat);
 		} else particulas--;
 	}
 
@@ -81,7 +81,7 @@ void Particles::randParticles(float x, float y){
 	{
 		parts[i]->x = 0;
 		parts[i]->z = 0;
-		parts[i]->vel = rand() % 15 + 5;
+		parts[i]->vel = rand() % 15 + 8;
 		parts[i]->angleVert = rand() % 360;
 		parts[i]->direction = rand() % 360;
 	}		
