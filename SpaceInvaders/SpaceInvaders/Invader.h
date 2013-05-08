@@ -1,16 +1,11 @@
 #pragma once
 #include "Char.h"
+#include "Particles.h"
 
 class Invader: public Char
 {
-	private:
-
-		Char * missile;
-
+		
 public:
+	Particles * part;
 	Invader(void);
-	void drawInvMissile();
-	void setInvMissile(bool val);
-	void newInvMissile();
-	void moveInvMissile();
 };

@@ -325,6 +325,7 @@ void Game::wasHit(){
 
 						if (distance <= (radius1+radius2))
 						{
+							inv[b][a]->part->randParticles(inv[b][a]->getX(), inv[b][a]->getY());
 							updateScore(b);
 							MissileShip->setAlive(false);
 							columns[a]--;
@@ -422,6 +423,7 @@ void Game::newMissile(){
 	}
 }
 
+
 void Game::drawObjects(){
 	float sitiox = -64;
 	float sitioy = -60;
@@ -430,16 +432,24 @@ void Game::drawObjects(){
 		
 		if(InvRed[i]->getAlive())
 			InvRed[i]->draw(InvRed[i]->getX(), InvRed[i]->getY()); // fila 1
+		else if (InvRed[i]->part->getAlive())
+			InvRed[i]->part->moveParticles(); // fila 1
 
 		if(InvGreen[i]->getAlive())
 			InvGreen[i]->draw(InvGreen[i]->getX(), InvGreen[i]->getY()); // fila 2
+		else if (InvGreen[i]->part->getAlive())
+				InvGreen[i]->part->moveParticles(); // fila 1
 
 		if(InvBlue[i]->getAlive())
 			InvBlue[i]->draw(InvBlue[i]->getX(), InvBlue[i]->getY()); // fila 3
-		
+		else if (InvBlue[i]->part->getAlive())
+			InvBlue[i]->part->moveParticles(); // fila 1
+
 		if(InvPurple[i]->getAlive())
 			InvPurple[i]->draw(InvPurple[i]->getX(), InvPurple[i]->getY()); // fila 4
-		
+		else if (InvPurple[i]->part->getAlive())
+			InvPurple[i]->part->moveParticles(); // fila 1
+
 		if(MissileInv[i]->getAlive()) 
 			MissileInv[i]->draw(MissileInv[i]->getX(), MissileInv[i]->getY());
 	}

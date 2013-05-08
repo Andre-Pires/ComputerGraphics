@@ -3,21 +3,35 @@
 
 #define PARTICLES 100
 
-class Particles: public Char
+class Particles
 {
 
 private:
 
-	float	direction; // direcção da particula
-	float	angleVert; // angulo de lançamento da particula
-	float	vel;	   // velocidade da particula
-	Particles * part[PARTICLES];
-	void drawParticle(float x, float y);
+	int particulas;
+	float currentTime;
+	bool _alive;
+	float	x0;
+	float	y0;
 
+	typedef struct
+	{
+		float	x;
+		float	z;
+		float	direction; // direcção da particula
+		float	angleVert; // angulo de lançamento da particula
+		float	vel;	   // velocidade da particula
+	}Particle;
+	
+	Particle ** parts;
 
 public:
 
-	void draw(float x, float y);
+	bool getAlive();
+	void setAlive(bool state);
+	void drawParticle(int particle);
+	void moveParticles();
+	void randParticles(float x, float y);
 	Particles(void);
 	~Particles(void);
 };

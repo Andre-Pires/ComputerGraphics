@@ -10,6 +10,7 @@
 #include "Shield.h"
 #include "Missile.h"
 #include "Background.h"
+#include "Particles.h"
 
 class Game
 {
@@ -23,6 +24,7 @@ private:
 	bool Right;
 	float alienx;
 	float alieny;
+	Particles * parts;
 	Invader* InvBlue[11];
 	Invader* InvGreen[11];
 	Invader* InvRed[11];
@@ -37,6 +39,7 @@ private:
 
 public:
 	
+	void updateParticles();
 	int getShipLives();
 	void updateScore(int alien);
 	void movementShip(unsigned char key);

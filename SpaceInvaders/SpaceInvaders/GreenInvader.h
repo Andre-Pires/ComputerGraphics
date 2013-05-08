@@ -3,7 +3,8 @@
 
 class GreenInvader: public Invader
 {
-	
+private:
+
 	void draw_legs();
 	void draw_body();
 	void draw_head();

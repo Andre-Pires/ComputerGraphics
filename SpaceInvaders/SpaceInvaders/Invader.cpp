@@ -4,4 +4,5 @@
 
 Invader::Invader(void)
 {
+	part = new Particles();
 }
