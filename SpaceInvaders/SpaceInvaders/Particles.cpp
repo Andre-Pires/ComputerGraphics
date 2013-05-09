@@ -29,7 +29,10 @@ void Particles::setAlive(bool state){
 	_alive = state;
 }
 
-void Particles::drawParticle(int particle, GLfloat * mat){
+void Particles::drawParticles(GLfloat * mat){
+
+	for (int particle = 0; particle < PARTICLES; particle++)
+	{
 
 	glPushMatrix();
 
@@ -51,10 +54,12 @@ void Particles::drawParticle(int particle, GLfloat * mat){
 	glutSolidCube(1);
 
 	glPopMatrix();
+
+	}
 }
 
 
-void Particles::moveParticles(GLfloat * mat){
+void Particles::moveParticles(){
 	
 	currentTime += 0.050;
 
@@ -63,8 +68,7 @@ void Particles::moveParticles(GLfloat * mat){
 
 		if(parts[i]->z > -5){
 		parts[i]->x = (parts[i]->vel*cos(parts[i]->angleVert)*currentTime);
-		parts[i]->z = (0 + parts[i]->vel*sin(parts[i]->angleVert)*currentTime-9.8*currentTime*currentTime); // z0 igual a 0
-		drawParticle(i, mat);
+		parts[i]->z = (0 + parts[i]->vel*sin(parts[i]->angleVert)*currentTime-13*currentTime*currentTime); // z0 igual a 0
 		} else particulas--;
 	}
 
@@ -81,7 +85,7 @@ void Particles::randParticles(float x, float y){
 	{
 		parts[i]->x = 0;
 		parts[i]->z = 0;
-		parts[i]->vel = rand() % 15 + 8;
+		parts[i]->vel = rand() % 15 + 10;
 		parts[i]->angleVert = rand() % 360;
 		parts[i]->direction = rand() % 360;
 	}		

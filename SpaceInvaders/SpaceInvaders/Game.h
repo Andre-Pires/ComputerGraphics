@@ -43,7 +43,7 @@ private:
 
 public:
 	
-	void updateParticles();
+	void updateP();
 	int getShipLives();
 	void updateScore(int alien);
 	void movementShip(unsigned char key);

@@ -260,22 +260,14 @@ void SpaceShip::draw(float x, float y){
 	glNormal3f(1.0f, 1.0f, 1.0f);
 	glVertex3f(-4,-3,4);
 
-	//glNormal3f(1.0f, 0.0f, 0.0f);
-	//glVertex3f(-4,-5,4);
 	glNormal3f(1.0f, 1.0f, 0.0f);
 	glVertex3f(-4,-7,4);
-	//glNormal3f(0.0f, 0.0f, 0.0f);
-	//glVertex3f(0,-7,4);
 	glNormal3f(-1.0f, 1.0f, 0.0f);
 	glVertex3f(4,-7,4);
-	//glNormal3f(-1.0f, 0.0f, 0.0f);
-	//glVertex3f(4,-5,4);
 	glNormal3f(-1.0f, 1.0f, 1.0f);
 	glVertex3f(4,-3,4);
 	glNormal3f(0.0f, 1.0f, 1.0f);
 	glVertex3f(0,-3,4);
-	//glNormal3f(1.0f,0.0f, 1.0f);
-	//glVertex3f(0,-5,4);
 	glEnd();
 	glPopMatrix();
 	//cubo central cima
@@ -352,21 +344,6 @@ void SpaceShip::draw(float x, float y){
 	glPopMatrix();
 	//cubo central trás
 
-
-
-/*	for (float cx = -3.5; cx <= 3.5; cx++)
-	{
-		for (float cy = -3.5; cy >= -6.5 ; cy--)
-		{
-			glPushMatrix();
-			glTranslated(cx, cy, 1);
-			glScaled(1, 1, 6);
-			glutSolidCube(1);
-			glPopMatrix();
-		}
-	}*/
-
-	//corpo
 
 		for (float cx = -1.5; cx <= 1.5 ;cx++)
 		{
@@ -478,7 +455,6 @@ void SpaceShip::moveShip(unsigned char key){
 			break;
 		}
 	}
-	glutPostRedisplay();
 }
 
 

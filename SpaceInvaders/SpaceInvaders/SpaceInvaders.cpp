@@ -90,7 +90,7 @@ void myTimer(int value){
 	elapsedTime = currentTime - previousTime;
 	
 	theGame->moveMissile();
-
+	theGame->updateP();
 	
 
 	if (elapsedTime >= 50)

@@ -29,8 +29,8 @@ public:
 
 	bool getAlive();
 	void setAlive(bool state);
-	void drawParticle(int particle, GLfloat *mat);
-	void moveParticles(GLfloat *mat);
+	void drawParticles(GLfloat *mat);
+	void moveParticles();
 	void randParticles(float x, float y);
 	Particles(void);
 	~Particles(void);
