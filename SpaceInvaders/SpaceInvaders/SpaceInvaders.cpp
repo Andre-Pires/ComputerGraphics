@@ -155,12 +155,47 @@ theGame->toggleLight(light);
 
 theGame->drawObjects();
 
-// glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18,'a');
-// glRasterPos2f(0, 0);
+	glColor3f(1,1,1);
+	string result = "LIVES:";
+	string lives = "lll ";
+	if(camera_mode == 1)
+		glRasterPos2f(95, 89.75);
+	else if(camera_mode == 2) 
+		glRasterPos3f(theGame->getShipPos()+124, 100, 30);
+	else glRasterPos3f(theGame->getShipPos()+46, 9, 43.60);
+
+
+
+	for(int i = 0; i < (int)result.length(); i++)
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, result[i]);   //Desenha a string no HUD
+
+	for(int i = 0; i < (int)theGame->getShipLives(); i++){
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, ' ');
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, lives[i]);
+	}
+
+	glColor3f(1,1,1);
+	string score = "SCORE:";
+	stringstream ss;
+	ss << theGame->getScore();
+	string points = ss.str();
+	if(camera_mode == 1)
+		glRasterPos2f(95, 80.75);
+	else if(camera_mode == 2) 
+		glRasterPos3f(theGame->getShipPos()+125, 91, 23);
+	else glRasterPos3f(theGame->getShipPos()+46, 9, 39.25);
+
+
+	for(int i = 0; i < (int)score.length(); i++)
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, score[i]);   //Desenha a string no HUD
+
+	for(int i = 0; i < (int)points.length(); i++){
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, points[i]);
+	}
 
 glutSwapBuffers();
 
-}
+} 
 
 void printMenu(){
 

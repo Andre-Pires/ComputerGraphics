@@ -227,6 +227,9 @@ void Game::updateScore(int alien){
 	printf("Score: %d \n", Score);
 }
 
+int Game::getScore(){
+	return Score;
+}
 int Game::getShipLives(){
 
 	return Ship->getLives();
@@ -281,7 +284,8 @@ void Game::wasHit(){
 
 				if (distance <= (radius3+radius2))
 				{
-					
+					Ship->part->randParticles(Ship->getX(), Ship->getY());
+
 					Ship->hitChar();
 
 					if (Ship->getLives() == 0) // só mata quando não houverem mais vidas
@@ -431,6 +435,7 @@ void Game::drawObjects(){
 	GLfloat red[] = {1,0.14,0,1};
 	GLfloat purple[] = {0.59,0.0,0.82,1};
 	GLfloat green[] = {0.5,1.0,0,1};
+	GLfloat ship[] = {.25,.25,.25,1};
 
 	for(int i = 0; i <= 10; i++){
 		
@@ -466,12 +471,18 @@ void Game::drawObjects(){
 	
 
 	if(Ship->getAlive()) Ship->draw(Ship->getX(), -85); // base do ecrã
+	if (Ship->part->getAlive())
+			Ship->part->drawParticles(ship); // fila 1
 
 	if(MissileShip->getAlive() != false) 
 		MissileShip->draw(MissileShip->getX(), MissileShip->getY());
 
 	Box->draw();
 
+}
+
+float Game::getShipPos(){
+	return Ship->getX();
 }
 
 void Game::switchView(float w, float h, int cam){
@@ -497,6 +508,9 @@ void Game::updateP(){
 		if (InvPurple[i]->part->getAlive())
 			InvPurple[i]->part->moveParticles(); // fila 4
 	}
+
+	if (Ship->part->getAlive())
+			Ship->part->moveParticles(); // fila 1
 
 }
 

@@ -1,5 +1,6 @@
 #pragma once
 #include "Char.h"
+#include "Particles.h"
 
 class SpaceShip : public Char 
 {
@@ -9,6 +10,7 @@ class SpaceShip : public Char
 public:
 	SpaceShip(void);
 	~SpaceShip(void);
+	Particles * part;
 	void moveShip(unsigned char key);
 	void draw(float x, float y);
 };

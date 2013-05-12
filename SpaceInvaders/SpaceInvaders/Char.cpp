@@ -46,7 +46,7 @@ void Char::setInv(bool b){
 	_inv = b;
 }
 
-float Char::getLives(){
+int Char::getLives(){
 
 	return _lives;
 }

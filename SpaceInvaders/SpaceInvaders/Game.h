@@ -46,6 +46,7 @@ public:
 	void updateP();
 	int getShipLives();
 	void updateScore(int alien);
+	int getScore();
 	void movementShip(unsigned char key);
 	void moveInvaders();
 	void moveMissile();
@@ -57,6 +58,7 @@ public:
 	void wasHit();
 	void newMissile();
 	void toggleLight(int light);
+	float getShipPos();
 	Game(void);
 	~Game(void);
 };

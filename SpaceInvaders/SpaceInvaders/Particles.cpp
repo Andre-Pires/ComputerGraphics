@@ -3,7 +3,7 @@
 
 Particles::Particles(void)
 {
-	parts = (Particle **) malloc(sizeof(Particle)*PARTICLES);
+	parts = (Particle **) malloc(sizeof(Particle *)*PARTICLES);
 
 	for (int i = 0; i < PARTICLES; i++)
 	{
@@ -11,7 +11,6 @@ Particles::Particles(void)
 	}
 	_alive = false;
 	currentTime = 0;
-	particulas = PARTICLES;
 }
 
 
@@ -51,7 +50,7 @@ void Particles::drawParticles(GLfloat * mat){
 	glRotated(parts[particle]->angleVert, 0, 0, 1);
 	glTranslated(parts[particle]->x, 0, parts[particle]->z);
 
-	glutSolidCube(1);
+	glutSolidOctahedron();
 
 	glPopMatrix();
 
@@ -80,6 +79,8 @@ void Particles::randParticles(float x, float y){
 	x0 = x;
 	y0 = y;
 	_alive = true;
+	particulas = PARTICLES;
+	currentTime = 0;
 
 	for (int i = 0; i < PARTICLES; i++)
 	{

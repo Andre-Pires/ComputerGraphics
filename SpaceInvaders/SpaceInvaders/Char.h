@@ -12,7 +12,7 @@ public:
 	GLfloat * material;
 
 	Char(void);
-	float getLives();
+	int getLives();
 	void hitChar();
 	float getX();
 	void setX(float x);

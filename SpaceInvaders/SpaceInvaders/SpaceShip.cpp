@@ -5,9 +5,10 @@
 SpaceShip::SpaceShip(void)
 {
 	_radius = 5;
-	_lives = 5;
+	_lives = 3;
 	_coord = _x;
 	_rot = 0;
+	part = new Particles();
 }
 
 
