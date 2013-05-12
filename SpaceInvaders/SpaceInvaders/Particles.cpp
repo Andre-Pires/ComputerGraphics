@@ -11,6 +11,8 @@ Particles::Particles(void)
 	}
 	_alive = false;
 	currentTime = 0;
+	transp = 0;
+
 }
 
 
@@ -36,9 +38,10 @@ void Particles::drawParticles(GLfloat * mat){
 	glPushMatrix();
 
 	GLfloat *material = mat;
-	GLfloat emission[] = {0,0,0,1};
-	GLfloat specular[] = {0,0,0,1};
+	GLfloat emission[] = {0,0,0,0};
+	GLfloat specular[] = {0,0,0,0};
 	GLfloat shininess[] = {0};
+	material[3] = 0.25;
 	glMaterialfv(GL_FRONT, GL_AMBIENT, material);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, material);
 	glMaterialfv(GL_FRONT, GL_EMISSION, emission);
@@ -69,6 +72,8 @@ void Particles::moveParticles(){
 		parts[i]->x = (parts[i]->vel*cos(parts[i]->angleVert)*currentTime);
 		parts[i]->z = (0 + parts[i]->vel*sin(parts[i]->angleVert)*currentTime-13*currentTime*currentTime); // z0 igual a 0
 		} else particulas--;
+
+		transp -= 0.05;
 	}
 
 	if(particulas == 0) _alive = false;
@@ -81,6 +86,7 @@ void Particles::randParticles(float x, float y){
 	_alive = true;
 	particulas = PARTICLES;
 	currentTime = 0;
+	transp = 1;
 
 	for (int i = 0; i < PARTICLES; i++)
 	{

@@ -13,6 +13,7 @@ private:
 	bool _alive;
 	float	x0;
 	float	y0;
+	float	transp;
 
 	typedef struct
 	{

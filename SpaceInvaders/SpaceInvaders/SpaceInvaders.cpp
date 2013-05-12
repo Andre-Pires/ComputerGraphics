@@ -30,6 +30,15 @@ int old_camera_mode = 1;
 int camera_mode = 1;
 int light = 0; 
 int prev_light = 0;
+
+static int window;
+static int menu_id;
+static int submenu_id;
+
+int pause = 2; 
+
+
+
 Game * theGame;
 
 void myKeyboard(unsigned char key, int x, int y){
@@ -61,7 +70,16 @@ void myKeyboard(unsigned char key, int x, int y){
 				light++;
 			else light = 0;		//Ligar/Desligar Luz
 			break;
+		case 'p':
+		case 'P':
+			pause == 1 ? pause = 2 : pause = 1;
+			break;
+		case 27: // Escape key
+			glutDestroyWindow (window);
+			exit (0);
+			break;
 		case ' ':
+			if (pause == 1)	
 			theGame->newMissile();
 			break;
 		
@@ -70,14 +88,32 @@ void myKeyboard(unsigned char key, int x, int y){
 
 void mySpecialKeyboard(int key, int x, int y){
 
-	switch (key){
-	case GLUT_KEY_LEFT:{
-			myKeyboard('A', x, y); //Movimenta para a esquerda
-            break;}   
-    case GLUT_KEY_RIGHT:{
-			myKeyboard('D', x, y); //Movimenta para a direita
-            break;}
+	if (pause == 1){	
+		switch (key){
+		case GLUT_KEY_LEFT:{
+				myKeyboard('A', x, y); //Movimenta para a esquerda
+				break;}   
+		case GLUT_KEY_RIGHT:{
+				myKeyboard('D', x, y); //Movimenta para a direita
+				break;}
+		}
 	}
+}
+
+void menu(int num){
+
+  if(num == 0){
+    glutDestroyWindow(window);
+    exit(0);
+  }else
+	num == 2 ? pause = 2 : pause = 1;
+} 
+
+void createMenu(void){
+	submenu_id = glutCreateMenu(menu);
+    glutAddMenuEntry("Resume", 1);   
+    glutAddMenuEntry("Pause", 2);    
+    glutAddMenuEntry("Quit", 0);     glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
 
 
@@ -86,9 +122,11 @@ void myTimer(int value){
 	int inv_dispara = rand() % 10 + 7;
 	inv_dispara *= 100;
 
+	if (pause == 1){	
+
 	currentTime = glutGet(GLUT_ELAPSED_TIME);
 	elapsedTime = currentTime - previousTime;
-	
+
 	theGame->moveMissile();
 	theGame->updateP();
 	
@@ -116,6 +154,7 @@ void myTimer(int value){
 		theGame->shootInvMissiles();
 	}
 
+	}
 	glutTimerFunc(10, myTimer, 0);
 
 }
@@ -205,6 +244,7 @@ void printMenu(){
 	printf("Movement: A and D / Left and Right keys\n");
 	printf("Shoot: Spacebar\n\n");
 	printf("Settings:\n");
+	printf("Pause: P\n");
 	printf("Lighting Toggle: L\n");
 	printf("Top View Camera: 1\n");
 	printf("3rd Person Camera: 2\n");
@@ -218,20 +258,19 @@ void printMenu(){
 
 int main(int argc, char** argv){
 
-int  janela;
-
-
 glutInit(&argc, argv);
 
-glutInitDisplayMode(GLUT_RGB|GLUT_DOUBLE|GLUT_DEPTH);
+glutInitDisplayMode(GLUT_RGBA|GLUT_DOUBLE|GLUT_DEPTH);
 
 glutInitWindowPosition(-1, -1);
 
 glutInitWindowSize(window_width, window_height);
 
-janela = glutCreateWindow("SpaceInvaders");
+window = glutCreateWindow("SpaceInvaders");
 
 glEnable( GL_DEPTH_TEST );
+
+createMenu();
 
 theGame = new Game();
 
@@ -244,7 +283,7 @@ glutReshapeFunc(myReshape);
 glutKeyboardFunc(myKeyboard);
 
 glutSpecialFunc(mySpecialKeyboard);
-
+	
 glutTimerFunc(0, myTimer, 0);
 
 glutMainLoop();
