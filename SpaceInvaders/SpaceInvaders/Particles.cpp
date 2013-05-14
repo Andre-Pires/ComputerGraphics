@@ -41,7 +41,6 @@ void Particles::drawParticles(GLfloat * mat){
 	GLfloat emission[] = {0,0,0,0};
 	GLfloat specular[] = {0,0,0,0};
 	GLfloat shininess[] = {0};
-	material[3] = 0.25;
 	glMaterialfv(GL_FRONT, GL_AMBIENT, material);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, material);
 	glMaterialfv(GL_FRONT, GL_EMISSION, emission);

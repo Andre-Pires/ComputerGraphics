@@ -42,7 +42,9 @@ private:
 
 
 public:
-	
+
+	void resetObjects();
+	void restartGame();
 	void updateP();
 	int getShipLives();
 	void updateScore(int alien);
@@ -51,7 +53,7 @@ public:
 	void moveInvaders();
 	void moveMissile();
 	void switchView(float w, float h, int cam);
-	void drawObjects();
+	void drawObjects(int debug);
 	void objectInit();
 	void moveInvMissiles();
 	void shootInvMissiles();

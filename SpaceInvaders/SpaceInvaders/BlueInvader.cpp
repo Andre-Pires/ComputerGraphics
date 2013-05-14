@@ -84,7 +84,7 @@ GLfloat * BlueInvader::getMaterial(){
 
 }
 
-void BlueInvader::draw(float x, float y){
+void BlueInvader::draw(float x, float y, int debug){
 
 	
 	_x = x;
@@ -107,6 +107,10 @@ void BlueInvader::draw(float x, float y){
 		glMaterialfv(GL_FRONT, GL_SHININESS, shininess);
 		glColor3f(0.0f, 0.75f, 1.0f);
 
+	glPushMatrix();
+	if (debug)
+		glutWireSphere(_radius, 13, 5);
+	glPopMatrix();
 
 	glPushMatrix();
 	glTranslated(-4.5, -5, 0);

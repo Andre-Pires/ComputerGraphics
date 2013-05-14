@@ -4,7 +4,8 @@
 
 Shield::Shield(void)
 {
-	_radius = 7;
+	_alive = true;
+	_radius = 8;
 	_lives = 5;
 	R = 1;
 	G = 1;
@@ -15,7 +16,16 @@ Shield::~Shield(void)
 {
 }
 
-void Shield::draw(float x, float y){
+void Shield::resetShields(){
+
+	_alive = true;
+	_lives = 5;
+	R = 1;
+	G = 1;
+	B = 1;
+}
+
+void Shield::draw(float x, float y, int debug){
 
 	_x = x;
 	_y = y;
@@ -36,6 +46,11 @@ glPushMatrix();
 	glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
 	glMaterialfv(GL_FRONT, GL_SHININESS, shininess);
 	glColor3f(R, G, B);
+
+	glPushMatrix(); // Debug Sphere
+	if (debug)
+		glutWireSphere(_radius, 13, 5);
+	glPopMatrix();
 
 glPushMatrix();
 glTranslated(0, 4, 0.0f);

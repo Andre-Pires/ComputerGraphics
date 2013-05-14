@@ -22,5 +22,5 @@ public:
 	bool getAlive();
 	void setAlive(bool a);
 	void setInv(bool b);
-	virtual void draw(float x, float y) = 0;
+	virtual void draw(float x, float y, int debug) = 0;
 };

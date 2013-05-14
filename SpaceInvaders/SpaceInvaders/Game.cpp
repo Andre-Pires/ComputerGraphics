@@ -22,6 +22,46 @@ Game::Game(void)
 	Ship->setX(0); //coord init
 }
 
+void Game::resetObjects(){
+
+	for(int i = 0; i <= 10; i++){
+
+		
+		InvRed[i]->setX(alienx);
+		InvRed[i]->setY(alieny);
+		InvRed[i]->setAlive(true);
+		
+		InvGreen[i]->setX(alienx);
+		InvGreen[i]->setY(alieny-15);
+		InvGreen[i]->setAlive(true);
+		
+		InvBlue[i]->setX(alienx);
+		InvBlue[i]->setY(alieny-30);
+		InvBlue[i]->setAlive(true);
+		
+		InvPurple[i]->setX(alienx);
+		InvPurple[i]->setY(alieny-45);
+		InvPurple[i]->setAlive(true);
+
+		
+		MissileInv[i]->setInv(true);
+		MissileInv[i]->setAlive(false);
+
+		alienx += 16; 
+
+		if(i <= 4){
+			Shields[i]->resetShields();
+		} 
+	}
+
+
+	MissileShip->setAlive(false);
+
+	Ship->setAlive(true);
+	Ship->resetShip();
+
+}
+
 void Game::objectInit(){
 
 	View = new Camera();
@@ -61,7 +101,23 @@ void Game::objectInit(){
 
 }
 
+void Game::restartGame(){
 
+	for (int i = 0; i <= 10; i++)
+	{
+		columns[i] = 4;
+	}
+
+	Score = 0;
+	Down = false;// se desce
+	Right = true; // se anda para direita
+	Max = 10; //mov invaders
+	Min = 0; //mov invaders
+	alienx = -80.0; //coord init
+	alieny = 90.0; //coord init
+	resetObjects();
+	Ship->setX(0); //coord init
+}
 
 void Game::movementShip(unsigned char key){
 
@@ -223,8 +279,6 @@ void Game::updateScore(int alien){
 	default:
 		break;
 	}
-
-	printf("Score: %d \n", Score);
 }
 
 int Game::getScore(){
@@ -412,6 +466,10 @@ void Game::wasHit(){
 							Ship->setAlive(false);
 
 					}
+
+					if(inv[b][a]->getY() <= -85) 
+						while (Ship->getLives())
+							Ship->hitChar();     // Game Over caso os aliens cheguem à base do ecrã
 				}
 			}
 		}
@@ -428,7 +486,7 @@ void Game::newMissile(){
 }
 
 
-void Game::drawObjects(){
+void Game::drawObjects(int debug){
 	float sitiox = -64;
 	float sitioy = -60;
 	GLfloat blue[] = {0,0.75,1,1};
@@ -440,44 +498,44 @@ void Game::drawObjects(){
 	for(int i = 0; i <= 10; i++){
 		
 		if(InvRed[i]->getAlive())
-			InvRed[i]->draw(InvRed[i]->getX(), InvRed[i]->getY()); // fila 1
+			InvRed[i]->draw(InvRed[i]->getX(), InvRed[i]->getY(), debug); // fila 1
 		else if (InvRed[i]->part->getAlive())
 			InvRed[i]->part->drawParticles(red); // fila 1
 
 		if(InvGreen[i]->getAlive())
-			InvGreen[i]->draw(InvGreen[i]->getX(), InvGreen[i]->getY()); // fila 2
+			InvGreen[i]->draw(InvGreen[i]->getX(), InvGreen[i]->getY(), debug); // fila 2
 		else if (InvGreen[i]->part->getAlive())
-				InvGreen[i]->part->drawParticles(green); // fila 1
+				InvGreen[i]->part->drawParticles(green); // fila 2
 
 		if(InvBlue[i]->getAlive())
-			InvBlue[i]->draw(InvBlue[i]->getX(), InvBlue[i]->getY()); // fila 3
+			InvBlue[i]->draw(InvBlue[i]->getX(), InvBlue[i]->getY(), debug); // fila 3
 		else if (InvBlue[i]->part->getAlive())
-			InvBlue[i]->part->drawParticles(blue); // fila 1
+			InvBlue[i]->part->drawParticles(blue); // fila 3
 		
 		if(InvPurple[i]->getAlive())
-			InvPurple[i]->draw(InvPurple[i]->getX(), InvPurple[i]->getY()); // fila 4
+			InvPurple[i]->draw(InvPurple[i]->getX(), InvPurple[i]->getY(), debug); // fila 4
 		else if (InvPurple[i]->part->getAlive())
-			InvPurple[i]->part->drawParticles(purple); // fila 1
+			InvPurple[i]->part->drawParticles(purple); // fila 4
 
 		if(MissileInv[i]->getAlive()) 
-			MissileInv[i]->draw(MissileInv[i]->getX(), MissileInv[i]->getY());
+			MissileInv[i]->draw(MissileInv[i]->getX(), MissileInv[i]->getY(), debug);
 	}
 
 	
-		if(Shields[0]->getAlive()) Shields[0]->draw(sitiox, sitioy);
-		if(Shields[1]->getAlive()) Shields[1]->draw(sitiox + 40, sitioy);
-		if(Shields[2]->getAlive()) Shields[2]->draw(sitiox + 88, sitioy);
-		if(Shields[3]->getAlive()) Shields[3]->draw(sitiox + 128, sitioy);
+		if(Shields[0]->getAlive()) Shields[0]->draw(sitiox, sitioy, debug);
+		if(Shields[1]->getAlive()) Shields[1]->draw(sitiox + 40, sitioy, debug);
+		if(Shields[2]->getAlive()) Shields[2]->draw(sitiox + 88, sitioy, debug);
+		if(Shields[3]->getAlive()) Shields[3]->draw(sitiox + 128, sitioy, debug);
 	
 
-	if(Ship->getAlive()) Ship->draw(Ship->getX(), -85); // base do ecrã
+	if(Ship->getAlive()) Ship->draw(Ship->getX(), -85, debug); // nave - na base do ecrã
 	if (Ship->part->getAlive())
-			Ship->part->drawParticles(ship); // fila 1
+			Ship->part->drawParticles(ship); // particulas da nave
 
 	if(MissileShip->getAlive() != false) 
-		MissileShip->draw(MissileShip->getX(), MissileShip->getY());
+		MissileShip->draw(MissileShip->getX(), MissileShip->getY(), debug); // missil da nave 
 
-	Box->draw();
+	Box->draw(); // desenho da textura
 
 }
 

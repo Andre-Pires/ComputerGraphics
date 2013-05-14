@@ -12,5 +12,5 @@ private:
 
 public:
 	GreenInvader(void);
-	void draw(float x, float y);
+	void draw(float x, float y, int debug);
 };

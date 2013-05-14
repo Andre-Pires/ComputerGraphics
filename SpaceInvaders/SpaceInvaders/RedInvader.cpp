@@ -129,7 +129,7 @@ void drawEyes(){
 	glPopMatrix();
 }
 
-void RedInvader::draw(float x, float y){
+void RedInvader::draw(float x, float y, int debug){
 	
 	_x = x;
 	_y = y;
@@ -151,6 +151,11 @@ void RedInvader::draw(float x, float y){
 		glMaterialfv(GL_FRONT, GL_EMISSION, emission);
 		glMaterialfv(GL_FRONT, GL_SHININESS, shininess);
 		glColor3f(1.0f, 0.14f, 0.0f);
+
+	glPushMatrix();
+	if (debug)
+		glutWireSphere(_radius, 13, 5);
+	glPopMatrix();
 
 	drawHead();
 	drawBody();

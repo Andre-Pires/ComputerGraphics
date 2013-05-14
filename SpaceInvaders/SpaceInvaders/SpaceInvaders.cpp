@@ -30,14 +30,14 @@ int old_camera_mode = 1;
 int camera_mode = 1;
 int light = 0; 
 int prev_light = 0;
+int debug = 0 ;
+int gameover = 0;
 
 static int window;
 static int menu_id;
 static int submenu_id;
 
 int pause = 2; 
-
-
 
 Game * theGame;
 
@@ -48,7 +48,7 @@ void myKeyboard(unsigned char key, int x, int y){
         case 'A':
         case 'd':   //Movimenta para a direita
         case 'D':
-            if (key > 96) key -= 32;   //Torna todas as teclas premidas maiusculas
+			if (pause == 1 && !gameover)
 			theGame->movementShip(key);
             break;
 		case '1': 
@@ -63,23 +63,35 @@ void myKeyboard(unsigned char key, int x, int y){
 			camera_mode = 3;
 			glutPostRedisplay();		//Troca para a camera third person
 			break;
-		case 'l': 
+		case 'l':						//Teclas para a iluminação
 		case 'L': 
-			if (key > 96) key -= 32;   //Torna todas as teclas premidas maiusculas
+			if (!gameover && pause == 1)
+			{
 			if (light != 2)
 				light++;
-			else light = 0;		//Ligar/Desligar Luz
+			else light = 0;					//Ligar/Desligar Luz
+			}
 			break;
-		case 'p':
+		case 'y':							//Tecla para a pausa
+		case 'Y':
+			debug ? debug = 0 : debug = 1;
+			break;
+		case 'p':							//Tecla para a pausa
 		case 'P':
 			pause == 1 ? pause = 2 : pause = 1;
 			break;
-		case 27: // Escape key
+		case 'R':							//Tecla para a pausa
+		case 'r':
+			theGame->restartGame();
+			gameover = 0;
+			pause = 2;
+			break;
+		case 27:							// Escape key -- Exit game
 			glutDestroyWindow (window);
 			exit (0);
 			break;
-		case ' ':
-			if (pause == 1)	
+		case ' ':							//Disparar a nave				
+			if (pause == 1 && gameover == 0)	
 			theGame->newMissile();
 			break;
 		
@@ -88,7 +100,7 @@ void myKeyboard(unsigned char key, int x, int y){
 
 void mySpecialKeyboard(int key, int x, int y){
 
-	if (pause == 1){	
+	if (pause == 1 && gameover == 0){	
 		switch (key){
 		case GLUT_KEY_LEFT:{
 				myKeyboard('A', x, y); //Movimenta para a esquerda
@@ -117,11 +129,60 @@ void createMenu(void){
 }
 
 
+void printStatus(){
+
+	theGame->switchView(global_width, global_height, 1); // activar camara ortogonal
+
+	glDisable(GL_LIGHTING);
+
+	if(pause == 2 && !gameover){
+
+
+		glColor3f(1,1,1);
+		string paused = "GAME PAUSED";
+		string start = "Press 'P' key to play";
+
+		glRasterPos2f(-21, 0);
+
+
+		for(int i = 0; i < (int)paused.length(); i++)
+			glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, paused[i]);   //Desenha estado de jogo - pausa
+
+		glRasterPos2f(-26, -10);
+
+		for(int i = 0; i < (int)start.length(); i++)
+			glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, start[i]);   //Desenha o tecla a pressionar
+
+	}else
+	{
+
+		glColor3f(1,1,1);
+		string end = "GAME OVER";
+		string restart = "Press 'R' key to restart";
+		glRasterPos2f(-17, 0);
+
+		for(int i = 0; i < (int)end.length(); i++)
+			glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, end[i]);   //Desenha estado do jogo - Game Over
+
+		glRasterPos2f(-30, -10);
+
+		for(int i = 0; i < (int)restart.length(); i++)
+			glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, restart[i]);   //Desenha a tecla a pressionar
+	}
+
+	glEnable(GL_LIGHTING);
+
+	theGame->switchView(global_width, global_height, camera_mode);
+}
+
+
 void myTimer(int value){
 
 	int inv_dispara = rand() % 10 + 7;
 	inv_dispara *= 100;
 
+	if (theGame->getShipLives() != 0)
+	{
 	if (pause == 1){	
 
 	currentTime = glutGet(GLUT_ELAPSED_TIME);
@@ -148,13 +209,15 @@ void myTimer(int value){
 
 	elapsedTime = currentTime - previousTime3;
 
-	if (elapsedTime >= inv_dispara)
-	{
+	if (elapsedTime >= inv_dispara){
 		previousTime3 = currentTime;	
 		theGame->shootInvMissiles();
+		}
 	}
 
-	}
+	}else gameover = 1;
+
+
 	glutTimerFunc(10, myTimer, 0);
 
 }
@@ -172,41 +235,28 @@ void proj(float w, float h){
 
 	theGame->switchView(w, h, camera_mode);
 
+
 	if (old_camera_mode != camera_mode) {
 		light = 1;
 		old_camera_mode = camera_mode;
 	}
 }
 
+void printHUD(){
 
+	theGame->switchView(global_width, global_height, 1); // activar camara ortogonal
 
-void myDisplay() {
-
-glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-glViewport(0, 0, global_width, global_height);
-proj(global_width, global_height);
-
-
-theGame->toggleLight(light);
-
-
-theGame->drawObjects();
+	glDisable(GL_LIGHTING);
 
 	glColor3f(1,1,1);
 	string result = "LIVES:";
 	string lives = "lll ";
-	if(camera_mode == 1)
-		glRasterPos2f(95, 89.75);
-	else if(camera_mode == 2) 
-		glRasterPos3f(theGame->getShipPos()+124, 100, 30);
-	else glRasterPos3f(theGame->getShipPos()+46, 9, 43.60);
 
+	glRasterPos2f(95, 89.75);
 
 
 	for(int i = 0; i < (int)result.length(); i++)
-        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, result[i]);   //Desenha a string no HUD
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, result[i]);   //Desenha a string no HUD
 
 	for(int i = 0; i < (int)theGame->getShipLives(); i++){
 		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, ' ');
@@ -218,19 +268,42 @@ theGame->drawObjects();
 	stringstream ss;
 	ss << theGame->getScore();
 	string points = ss.str();
-	if(camera_mode == 1)
-		glRasterPos2f(95, 80.75);
-	else if(camera_mode == 2) 
-		glRasterPos3f(theGame->getShipPos()+125, 91, 23);
-	else glRasterPos3f(theGame->getShipPos()+46, 9, 39.25);
 
+	glRasterPos2f(95, 80.75);
 
 	for(int i = 0; i < (int)score.length(); i++)
-        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, score[i]);   //Desenha a string no HUD
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, score[i]);   //Desenha a string no HUD
 
 	for(int i = 0; i < (int)points.length(); i++){
 		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, points[i]);
 	}
+
+	glEnable(GL_LIGHTING);
+
+	theGame->switchView(global_width, global_height, camera_mode);
+
+};
+
+
+void myDisplay() {
+
+glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+glViewport(0, 0, global_width, global_height);
+
+printHUD();
+
+if(gameover || pause == 2)
+printStatus();
+
+proj(global_width, global_height);
+
+
+theGame->toggleLight(light);
+
+
+theGame->drawObjects(debug);
 
 glutSwapBuffers();
 
@@ -244,11 +317,13 @@ void printMenu(){
 	printf("Movement: A and D / Left and Right keys\n");
 	printf("Shoot: Spacebar\n\n");
 	printf("Settings:\n");
-	printf("Pause: P\n");
+	printf("Pause game: P\n");
+	printf("Restart game: P\n");
 	printf("Lighting Toggle: L\n");
 	printf("Top View Camera: 1\n");
 	printf("3rd Person Camera: 2\n");
 	printf("1st Person Camera: 3\n");
+	printf("Debug mode(Wireframe): Y\n");
 	printf("\n\n\n");
 	printf(" Andre Pires N:68593            \n");
 	printf(" Joana Condeco N:68624            \n");

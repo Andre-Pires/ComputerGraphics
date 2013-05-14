@@ -4,10 +4,10 @@
 
 Missile::Missile(void)
 {
-	_radius = 4.5;
+	_radius = 3.5;
 }
 
-void Missile::draw(float x, float y)
+void Missile::draw(float x, float y, int debug)
 {
 	_x = x;
 	_y = y;
@@ -45,9 +45,18 @@ void Missile::draw(float x, float y)
 	}else glColor3f(0.30f, 0.30f, 0.30f);
 
 	glPushMatrix();
+
 	glTranslated(x, y, 0);
+
+	glPushMatrix();
+	if (debug)
+		glutWireSphere(_radius, 13, 5);
+	glPopMatrix();
+
 	glScalef(1.5, 5, 2);
+
 	glutSolidCube(1);
+
 	glPopMatrix();
 
 	glPopMatrix();

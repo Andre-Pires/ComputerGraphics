@@ -86,7 +86,7 @@ void GreenInvader::draw_eyes(){
 	}
 }
 
-void GreenInvader::draw(float x, float y){
+void GreenInvader::draw(float x, float y, int debug){
 
 	_x = x;
 	_y = y;
@@ -109,6 +109,11 @@ void GreenInvader::draw(float x, float y){
 		glMaterialfv(GL_FRONT, GL_EMISSION, emission);
 		glMaterialfv(GL_FRONT, GL_SHININESS, shininess);
 		glColor3f(0.5f, 1.0f, 0.0f);
+
+	glPushMatrix();
+		if (debug)
+		glutWireSphere(_radius, 13, 5);
+	glPopMatrix();
 
 	glPushMatrix();
 	draw_legs(); // pernas

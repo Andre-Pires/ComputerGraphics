@@ -4,7 +4,7 @@
 
 SpaceShip::SpaceShip(void)
 {
-	_radius = 5;
+	_radius = 7;
 	_lives = 3;
 	_coord = _x;
 	_rot = 0;
@@ -12,8 +12,15 @@ SpaceShip::SpaceShip(void)
 }
 
 
+void SpaceShip::resetShip(void){
 
-void SpaceShip::draw(float x, float y){
+	_radius = 7;
+	_lives = 3;
+	_coord = _x;
+	_rot = 0;
+}
+
+void SpaceShip::draw(float x, float y, int debug){
 
 	_x = x;
 	_y = y;
@@ -69,6 +76,11 @@ void SpaceShip::draw(float x, float y){
 			glMaterialfv(GL_FRONT, GL_EMISSION, emission);
 			glMaterialfv(GL_FRONT, GL_SHININESS, shininess);
 			glColor3f(0.30f, 0.30f, 0.30f);
+
+		glPushMatrix();
+		if (debug) // Debug Sphere
+			glutWireSphere(_radius, 13 ,5);
+		glPopMatrix();
 
 		glTranslated(0, 0 , -1.5);
 
@@ -426,9 +438,8 @@ void SpaceShip::draw(float x, float y){
 	// ponta da nave
 
 
-
-
 	glPopMatrix();
+
 	glPopMatrix();
 
 	_coord = x;
@@ -440,6 +451,7 @@ void SpaceShip::moveShip(unsigned char key){
 
 	switch (key){
 		//Movimenta para a esquerda
+	case 'a':
 	case 'A': 
 		{
 			if(_x > -85){
@@ -448,6 +460,7 @@ void SpaceShip::moveShip(unsigned char key){
 			break;
 		}
 		//Movimenta para a direita
+	case 'd':
 	case 'D':
 		{
 			if(_x < 85){

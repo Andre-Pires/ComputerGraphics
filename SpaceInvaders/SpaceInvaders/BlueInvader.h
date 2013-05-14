@@ -13,6 +13,6 @@ private:
 public:
 	BlueInvader(void);
 	GLfloat * getMaterial();
-	void draw(float x, float y);
+	void draw(float x, float y, int debug);
 };
 

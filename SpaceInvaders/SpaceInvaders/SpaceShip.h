@@ -11,7 +11,8 @@ public:
 	SpaceShip(void);
 	~SpaceShip(void);
 	Particles * part;
+	void resetShip(void);
 	void moveShip(unsigned char key);
-	void draw(float x, float y);
+	void draw(float x, float y, int debug);
 };
 

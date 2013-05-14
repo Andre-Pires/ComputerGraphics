@@ -4,7 +4,6 @@
 
 PurpleInvader::PurpleInvader(void)
 {
-	GLfloat material[] = {0.5,1.0,0,1};
 	_radius = 5.5;
 	_lives = 1;
 }
@@ -107,7 +106,7 @@ void PurpleInvader::drawEyes()
 	glPopMatrix();
 }
 
-void PurpleInvader::draw(float x, float y)
+void PurpleInvader::draw(float x, float y, int debug)
 {
 	_x = x;
 	_y = y;
@@ -128,6 +127,12 @@ void PurpleInvader::draw(float x, float y)
 		glMaterialfv(GL_FRONT, GL_EMISSION, emission);
 		glMaterialfv(GL_FRONT, GL_SHININESS, shininess);
 		glColor3f(0.59f, 0.0f, 0.82f);
+
+
+		glPushMatrix(); // Debug Sphere
+		if (debug)
+		glutWireSphere(_radius, 13, 5);
+		glPopMatrix();
 
 	drawHead();
 	drawBody();

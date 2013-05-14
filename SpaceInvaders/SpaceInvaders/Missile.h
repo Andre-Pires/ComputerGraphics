@@ -8,6 +8,6 @@ class Missile : public Char
 public:
 	Missile(void);
 	~Missile(void);
-	void draw(float x, float y);
+	void draw(float x, float y, int debug);
 };
 

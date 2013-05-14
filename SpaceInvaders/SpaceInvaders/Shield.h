@@ -12,6 +12,7 @@ private:
 public:
 	Shield(void);
 	~Shield(void);
+	void resetShields();
 	void switchShield();
-	void draw(float x, float y);
+	void draw(float x, float y, int debug);
 };
