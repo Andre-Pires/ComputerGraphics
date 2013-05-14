@@ -342,6 +342,7 @@ void printMenu(){
 	printf("Settings:\n");
 	printf("Pause game: P\n");
 	printf("Restart game: P\n");
+	printf("Exit game: Esc key\n");
 	printf("Lighting Toggle: L\n");
 	printf("Top View Camera: 1\n");
 	printf("3rd Person Camera: 2\n");
