@@ -43,6 +43,7 @@ private:
 
 public:
 
+	int aliensAlive();
 	void resetObjects();
 	void restartGame();
 	void updateP();

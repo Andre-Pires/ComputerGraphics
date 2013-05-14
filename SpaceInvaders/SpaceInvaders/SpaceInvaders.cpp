@@ -32,6 +32,7 @@ int light = 0;
 int prev_light = 0;
 int debug = 0 ;
 int gameover = 0;
+int victory = 0;
 
 static int window;
 static int menu_id;
@@ -84,6 +85,7 @@ void myKeyboard(unsigned char key, int x, int y){
 		case 'r':
 			theGame->restartGame();
 			gameover = 0;
+			victory = 0;
 			pause = 2;
 			break;
 		case 27:							// Escape key -- Exit game
@@ -153,11 +155,25 @@ void printStatus(){
 		for(int i = 0; i < (int)start.length(); i++)
 			glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, start[i]);   //Desenha o tecla a pressionar
 
-	}else
+	}else if (gameover && !victory)
 	{
 
 		glColor3f(1,1,1);
 		string end = "GAME OVER";
+		string restart = "Press 'R' key to restart";
+		glRasterPos2f(-17, 0);
+
+		for(int i = 0; i < (int)end.length(); i++)
+			glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, end[i]);   //Desenha estado do jogo - Game Over
+
+		glRasterPos2f(-30, -10);
+
+		for(int i = 0; i < (int)restart.length(); i++)
+			glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, restart[i]);   //Desenha a tecla a pressionar
+	}else{
+
+		glColor3f(1,1,1);
+		string end = "YOU WIN!";
 		string restart = "Press 'R' key to restart";
 		glRasterPos2f(-17, 0);
 
@@ -183,39 +199,46 @@ void myTimer(int value){
 
 	if (theGame->getShipLives() != 0)
 	{
-	if (pause == 1){	
 
-	currentTime = glutGet(GLUT_ELAPSED_TIME);
-	elapsedTime = currentTime - previousTime;
+		if (theGame->aliensAlive())
+		{
+			if (pause == 1){	
 
-	theGame->moveMissile();
-	theGame->updateP();
+			currentTime = glutGet(GLUT_ELAPSED_TIME);
+			elapsedTime = currentTime - previousTime;
+
+			theGame->moveMissile();
+			theGame->updateP();
 	
 
-	if (elapsedTime >= 50)
-	{
-		previousTime = currentTime;	
-		theGame->moveInvMissiles();
-		theGame->wasHit();
-	}
+			if (elapsedTime >= 50)
+			{
+				previousTime = currentTime;	
+				theGame->moveInvMissiles();
+				theGame->wasHit();
+			}
 
-	elapsedTime = currentTime - previousTime2;
+			elapsedTime = currentTime - previousTime2;
 
-	if (elapsedTime >= 400)
-	{
-		previousTime2 = currentTime;	
-		theGame->moveInvaders();
-	}
+			if (elapsedTime >= 400)
+			{
+				previousTime2 = currentTime;	
+				theGame->moveInvaders();
+			}
 
-	elapsedTime = currentTime - previousTime3;
+			elapsedTime = currentTime - previousTime3;
 
-	if (elapsedTime >= inv_dispara){
-		previousTime3 = currentTime;	
-		theGame->shootInvMissiles();
+			if (elapsedTime >= inv_dispara){
+				previousTime3 = currentTime;	
+				theGame->shootInvMissiles();
+				}
+			}
+		}else{
+			gameover = 1;
+			victory = 1;
 		}
-	}
 
-	}else gameover = 1;
+	}else  gameover = 1;
 
 
 	glutTimerFunc(10, myTimer, 0);

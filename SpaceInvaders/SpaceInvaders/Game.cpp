@@ -101,6 +101,16 @@ void Game::objectInit(){
 
 }
 
+int Game::aliensAlive(){
+
+	for (int i = 0; i <= 10; i++)
+	{
+		if(columns[i] != 0) return 1;
+	}
+
+	return 0;
+}
+
 void Game::restartGame(){
 
 	for (int i = 0; i <= 10; i++)
