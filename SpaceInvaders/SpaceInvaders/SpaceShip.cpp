@@ -18,6 +18,7 @@ void SpaceShip::resetShip(void){
 	_lives = 3;
 	_coord = _x;
 	_rot = 0;
+	part->setAlive(false);
 }
 
 void SpaceShip::draw(float x, float y, int debug){

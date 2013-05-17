@@ -33,6 +33,7 @@ int prev_light = 0;
 int debug = 0 ;
 int gameover = 0;
 int victory = 0;
+int played_sound = 0;
 
 static int window;
 static int menu_id;
@@ -86,6 +87,7 @@ void myKeyboard(unsigned char key, int x, int y){
 			theGame->restartGame();
 			gameover = 0;
 			victory = 0;
+			played_sound = 0;
 			pause = 2;
 			break;
 		case 27:							// Escape key -- Exit game
@@ -93,7 +95,7 @@ void myKeyboard(unsigned char key, int x, int y){
 			exit (0);
 			break;
 		case ' ':							//Disparar a nave				
-			if (pause == 1 && gameover == 0)	
+			if (pause == 1 && gameover == 0)
 			theGame->newMissile();
 			break;
 		
@@ -163,6 +165,7 @@ void printStatus(){
 		string restart = "Press 'R' key to restart";
 		glRasterPos2f(-17, 0);
 
+
 		for(int i = 0; i < (int)end.length(); i++)
 			glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, end[i]);   //Desenha estado do jogo - Game Over
 
@@ -170,6 +173,13 @@ void printStatus(){
 
 		for(int i = 0; i < (int)restart.length(); i++)
 			glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, restart[i]);   //Desenha a tecla a pressionar
+
+		if (!played_sound)
+		{
+			PlaySound(TEXT("sounds/Death.wav"), NULL, SND_FILENAME|SND_NODEFAULT|SND_ASYNC);
+			played_sound = 1;
+		}
+
 	}else{
 
 		glColor3f(1,1,1);
@@ -184,6 +194,12 @@ void printStatus(){
 
 		for(int i = 0; i < (int)restart.length(); i++)
 			glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, restart[i]);   //Desenha a tecla a pressionar
+
+		if (!played_sound)
+		{
+			PlaySound(TEXT("sounds/fanfare.wav"), NULL, SND_FILENAME|SND_NODEFAULT|SND_ASYNC);
+			played_sound = 1;
+		}
 	}
 
 	glEnable(GL_LIGHTING);
@@ -239,6 +255,7 @@ void myTimer(int value){
 		}
 
 	}else  gameover = 1;
+
 
 
 	glutTimerFunc(10, myTimer, 0);
@@ -341,7 +358,7 @@ void printMenu(){
 	printf("Shoot: Spacebar\n\n");
 	printf("Settings:\n");
 	printf("Pause game: P\n");
-	printf("Restart game: P\n");
+	printf("Restart game: R\n");
 	printf("Exit game: Esc key\n");
 	printf("Lighting Toggle: L\n");
 	printf("Top View Camera: 1\n");

@@ -198,8 +198,6 @@ void Game::moveInvaders(){
 						InvPurple[i]->setX(x-step);
 					}
 				}
-				
-	glutPostRedisplay();
 }
 
 void Game::moveMissile(){
@@ -248,26 +246,31 @@ void Game::shootInvMissiles(){
 		MissileInv[inv_num]->setAlive(true); 
 		MissileInv[inv_num]->setX(InvPurple[inv_num]->getX()); 
 		MissileInv[inv_num]->setY(InvPurple[inv_num]->getY()-10);
+		PlaySound(TEXT("sounds/laserinvader.wav"), NULL, SND_FILENAME|SND_NODEFAULT|SND_ASYNC);
 		
 	}else if(InvBlue[inv_num]->getAlive())
 	{
 		MissileInv[inv_num]->setAlive(true); 
 		MissileInv[inv_num]->setX(InvBlue[inv_num]->getX()); 
 		MissileInv[inv_num]->setY(InvBlue[inv_num]->getY()-10);
+		PlaySound(TEXT("sounds/laserinvader.wav"), NULL, SND_FILENAME|SND_NODEFAULT|SND_ASYNC);
 		
 	}else if (InvGreen[inv_num]->getAlive())
 	{
 		MissileInv[inv_num]->setAlive(true); 
 		MissileInv[inv_num]->setX(InvGreen[inv_num]->getX()); 
 		MissileInv[inv_num]->setY(InvGreen[inv_num]->getY()-10);
+		PlaySound(TEXT("sounds/laserinvader.wav"), NULL, SND_FILENAME|SND_NODEFAULT|SND_ASYNC);
 
 	}else if (InvRed[inv_num]->getAlive())
 	{
 		MissileInv[inv_num]->setAlive(true); 
 		MissileInv[inv_num]->setX(InvRed[inv_num]->getX()); 
 		MissileInv[inv_num]->setY(InvRed[inv_num]->getY()-10);
-		
+		PlaySound(TEXT("sounds/laserinvader.wav"), NULL, SND_FILENAME|SND_NODEFAULT|SND_ASYNC);
 	}
+
+	
 }
 
 void Game::updateScore(int alien){
@@ -352,6 +355,9 @@ void Game::wasHit(){
 
 					Ship->hitChar();
 
+					PlaySound(TEXT("sounds/explosion.wav"), NULL, SND_FILENAME|SND_NODEFAULT|SND_ASYNC);
+
+
 					if (Ship->getLives() == 0) // só mata quando não houverem mais vidas
 						Ship->setAlive(false);
 
@@ -398,6 +404,7 @@ void Game::wasHit(){
 							MissileShip->setAlive(false);
 							columns[a]--;
 							inv[b][a]->setAlive(false);
+							PlaySound(TEXT("sounds/invaderkilled.wav"), NULL, SND_FILENAME|SND_NODEFAULT|SND_ASYNC);
 							break;
 						}
 
@@ -492,6 +499,7 @@ void Game::newMissile(){
 		MissileShip->setAlive(true);
 		MissileShip->setX(Ship->getX());
 		MissileShip->setY(-75);
+		PlaySound(TEXT("sounds/laser.wav"), NULL, SND_FILENAME|SND_NODEFAULT|SND_ASYNC);
 	}
 }
 
@@ -504,6 +512,7 @@ void Game::drawObjects(int debug){
 	GLfloat purple[] = {0.59,0.0,0.82,1};
 	GLfloat green[] = {0.5,1.0,0,1};
 	GLfloat ship[] = {.25,.25,.25,1};
+
 
 	for(int i = 0; i <= 10; i++){
 		
@@ -536,7 +545,7 @@ void Game::drawObjects(int debug){
 		if(Shields[1]->getAlive()) Shields[1]->draw(sitiox + 40, sitioy, debug);
 		if(Shields[2]->getAlive()) Shields[2]->draw(sitiox + 88, sitioy, debug);
 		if(Shields[3]->getAlive()) Shields[3]->draw(sitiox + 128, sitioy, debug);
-	
+
 
 	if(Ship->getAlive()) Ship->draw(Ship->getX(), -85, debug); // nave - na base do ecrã
 	if (Ship->part->getAlive())
@@ -546,7 +555,6 @@ void Game::drawObjects(int debug){
 		MissileShip->draw(MissileShip->getX(), MissileShip->getY(), debug); // missil da nave 
 
 	Box->draw(); // desenho da textura
-
 }
 
 float Game::getShipPos(){

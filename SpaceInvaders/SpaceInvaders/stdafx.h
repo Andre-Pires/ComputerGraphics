@@ -10,6 +10,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <windows.h>
 #include <tchar.h>
 #include <time.h>
 #include <math.h>
@@ -17,7 +18,7 @@
 
 #if defined(__APPLE__) || defined(MACOSX) 
 #include <GLUT/glut.h> 
-#else
+#else ifndef
 #include <GL/glut.h> 
 #endif
 
