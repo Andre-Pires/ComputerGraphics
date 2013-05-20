@@ -246,7 +246,7 @@ void myTimer(int value){
 
 			if (elapsedTime >= inv_dispara){
 				previousTime3 = currentTime;	
-				//theGame->shootInvMissiles();
+				theGame->shootInvMissiles();
 				}
 			}
 		}else{
