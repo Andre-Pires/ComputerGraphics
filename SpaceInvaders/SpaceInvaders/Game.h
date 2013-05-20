@@ -24,6 +24,7 @@ private:
 	bool Right;
 	float alienx;
 	float alieny;
+	Invader ** inv[4];
 	GLfloat *blueMat;
 	GLfloat * purpleMat;
 	GLfloat * redMat;
@@ -43,6 +44,9 @@ private:
 
 public:
 
+	void colisionInvaders();
+	void colisionMissileShip();
+	void colisionMissileInv();
 	int aliensAlive();
 	void resetObjects();
 	void restartGame();
