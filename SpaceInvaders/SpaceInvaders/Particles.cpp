@@ -6,9 +6,8 @@ Particles::Particles(void)
 	parts = (Particle **) malloc(sizeof(Particle *)*PARTICLES);
 
 	for (int i = 0; i < PARTICLES; i++)
-	{
 		parts[i] = (Particle *) malloc(sizeof(Particle));
-	}
+
 	_alive = false;
 	currentTime = 0;
 
@@ -69,11 +68,15 @@ void Particles::moveParticles(){
 		if(parts[i]->z >= -5){
 		parts[i]->x = (parts[i]->vel*cos(parts[i]->angleVert)*currentTime);
 		parts[i]->z = (0 + parts[i]->vel*sin(parts[i]->angleVert)*currentTime-13*currentTime*currentTime); // z0 igual a 0
-		} else particulas--;
-
+		}
 	}
 
-	if(particulas == 0) _alive = false;
+
+	for (int i = 0; i < PARTICLES; i++){
+		if (parts[i]->z <= -5)
+			_alive = false;
+		else {_alive = true; break;}
+	}
 }
 
 void Particles::randParticles(float x, float y){
@@ -81,7 +84,6 @@ void Particles::randParticles(float x, float y){
 	x0 = x;
 	y0 = y;
 	_alive = true;
-	particulas = PARTICLES;
 	currentTime = 0;
 
 	for (int i = 0; i < PARTICLES; i++)

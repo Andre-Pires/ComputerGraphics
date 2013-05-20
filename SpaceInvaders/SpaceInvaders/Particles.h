@@ -8,7 +8,7 @@ class Particles
 
 private:
 
-	int particulas;
+	int particulas[PARTICLES];
 	float currentTime;
 	bool _alive;
 	float	x0;
