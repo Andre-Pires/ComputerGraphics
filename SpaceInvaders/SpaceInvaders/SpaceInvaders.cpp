@@ -238,7 +238,7 @@ void myTimer(int value){
 
 			if (elapsedTime >= 400)
 			{
-				previousTime2 = currentTime;	
+				previousTime2 = currentTime;
 				theGame->moveInvaders();
 			}
 
