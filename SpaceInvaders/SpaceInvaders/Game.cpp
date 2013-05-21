@@ -485,9 +485,19 @@ void Game::colisionInvaders(){
 
 					distance = sqrt((shipx - invx)*(shipx - invx) + (shipy - invy)*(shipy - invy));
 
-					if (distance <= (radius4+radius2)) // ciclo para se os invaders colidem com a nave
+					if (distance <= (radius4+radius2)){ // ciclo para se os invaders colidem com a nave
+
+						inv[b][a]->part->randParticles(inv[b][a]->getX(), inv[b][a]->getY());
+						Ship->part->randParticles(Ship->getX(), Ship->getY());
+						
 						while (Ship->getLives())
 							Ship->hitChar(); 
+
+						columns[a]--;
+						inv[b][a]->setAlive(false);
+						Ship->setAlive(false);
+						PlaySound(TEXT("sounds/explosion.wav"), NULL, SND_FILENAME|SND_NODEFAULT|SND_ASYNC);
+					}
 
 				}
 
